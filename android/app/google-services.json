@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1019439351726",
+    "project_id": "pedwumaauth",
+    "storage_bucket": "pedwumaauth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019439351726:android:1a5c3caeb0d0855cd4aa3f",
+        "android_client_info": {
+          "package_name": "com.example.pedwuma"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChqRDwIq4c9NobJwefd3n-eq31T4xzOMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

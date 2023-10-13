@@ -1,0 +1,271 @@
+
+I'll provide your some source codes in the next queries and just as you just did provide me with the collection, document and various  fields in categories and add the data type to it, understood?
+
+provide all the database fields and categorize them under their collections and documents from the source code above and also add the data types
+
+
+1.**Collection: 'Handyman Job Upload'/ Booking Profile**
+
+- Document: Auto-generated document ID(Handyman Job Document)
+  - 'Customer ID/ Worker ID' (String)
+  - 'Deadline' (String)
+  - 'User Pic' (String)
+  - 'Job ID/ Booking Profile ID' (String)
+  - 'Name' (String)
+  - 'Seen By' (String)
+  - 'Service Information' (Map)
+    - 'Service Category' (String)
+    - 'Service Provided' (String)
+    - 'Charge' (int)
+    - 'Charge Rate' (String)
+    - 'Expertise' (String)
+  - 'Job Details' (Map)
+    - 'People Applied' (int)
+    - 'Applier IDs' (List of Strings)
+  - 'Work Experience & Certification' (Map)
+    - 'Certification' (List of Strings)
+    - 'Experience' (List of Strings)
+    - 'Rating' (String)
+    - "Job's Completed" (int)
+    - 'Reference' (List of Strings)
+    - 'Portfolio' (List of Strings)
+  - 'Address Information' (Map)
+    - 'House Number' (String)
+    - 'Street' (String)
+    - 'Town' (String)
+    - 'Region' (String)
+  - 'Upload Date' (String)
+  - 'Upload Time' (String)
+
+
+
+
+2.**Collection: 'Customer Jobs Applied'**
+
+- Document: Auto-generated document ID (e.g., 'Applier ID_Customer ID')
+  - 'Accepted Date' (Timestamp)
+  - 'In Progress Date' (Timestamp)
+  - 'Completed Date' (Timestamp)
+  - 'Jobs Applied ID' (String)
+  - 'Job ID' (String)
+  - 'Applier ID' (String)
+  - 'Receiver ID' (String)
+  - 'Name' (String)
+  - 'Job Status' (String)
+  - 'Charge' (int)
+  - 'Charge Rate' (String)
+  - 'Street' (String)
+  - 'Town' (String)
+  - 'House Number' (String)
+  - 'Region' (String)
+  - 'Address Type' (String)
+  - 'Note' (String)
+  - 'User Pic' (String)
+  - 'Schedule Time' (String)
+  - 'Schedule Date' (String)
+  -  Who Applied (String)
+  - Reference Links (String)
+
+
+3.**Collection: 'Job Application'**
+- Document: Auto-generated document ID
+  - 'Jobs Applied' (Map)
+    - 'Customer' (List of Strings)
+    - 'Handyman' (List of Strings)
+  - 'Jobs Upcoming' (Map)
+    - 'Customer' (List of Strings)
+    - 'Handyman' (List of Strings)
+  - 'Jobs Completed' (Map)
+    - 'Customer' (List of Strings)
+    - 'Handyman' (List of Strings)
+  - 'Job Offers' (Map)
+    - 'Customer' (List of Strings)
+    - 'Handyman' (List of Strings)
+  - 'Customer ID' (String)
+  - 'Job Application ID' (String)
+
+
+
+
+
+
+5.Collection: Category
+
+Document: [Category Document]
+'Category Name': String
+'Services Provided': List<String>
+
+
+6.Collection: Profile
+Document: [Profile Document]
+'Work Experience & Certification':
+'Rating': dynamic (seems to be a number)
+- `User ID`
+- `Mobile Money Type`
+- `Credit Card Information`
+     - `Card Number`(null)
+     - `Expiry Date`
+     - `CVV`(int)
+- `PayPal`
+    - `Address Information`(map)
+   - `Street Name`
+   - `Town`
+   - `Region`
+   - `House Number`
+Service Category' (Data Type: String)
+'Services Provided' (Data Type: String)
+'Charge' (Data Type: int)
+'Charge Rate' (Data Type: String)
+'Level of Expertise' (Data Type: String)
+'Work Experience & Certification'
+'Certification' (Data Type: List of Strings)
+Experience' (Data Type: List of Strings)
+'Rating' (Data Type: double)
+'Number of Jobs' (Data Type: int)
+
+
+
+
+
+4. **Collection**: Customer Job Upload/ Jobs
+
+   - **Document**: [Job Document]
+     - 'User Pic': String (Profile picture of the customer)
+     - 'Job ID': String (Unique identifier for the job)
+     - 'Customer ID/ Client ID': String (ID of the customer submitting the job)
+     - 'Name': String (Name of the customer)
+     - 'Seen By': String (Visibility settings for who can see the job upload)
+     - 'Service Information':
+       - 'Service Category': String (Category of the job)
+       - 'Service Provided': String (Specific service within the category)
+       - 'Charge': int (Charge for the service)
+       - 'Charge Rate': String (Rate at which the charge is applied)
+       - 'Expertise': String (Level of expertise required)
+     - 'Work Detail & Rating':
+       - 'Portfolio': List (List of portfolio items, possibly file references)
+       - 'Rating': String (Overall rating for the customer)
+     - 'Address Information':
+       - 'House Number': String
+       - 'Street': String
+       - 'Town': String
+       - 'Region': String
+     - 'Optional':
+       - 'Portfolio Present': bool (Whether portfolio items are added)
+       - 'References Present': bool (Whether references are added)
+     - 'Job Details':
+       - 'Job Status': bool (Status of the job, possibly ongoing or completed)
+       - 'People Applied': int (Number of people who applied for the job)
+       - 'Applier IDs': List (List of IDs of people who applied)
+       - 'Deadline': String (Deadline for the job)
+
+      -'Upload Date': String (Date of the job upload)
+      -'Upload Time': String (Time of the job upload)
+
+	'Accepted Date': null
+       -'In Progress Date': null
+	'Completed Date': null
+	'Jobs Applied ID': String
+
+	'Applier ID': String
+	'Receiver ID': String
+	'Address Type': String
+	'Note': String
+	'User Pic': String (URL)
+	'Schedule Time': String
+	'Schedule Date': String
+
+7.Collection: Customer Job Upload Portfolio (Assuming a subcollection for portfolio items)
+
+	Document: [Portfolio Item Document]
+		'File Name': String (Name of the uploaded file)
+		'File Path': String (Path to the uploaded file)
+		'Job ID': String (Identifier linking the portfolio item to the job)
+
+
+8.**Collections:** `users`
+   - `First Name`
+   - `Last Name`
+   - `Email Address`
+   - `Mobile Number`(int)
+   - `Role`
+   - `User ID`
+   - `Pic`
+   - `FCM Token`
+
+
+
+
+9. **Collection**: `Handyman Jobs Applied`
+   - Document Fields:
+     - `Accepted Date` (Data Type: DateTime)
+     - `In Progress Date` (Data Type: DateTime)
+     - `Completed Date` (Data Type: DateTime)
+     - `Jobs Applied ID` (Data Type: String)
+     - `Job ID` (Data Type: String)
+     - `Applier ID` (Data Type: String)
+     - `Receiver ID` (Data Type: String)
+     - `Name` (Data Type: String)
+     - `Job Status` (Data Type: String)
+     - `Charge` (Data Type: String)
+     - `Charge Rate` (Data Type: // Data Type Not Specified)
+     - `Street` (Data Type: String)
+     - `Town` (Data Type: String)
+     - `House Number` (Data Type: String)
+     - `Region` (Data Type: String)
+     - `Address Type` (Data Type: // Data Type Not Specified)
+     - `Note` (Data Type: String)
+     - `Reference Links` (Data Type: List<String>)
+     - `Portfolio` (Data Type: List<String>)
+     - `User Pic` (Data Type: String)
+     - `Schedule Time` (Data Type: // Data Type Not Specified)
+     - `Schedule Date` (Data Type: String)
+     - Who Applied (String)
+
+10.**Collection**: `Reviews`
+   - Document Fields:
+     - `User ID` (Data Type: String)
+     - `Review Date` (Data Type: DateTime or String, based on usage)
+     - `Review ID` (Data Type: String)
+     - `Job ID` (Data Type: String)
+     - `Stars` (Data Type: int)
+     - `Comment` (Data Type: String)
+     - `Likes` (Data Type: int)
+     - `Replies` (Data Type: List, if used)
+
+11. Bookmark Collection:
+   - Collection: 'Bookmark'
+   - Fields:
+     - 'User ID' (String): User ID of the logged-in user.
+     - 'Customer Job IDs' (List<String>): List of Customer Job IDs bookmarked by the user.
+     - 'Handyman Job IDs' (List<String>): List of Handyman Job IDs bookmarked by the user.
+     - 'Bookmark ID' (String): Unique ID for the bookmark document (if added).
+
+12. HandymanDetailsScreen Widget:
+   - State Variables:
+     - `handymenJobsBookmarked` (List<String>): List of Handyman Job IDs bookmarked by the user.
+     - `customerJobsBookmarked` (List<String>): List of Customer Job IDs bookmarked by the user.
+     - `isHandymanBookmarked` (bool): Indicates whether the Handyman is bookmarked by the user.
+
+
+
+Firestore Collection: 'chats' (Assuming this is where chat messages are stored)
+
+Document Field: 'Timestamp' (Data Type: Timestamp)
+Document Field: 'Sender ID' (Data Type: String)
+Document Field: 'Message' (Data Type: String)
+
+Firestore Collection: 'Chat Room'
+
+Document Field: Chat Room ID (Auto-generated by concatenating user IDs)
+Subcollection: 'Messages'
+	Document Field: 'Sender ID' (Data Type: String)
+	Document Field: 'Receiver ID' (Data Type: String)
+	Document Field: 'Sender Name' (Data Type: String)
+	Document Field: 'Message' (Data Type: String)
+	Document Field: 'Timestamp' (Data Type: Timestamp)
+
+
+
+
+Check the datatype of Porfolio
+
