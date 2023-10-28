@@ -89,7 +89,7 @@ class _BodyState extends State<Body> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SearchBarItem(
-              hintText: AppLocalizations.of(context)!.bq,
+              hintText: AppLocalizations.of(context)!.xx,
               onSearchTap: () {
                 showSearch(
                   context: context,

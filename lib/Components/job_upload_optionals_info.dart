@@ -34,9 +34,9 @@ class _JobUploadOptionalsInfoState extends State<JobUploadOptionalsInfo> {
             ),
           ),
         ),
-        SizedBox(height: 13 * screenHeight),
+        SizedBox(height: 4 * screenHeight),
         Container(
-          height: 110 * screenHeight,
+          height: 130 * screenHeight,
           width: 359 * screenWidth,
           decoration: BoxDecoration(
             color: sectionColor,

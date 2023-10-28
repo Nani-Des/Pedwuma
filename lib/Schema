@@ -40,7 +40,7 @@ provide all the database fields and categorize them under their collections and 
 
 
 
-2.**Collection: 'Customer Jobs Applied'**
+2.**Collection: 'Customer Jobs Applied/ Bookings'**
 
 - Document: Auto-generated document ID (e.g., 'Applier ID_Customer ID')
   - 'Accepted Date' (Timestamp)
@@ -67,7 +67,7 @@ provide all the database fields and categorize them under their collections and 
   - Reference Links (String)
 
 
-3.**Collection: 'Job Application'**
+3.**Collection: 'Job Application/Services'**
 - Document: Auto-generated document ID
   - 'Jobs Applied' (Map)
     - 'Customer' (List of Strings)
@@ -82,7 +82,7 @@ provide all the database fields and categorize them under their collections and 
     - 'Customer' (List of Strings)
     - 'Handyman' (List of Strings)
   - 'Customer ID' (String)
-  - 'Job Application ID' (String)
+  - 'Job Application ID/Services ID' (String)
 
 
 
@@ -92,6 +92,7 @@ provide all the database fields and categorize them under their collections and 
 5.Collection: Category
 
 Document: [Category Document]
+'Category ID'
 'Category Name': String
 'Services Provided': List<String>
 
@@ -144,11 +145,13 @@ Experience' (Data Type: List of Strings)
      - 'Work Detail & Rating':
        - 'Portfolio': List (List of portfolio items, possibly file references)
        - 'Rating': String (Overall rating for the customer)
-     - 'Address Information':
+    //*** - 'Address Information':
        - 'House Number': String
        - 'Street': String
        - 'Town': String
        - 'Region': String
+       **//
+
      - 'Optional':
        - 'Portfolio Present': bool (Whether portfolio items are added)
        - 'References Present': bool (Whether references are added)
@@ -158,8 +161,10 @@ Experience' (Data Type: List of Strings)
        - 'Applier IDs': List (List of IDs of people who applied)
        - 'Deadline': String (Deadline for the job)
 
+//**
       -'Upload Date': String (Date of the job upload)
       -'Upload Time': String (Time of the job upload)
+**//  -Timestamp
 
 	'Accepted Date': null
        -'In Progress Date': null
@@ -195,7 +200,7 @@ Experience' (Data Type: List of Strings)
 
 
 
-9. **Collection**: `Handyman Jobs Applied`
+9. **Collection**: `Handyman Jobs Applied/Applications `
    - Document Fields:
      - `Accepted Date` (Data Type: DateTime)
      - `In Progress Date` (Data Type: DateTime)
@@ -219,7 +224,7 @@ Experience' (Data Type: List of Strings)
      - `User Pic` (Data Type: String)
      - `Schedule Time` (Data Type: // Data Type Not Specified)
      - `Schedule Date` (Data Type: String)
-     - Who Applied (String)
+     - Who Applied (String)00
 
 10.**Collection**: `Reviews`
    - Document Fields:
@@ -264,8 +269,6 @@ Subcollection: 'Messages'
 	Document Field: 'Message' (Data Type: String)
 	Document Field: 'Timestamp' (Data Type: Timestamp)
 
-
-
-
 Check the datatype of Porfolio
+
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:handyman_app/Screens/Dashboard/Handymen/handymen_dashboard_screen.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../Components/default_back_button.dart';
 import '../../constants.dart';
 import '../Bookings/Components/body.dart';
@@ -17,7 +17,7 @@ class CustomerBookingsScreen extends StatelessWidget {
           screen: HandymanDashboardScreen(),
         ),
         title: Text(
-          'Bookings',
+          AppLocalizations.of(context)!.bookings,
           style: TextStyle(
             color: black,
             fontSize: 18,

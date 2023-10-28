@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../constants.dart';
 
 class CarouselItem extends StatelessWidget {
@@ -62,7 +62,7 @@ class CarouselItem extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              'Book Now!',
+                              AppLocalizations.of(context)!.eh,
                               style: TextStyle(
                                   fontWeight: FontWeight.w800,
                                   fontSize: 16,

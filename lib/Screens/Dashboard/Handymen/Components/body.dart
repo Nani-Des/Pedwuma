@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:handyman_app/Components/carousel_slider_item.dart';
 import 'package:handyman_app/Components/search_bar_item.dart';
 import 'package:handyman_app/constants.dart';
-
 import '../../../../Components/category_item.dart';
 import '../../../../Components/dashboard_tab.dart';
 import '../../../../Models/customer_category_data.dart';

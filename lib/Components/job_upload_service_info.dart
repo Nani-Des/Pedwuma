@@ -5,7 +5,7 @@ import 'package:handyman_app/Components/profile_item.dart';
 import 'package:handyman_app/Components/profile_item_dropdown.dart';
 import 'package:handyman_app/Screens/Home/Components/body.dart';
 import 'package:handyman_app/Services/read_data.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../Models/category.dart';
 import '../constants.dart';
 
@@ -63,7 +63,7 @@ class _JobUploadServiceInfoState extends State<JobUploadServiceInfo> {
           padding:
               EdgeInsets.only(left: screenWidth * 5.0, right: 10 * screenWidth),
           child: Text(
-            'Service Information',
+            AppLocalizations.of(context)!.servinfo,
             style: TextStyle(
               color: black,
               fontSize: 17,
@@ -87,7 +87,7 @@ class _JobUploadServiceInfoState extends State<JobUploadServiceInfo> {
             children: <Widget>[
               ServiceCategorySelect(
                 isReadOnly: widget.isReadOnly,
-                title: 'Services Category',
+                title: AppLocalizations.of(context)!.eq,
                 dropdownList: allCategoriesName.toSet().toList(),
                 hintText: serviceCatHintText,
                 onChanged: (newValue) {
@@ -101,7 +101,7 @@ class _JobUploadServiceInfoState extends State<JobUploadServiceInfo> {
               SizedBox(height: 20 * screenHeight),
               ServiceCategorySelect(
                 isReadOnly: widget.isReadOnly,
-                title: 'Services Provided',
+                title: AppLocalizations.of(context)!.er,
                 dropdownList: servicesProvided.toList(),
                 hintText: widget.isReadOnly
                     ? widget.serviceProvided
@@ -179,7 +179,7 @@ class _JobUploadServiceInfoState extends State<JobUploadServiceInfo> {
               SizedBox(height: 20 * screenHeight),
               ServiceCategorySelect(
                 isReadOnly: widget.isReadOnly,
-                title: 'Level of Expertise',
+                title: AppLocalizations.of(context)!.es,
                 dropdownList: expertiseList,
                 hintText: expertHint,
                 onChanged: (newValue) {

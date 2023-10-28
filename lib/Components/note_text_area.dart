@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../constants.dart';
 
 class NoteTextArea extends StatelessWidget {
@@ -54,7 +54,7 @@ class NoteTextArea extends StatelessWidget {
                 focusedBorder: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 border: InputBorder.none,
-                hintText: 'Add notes here...',
+                hintText: AppLocalizations.of(context)!.ew,
                 hintStyle: TextStyle(
                   fontWeight: FontWeight.w200,
                   color: black,

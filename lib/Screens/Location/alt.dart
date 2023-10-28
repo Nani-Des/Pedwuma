@@ -6,16 +6,16 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math' show asin, atan2, cos, pi, sin, sqrt;
 
-class LocationScreen extends StatefulWidget {
+class LocationScreena extends StatefulWidget {
   final LatLng? initialSelectedPostion;
-  const LocationScreen({Key? key, this.initialSelectedPostion})
+  const LocationScreena({Key? key, this.initialSelectedPostion})
       : super(key: key);
 
   @override
-  State<LocationScreen> createState() => _LocationScreenState();
+  State<LocationScreena> createState() => _LocationScreenaState();
 }
 
-class _LocationScreenState extends State<LocationScreen>
+class _LocationScreenaState extends State<LocationScreena>
     with TickerProviderStateMixin {
   late GoogleMapController mapController;
   late AnimationController lifter;

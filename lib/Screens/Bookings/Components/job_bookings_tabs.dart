@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../constants.dart';
 
 class JobBookingsTab extends StatefulWidget {
@@ -39,7 +39,7 @@ class _JobBookingsTabState extends State<JobBookingsTab> {
                 alignment: Alignment.center,
                 width: 108 * screenWidth,
                 child: Text(
-                  'Upcoming',
+                  AppLocalizations.of(context)!.upcoming,
                   style: isJobUpcomingClicked
                       ? TextStyle(
                           color: primary,
@@ -65,7 +65,7 @@ class _JobBookingsTabState extends State<JobBookingsTab> {
                 alignment: Alignment.center,
                 width: 108 * screenWidth,
                 child: Text(
-                  '0 & A',
+                  AppLocalizations.of(context)!.oa,
                   style: isJobOffersClicked
                       ? TextStyle(
                           color: primary,
@@ -91,7 +91,7 @@ class _JobBookingsTabState extends State<JobBookingsTab> {
                 alignment: Alignment.center,
                 width: 108 * screenWidth,
                 child: Text(
-                  'Completed',
+                  AppLocalizations.of(context)!.completed,
                   style: isJobCompletedClicked
                       ? TextStyle(
                           color: primary,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../constants.dart';
 
 class MediaViewTypeTab extends StatefulWidget {
@@ -34,7 +34,7 @@ class _MediaViewTypeTabState extends State<MediaViewTypeTab> {
             GestureDetector(
               onTap: widget.gridCallback,
               child: Text(
-                'Grid View',
+                AppLocalizations.of(context)!.et,
                 style: isGridViewSelected
                     ? TextStyle(
                         fontSize: 17,
@@ -60,7 +60,7 @@ class _MediaViewTypeTabState extends State<MediaViewTypeTab> {
             GestureDetector(
               onTap: widget.singleCallback,
               child: Text(
-                'Single View',
+                AppLocalizations.of(context)!.eu,
                 style: isSingleViewSelected
                     ? TextStyle(
                         fontSize: 17,

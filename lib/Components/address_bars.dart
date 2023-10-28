@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../constants.dart';
 
 class AddressBars extends StatefulWidget {
@@ -110,7 +110,7 @@ class _AddressBarsState extends State<AddressBars> {
                                 focusedBorder: InputBorder.none,
                                 enabledBorder: InputBorder.none,
                                 border: InputBorder.none,
-                                hintText: 'Send message ...',
+                                hintText: AppLocalizations.of(context)!.eb,
                                 hintStyle: TextStyle(
                                   fontWeight: FontWeight.w200,
                                   color: black,

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:handyman_app/Components/appointment_date.dart';
 import 'package:handyman_app/Components/appointment_static_time.dart';
 import 'package:handyman_app/constants.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../Components/appointment_button.dart';
 import '../../../Components/personnel_info_summary.dart';
 import '../../../Components/schedule_address.dart';
@@ -36,10 +36,10 @@ class _BodyState extends State<Body> {
           backgroundColor: Colors.black45,
           behavior: SnackBarBehavior.floating,
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           content: Center(
             child: Text(
-              'One or more required fields has an error. Check them again.',
+              AppLocalizations.of(context)!.bt,
               style: TextStyle(height: 1.3),
               textAlign: TextAlign.center,
             ),
@@ -59,42 +59,42 @@ class _BodyState extends State<Body> {
           content: isSummaryClicked
               ? SummaryDetails()
               : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    SummaryDetails(),
-                    SizedBox(height: 24 * screenHeight),
-                    GestureDetector(
-                      onTap: () {
-                        (apppointmentRegion == '' ||
-                                apppointmentTown == '' ||
-                                apppointmentHouseNum == '' ||
-                                apppointmentStreet == '')
-                            ? popDialog()
-                            : scheduleJob();
-                      },
-                      child: Container(
-                        height: 49 * screenHeight,
-                        width: 312 * screenWidth,
-                        decoration: BoxDecoration(
-                            color: primary,
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(color: sectionColor, width: 3)),
-                        child: Center(
-                          child: Text(
-                            'Schedule',
-                            style: TextStyle(
-                              color: white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              SummaryDetails(),
+              SizedBox(height: 24 * screenHeight),
+              GestureDetector(
+                onTap: () {
+                  (apppointmentRegion == '' ||
+                      apppointmentTown == '' ||
+                      apppointmentHouseNum == '' ||
+                      apppointmentStreet == '')
+                      ? popDialog()
+                      : scheduleJob();
+                },
+                child: Container(
+                  height: 49 * screenHeight,
+                  width: 312 * screenWidth,
+                  decoration: BoxDecoration(
+                      color: primary,
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: sectionColor, width: 3)),
+                  child: Center(
+                    child: Text(
+                      AppLocalizations.of(context)!.schedule,
+                      style: TextStyle(
+                        color: white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
                       ),
                     ),
-                  ],
+                  ),
                 ),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -116,7 +116,7 @@ class _BodyState extends State<Body> {
           .get();
 
       if (querySnapshot.docs.isNotEmpty) {
-        throw 'You have already applied for this job. You cannot apply for a particular job twice';
+        throw AppLocalizations.of(context)!.bu;
       } else {
         await FirebaseFirestore.instance
             .collection('Customer Jobs Applied')
@@ -142,7 +142,7 @@ class _BodyState extends State<Body> {
           'User Pic': allUsers[0].pic,
           'Schedule Time': timeList[appointmentTimeIndex],
           'Schedule Date':
-              '${dates[appointmentDateIndex].day.toString().padLeft(2, '0')}-${dates[appointmentDateIndex].month.toString().padLeft(2, '0')}-${dates[appointmentDateIndex].year}',
+          '${dates[appointmentDateIndex].day.toString().padLeft(2, '0')}-${dates[appointmentDateIndex].month.toString().padLeft(2, '0')}-${dates[appointmentDateIndex].year}',
         });
       }
 
@@ -181,7 +181,7 @@ class _BodyState extends State<Body> {
         jobCustomerAppliedIDs.clear();
         jobCustomerAppliedIDs.add(applierID);
         final document =
-            await FirebaseFirestore.instance.collection('Job Application').add({
+        await FirebaseFirestore.instance.collection('Job Application').add({
           'Jobs Applied': {
             'Customer': jobCustomerAppliedIDs,
             'Handyman': [],
@@ -240,7 +240,7 @@ class _BodyState extends State<Body> {
       } else {
         jobHandymanOffersIDs.add(applierID);
         final document =
-            await FirebaseFirestore.instance.collection('Job Application').add({
+        await FirebaseFirestore.instance.collection('Job Application').add({
           'Jobs Applied': {
             'Customer': [],
             'Handyman': [],
@@ -278,7 +278,7 @@ class _BodyState extends State<Body> {
       if (jobUploadDoc.docs.isNotEmpty) {
         final docID = jobUploadDoc.docs.single.id;
         List applierIDs =
-            jobUploadDoc.docs.single.get('Job Details.Applier IDs');
+        jobUploadDoc.docs.single.get('Job Details.Applier IDs');
 
         applierIDs.add(applierID);
         final receiverID = jobUploadDoc.docs.single.get('Customer ID');
@@ -298,7 +298,7 @@ class _BodyState extends State<Body> {
             .doc(applierID)
             .update({'Receiver ID': receiverID});
       } else {
-        print('Job upload update failed.');
+        print(AppLocalizations.of(context)!.ea);
       }
       Navigator.push(
         context,
@@ -316,7 +316,7 @@ class _BodyState extends State<Body> {
             backgroundColor: Colors.black45,
             behavior: SnackBarBehavior.floating,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             content: Center(
               child: Text(
                 e.toString(),
@@ -352,11 +352,11 @@ class _BodyState extends State<Body> {
               ),
               child: allJobItemList[0].pic == ''
                   ? Center(
-                      child: Icon(
-                      Icons.person,
-                      color: white,
-                      size: 42,
-                    ))
+                  child: Icon(
+                    Icons.person,
+                    color: white,
+                    size: 42,
+                  ))
                   : SizedBox(),
             ),
           ),
@@ -389,7 +389,7 @@ class _BodyState extends State<Body> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               AppointmentButton(
-                text: 'Schedule',
+                text: AppLocalizations.of(context)!.schedule,
                 containerColor: primary,
                 textColor: white,
                 press: () {
@@ -401,7 +401,7 @@ class _BodyState extends State<Body> {
               ),
               SizedBox(width: 3 * screenWidth),
               AppointmentButton(
-                text: 'Summary',
+                text: AppLocalizations.of(context)!.summary,
                 containerColor: sectionColor,
                 textColor: textGreyColor,
                 press: () {

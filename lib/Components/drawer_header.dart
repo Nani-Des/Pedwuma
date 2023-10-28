@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../constants.dart';
 import 'default_back_button.dart';
 
@@ -36,7 +36,7 @@ class DrawerHeaderCreated extends StatelessWidget {
         ),
         SizedBox(width: 15 * screenWidth),
         Text(
-          '204 followers',
+          '0 ${AppLocalizations.of(context)!.ep}',
           style: TextStyle(
             color: black,
             fontSize: 17,

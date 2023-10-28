@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../Components/category_item.dart';
 import '../../Components/job_category_item.dart';
 import '../../constants.dart';
@@ -71,7 +71,7 @@ class JobSearchDelegate extends SearchDelegate<void> {
             },
           )
         : Center(
-            child: Text('Job Type is not available'),
+            child: Text(AppLocalizations.of(context)!.by),
           );
   }
 
@@ -107,7 +107,7 @@ class JobSearchDelegate extends SearchDelegate<void> {
             },
           )
         : Center(
-            child: Text('Job Type is not available'),
+            child: Text(AppLocalizations.of(context)!.by),
           );
   }
 }

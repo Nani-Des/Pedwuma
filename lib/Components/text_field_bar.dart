@@ -38,7 +38,7 @@ class TextfieldBar extends StatelessWidget {
                 color: primary,
               ),
             ),
-            SizedBox(width: 9 * screenWidth),
+            SizedBox(width: 7 * screenWidth),
             GestureDetector(
               onTap: () {},
               child: Icon(
@@ -46,7 +46,7 @@ class TextfieldBar extends StatelessWidget {
                 color: primary,
               ),
             ),
-            SizedBox(width: 12 * screenWidth),
+            SizedBox(width: 8 * screenWidth),
             Container(
               height: screenHeight * 50.62,
               width: 255 * screenWidth,
@@ -85,7 +85,7 @@ class TextfieldBar extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 6 * screenWidth),
+            SizedBox(width: 2 * screenWidth),
             IconButton(
                 onPressed: screen,
                 icon: Icon(

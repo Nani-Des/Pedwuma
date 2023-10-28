@@ -3,7 +3,7 @@ import 'package:handyman_app/Components/default_back_button.dart';
 
 import 'package:handyman_app/Screens/Appointment/Components/body.dart';
 import 'package:handyman_app/Screens/Chat/Components/chat_alternate_screen.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../Components/schedule_day_tab.dart';
 import '../../Components/schedule_time_tab.dart';
 import '../../constants.dart';
@@ -42,7 +42,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         leading: DefaultBackButton(),
         backgroundColor: white,
         title: Text(
-          'Appointment',
+          AppLocalizations.of(context)!.appointment,
           style: TextStyle(
             color: black,
             fontSize: 18,

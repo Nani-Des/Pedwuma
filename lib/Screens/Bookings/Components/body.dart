@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:handyman_app/Screens/Bookings/Components/job_bookings_tabs.dart';
@@ -150,7 +150,7 @@ class _BodyState extends State<Body> {
                             itemCount: allJobUpcoming.length)
                         : Center(
                             child: Text(
-                              'No upcoming jobs.',
+                              AppLocalizations.of(context)!.bv,
                               style: TextStyle(
                                 color: primary,
                                 fontSize: 17,
@@ -162,7 +162,7 @@ class _BodyState extends State<Body> {
                     (allJobOffers.isEmpty && allJobApplied.isEmpty)
                         ? Center(
                             child: Text(
-                              'No job offers available.',
+                              AppLocalizations.of(context)!.bw,
                               style: TextStyle(
                                 color: primary,
                                 fontSize: 17,
@@ -175,7 +175,7 @@ class _BodyState extends State<Body> {
                     allJobCompleted.isEmpty
                         ? Center(
                             child: Text(
-                              'No jobs completed.',
+                              AppLocalizations.of(context)!.bx,
                               style: TextStyle(
                                 color: primary,
                                 fontSize: 17,

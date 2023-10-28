@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:handyman_app/Components/services_tab.dart';
 import 'package:handyman_app/Services/read_data.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../constants.dart';
 
 class AboutTab extends StatelessWidget {
@@ -25,7 +25,7 @@ class AboutTab extends StatelessWidget {
             padding: EdgeInsets.only(
                 left: screenWidth * 5.0, bottom: 20 * screenHeight),
             child: Text(
-              'Category',
+              AppLocalizations.of(context)!.cat,
               style: TextStyle(
                   color: black, fontWeight: FontWeight.w600, fontSize: 18),
             ),
@@ -39,7 +39,7 @@ class AboutTab extends StatelessWidget {
                       bottom: 20 * screenHeight,
                       top: 10 * screenHeight),
                   child: Text(
-                    'Work Experience & Certification',
+                    AppLocalizations.of(context)!.bi,
                     style: TextStyle(
                         color: black,
                         fontWeight: FontWeight.w600,
@@ -56,14 +56,14 @@ class AboutTab extends StatelessWidget {
           isCustomerSection ? SizedBox(height: 8 * screenWidth) : SizedBox(),
           isCustomerSection
               ? AdditionalInfo(
-                  text: 'Certification',
+                  text: AppLocalizations.of(context)!.cert,
                   fileName: allJobItemList[0].certification,
                 )
               : SizedBox(),
           isCustomerSection ? SizedBox(height: 8 * screenWidth) : SizedBox(),
           isCustomerSection
               ? AdditionalInfo(
-                  text: 'References',
+                  text: AppLocalizations.of(context)!.ref,
                   fileName: allJobItemList[0].references,
                 )
               : SizedBox(),
@@ -74,7 +74,8 @@ class AboutTab extends StatelessWidget {
                       bottom: 20 * screenHeight,
                       top: 15 * screenHeight),
                   child: Text(
-                    'Jobs Completed: ${allJobItemList[0].jobsDone}',
+
+                    '${AppLocalizations.of(context)!.bc}: ${allJobItemList[0].jobsDone}',
                     style: TextStyle(
                         color: black,
                         fontWeight: FontWeight.w600,

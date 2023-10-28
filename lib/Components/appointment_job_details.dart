@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../constants.dart';
 
 class AppointmentJobDetails extends StatelessWidget {
@@ -50,7 +50,7 @@ class AppointmentJobDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Job Details',
+                  AppLocalizations.of(context)!.ec,
                   style: TextStyle(
                     color: black,
                     fontSize: 15,
@@ -73,7 +73,7 @@ class AppointmentJobDetails extends StatelessWidget {
             ),
             SizedBox(height: 12 * screenHeight),
             Text(
-              'Job',
+              AppLocalizations.of(context)!.jobs,
               style: TextStyle(
                 color: primary,
                 fontSize: 15,
@@ -91,7 +91,7 @@ class AppointmentJobDetails extends StatelessWidget {
             ),
             SizedBox(height: 12 * screenHeight),
             Text(
-              'Date',
+              AppLocalizations.of(context)!.date,
               style: TextStyle(
                 color: primary,
                 fontSize: 15,
@@ -109,7 +109,7 @@ class AppointmentJobDetails extends StatelessWidget {
             ),
             SizedBox(height: 12 * screenHeight),
             Text(
-              'Address',
+              AppLocalizations.of(context)!.address,
               style: TextStyle(
                 color: primary,
                 fontSize: 15,

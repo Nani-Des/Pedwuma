@@ -93,7 +93,7 @@ class MyJobItems extends StatelessWidget {
                         softWrap: false,
                       ),
                     ),
-                    SizedBox(height: 3 * screenHeight),
+                    SizedBox(height: 0 * screenHeight),
                     SizedBox(
                       width: 140 * screenWidth,
                       child: Text(

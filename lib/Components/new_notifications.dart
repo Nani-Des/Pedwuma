@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../constants.dart';
 import 'notification_item.dart';
 
@@ -28,7 +28,7 @@ class _NewNotificationsState extends State<NewNotifications> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'New Notification',
+                AppLocalizations.of(context)!.ev,
                 style: TextStyle(
                   color: black,
                   fontSize: 17,

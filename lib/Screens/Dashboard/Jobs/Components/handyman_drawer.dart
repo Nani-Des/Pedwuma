@@ -138,7 +138,7 @@ class HandymanDrawer extends StatelessWidget {
                   ),
                   SizedBox(height: 27 * screenHeight),
                   DrawerTile(
-                    title: AppLocalizations.of(context)!.jobupload,
+                    title: AppLocalizations.of(context)!.profileupload,
                     icon: Icons.cloud_upload,
                     screen: HandymanJobUploadScreen(),
                   ),

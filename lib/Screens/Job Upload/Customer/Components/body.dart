@@ -131,28 +131,28 @@ class _BodyState extends State<Body> {
   }
 
   Future addDetails(
-    String pic,
-    String jobId,
-    String custId,
-    String userName,
-    String seenBy,
-    String serviceCat,
-    String serviceProv,
-    int charge,
-    String chargeRate,
-    String expertise,
-    List portfolio,
-    String rating,
-    String houseNum,
-    String street,
-    String town,
-    String region,
-    bool isPortfolioPresent,
-    bool isReferencePresent,
-    bool jobStatus,
-    int peopleApplied,
-    String deadline,
-  ) async {
+      String pic,
+      String jobId,
+      String custId,
+      String userName,
+      String seenBy,
+      String serviceCat,
+      String serviceProv,
+      int charge,
+      String chargeRate,
+      String expertise,
+      List portfolio,
+      String rating,
+      String houseNum,
+      String street,
+      String town,
+      String region,
+      bool isPortfolioPresent,
+      bool isReferencePresent,
+      bool jobStatus,
+      int peopleApplied,
+      String deadline,
+      ) async {
     DateTime dateTime = DateTime.now();
     await FirebaseFirestore.instance
         .collection('Customer Job Upload')
@@ -192,9 +192,9 @@ class _BodyState extends State<Body> {
       },
       //TODO: CHANGE YEAR TO 2000'S AND LET IT REFLECT EVERYWHERE
       'Upload Date':
-          '${dateTime.day > 9 ? dateTime.day : '0${dateTime.day}'}-${dateTime.month > 9 ? dateTime.month : '0${dateTime.month}'}-${dateTime.year - 2000}',
+      '${dateTime.day > 9 ? dateTime.day : '0${dateTime.day}'}-${dateTime.month > 9 ? dateTime.month : '0${dateTime.month}'}-${dateTime.year - 2000}',
       'Upload Time':
-          '${dateTime.hour > 9 ? dateTime.hour : '0${dateTime.hour}'}:${dateTime.minute > 9 ? dateTime.minute : '0${dateTime.minute}'}',
+      '${dateTime.hour > 9 ? dateTime.hour : '0${dateTime.hour}'}:${dateTime.minute > 9 ? dateTime.minute : '0${dateTime.minute}'}',
     });
   }
 
@@ -215,7 +215,7 @@ class _BodyState extends State<Body> {
             backgroundColor: Colors.black45,
             behavior: SnackBarBehavior.floating,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             content: Center(
               child: Text(
                 'One or more required fields is empty. Check them again.',
@@ -290,7 +290,7 @@ class _BodyState extends State<Body> {
                   children: <Widget>[
                     Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: screenWidth * 5.0),
+                      EdgeInsets.symmetric(horizontal: screenWidth * 5.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -319,7 +319,7 @@ class _BodyState extends State<Body> {
                                 ),
                                 child: Center(
                                     child:
-                                        Icon(Icons.visibility, color: primary)),
+                                    Icon(Icons.visibility, color: primary)),
                               ),
                               SeenBySelect(
                                 isReadOnly: jobUploadReadOnly,
@@ -370,7 +370,7 @@ class _BodyState extends State<Body> {
                                         deadlineMonth = date.month.toString();
                                       } else {
                                         deadlineMonth =
-                                            ('0' + date.month.toString());
+                                        ('0' + date.month.toString());
                                       }
                                       deadlineYear = date.year.toString();
                                     });
@@ -415,7 +415,7 @@ class _BodyState extends State<Body> {
                     JobUploadOptionalsInfo(
                       isReadOnly: jobUploadReadOnly,
                     ),
-                    SizedBox(height: 10 * screenHeight),
+                    SizedBox(height: 30 * screenHeight),
                   ],
                 ),
               );

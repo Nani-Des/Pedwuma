@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../constants.dart';
 
 class AppointmentJobStatus extends StatefulWidget {
@@ -136,7 +136,7 @@ class _AppointmentJobStatusState extends State<AppointmentJobStatus> {
                     ),
                     SizedBox(height: 45 * screenHeight),
                     Text(
-                      'Job-In-Progress',
+                      AppLocalizations.of(context)!.dd,
                       style: TextStyle(
                         fontSize: 17,
                         color: widget.isJobInProgressActive ? black : grey,
@@ -154,7 +154,7 @@ class _AppointmentJobStatusState extends State<AppointmentJobStatus> {
                     ),
                     SizedBox(height: 45 * screenHeight),
                     Text(
-                      'Job Completed',
+                      AppLocalizations.of(context)!.jobcomplete,
                       style: TextStyle(
                         fontSize: 17,
                         color: widget.isJobCompletedAcitve ? black : grey,

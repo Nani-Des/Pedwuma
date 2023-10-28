@@ -55,7 +55,7 @@ class _ApplicationChargeDetailsState extends State<ApplicationChargeDetails> {
           children: <Widget>[
             AppointmentTabRow(
                 tabTitle: 'Charge Details', isCustomVisible: false),
-            SizedBox(height: 8 * screenHeight),
+            SizedBox(height: 22 * screenHeight),
             Padding(
               padding: EdgeInsets.only(left: screenWidth * 5.0),
               child: Row(
@@ -81,7 +81,7 @@ class _ApplicationChargeDetailsState extends State<ApplicationChargeDetails> {
                         children: <Widget>[
                           SizedBox(
                             width: 143 * screenWidth,
-                            height: 38 * screenHeight,
+                            height: 34 * screenHeight,
                             child: Center(
                               child: TextField(
                                 autofocus: false,
@@ -106,12 +106,12 @@ class _ApplicationChargeDetailsState extends State<ApplicationChargeDetails> {
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(7),
                                     borderSide:
-                                        BorderSide(color: appointmentTimeColor),
+                                    BorderSide(color: appointmentTimeColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(7),
                                     borderSide:
-                                        BorderSide(color: appointmentTimeColor),
+                                    BorderSide(color: appointmentTimeColor),
                                   ),
                                   hintStyle: TextStyle(
                                     fontSize: 15,
@@ -123,7 +123,7 @@ class _ApplicationChargeDetailsState extends State<ApplicationChargeDetails> {
                                   //     vertical: 15 * screenHeight),
                                 ),
                                 textCapitalization:
-                                    TextCapitalization.sentences,
+                                TextCapitalization.sentences,
                                 style: TextStyle(
                                   decoration: TextDecoration.none,
                                   color: black,
@@ -141,7 +141,7 @@ class _ApplicationChargeDetailsState extends State<ApplicationChargeDetails> {
                                 color: white,
                                 borderRadius: BorderRadius.circular(9),
                                 border:
-                                    Border.all(color: appointmentTimeColor)),
+                                Border.all(color: appointmentTimeColor)),
                             alignment: Alignment.center,
                             child: Text(
                               '\$',
@@ -211,7 +211,7 @@ class _ApplicationChargeDetailsState extends State<ApplicationChargeDetails> {
                               ),
                             ),
                             items:
-                                chargePerList.map((String serviceCategoryList) {
+                            chargePerList.map((String serviceCategoryList) {
                               return DropdownMenuItem(
                                 value: serviceCategoryList,
                                 child: Text(

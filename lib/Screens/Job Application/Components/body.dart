@@ -61,7 +61,7 @@ class _BodyState extends State<Body> {
             backgroundColor: Colors.black45,
             behavior: SnackBarBehavior.floating,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             content: Center(
               child: Text(
                 'One or more required fields has an error. Check them again.',
@@ -84,44 +84,44 @@ class _BodyState extends State<Body> {
           content: isSummaryClicked
               ? ApplicationSummaryDetails()
               : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ApplicationSummaryDetails(),
-                    SizedBox(height: 24 * screenHeight),
-                    GestureDetector(
-                      onTap: ((jobApplicationPortfolioList.isEmpty &&
-                                  allJobItemList[0].isPortfolioPresent) ||
-                              (jobApplicationLinks.isEmpty &&
-                                  allJobItemList[0].isReferencesPresent) ||
-                              apppointmentRegion == '' ||
-                              apppointmentTown == '' ||
-                              apppointmentHouseNum == '' ||
-                              apppointmentStreet == '')
-                          ? popDialog
-                          : applyJob,
-                      child: Container(
-                        height: 49 * screenHeight,
-                        width: 312 * screenWidth,
-                        decoration: BoxDecoration(
-                            color: primary,
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(color: sectionColor, width: 3)),
-                        child: Center(
-                          child: Text(
-                            'Apply',
-                            style: TextStyle(
-                              color: white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ApplicationSummaryDetails(),
+              SizedBox(height: 24 * screenHeight),
+              GestureDetector(
+                onTap: ((jobApplicationPortfolioList.isEmpty &&
+                    allJobItemList[0].isPortfolioPresent) ||
+                    (jobApplicationLinks.isEmpty &&
+                        allJobItemList[0].isReferencesPresent) ||
+                    apppointmentRegion == '' ||
+                    apppointmentTown == '' ||
+                    apppointmentHouseNum == '' ||
+                    apppointmentStreet == '')
+                    ? popDialog
+                    : applyJob,
+                child: Container(
+                  height: 49 * screenHeight,
+                  width: 312 * screenWidth,
+                  decoration: BoxDecoration(
+                      color: primary,
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: sectionColor, width: 3)),
+                  child: Center(
+                    child: Text(
+                      'Apply',
+                      style: TextStyle(
+                        color: white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
                       ),
                     ),
-                  ],
+                  ),
                 ),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -136,7 +136,7 @@ class _BodyState extends State<Body> {
         final uploadFileName = resultFile.name;
         final file = await FirebaseStorage.instance
             .ref(
-                'Job Application/${allJobItemList[0].jobID}/$loggedInUserId/Portfolio/')
+            'Job Application/${allJobItemList[0].jobID}/$loggedInUserId/Portfolio/')
             .child(uploadFileName)
             .putFile(uploadFile);
         final downloadURL = await file.ref.getDownloadURL();
@@ -195,7 +195,7 @@ class _BodyState extends State<Body> {
           'User Pic': allUsers[0].pic,
           'Schedule Time': timeList[appointmentTimeIndex],
           'Schedule Date':
-              '${dates[appointmentDateIndex].day.toString().padLeft(2, '0')}-${dates[appointmentDateIndex].month.toString().padLeft(2, '0')}-${dates[appointmentDateIndex].year}',
+          '${dates[appointmentDateIndex].day.toString().padLeft(2, '0')}-${dates[appointmentDateIndex].month.toString().padLeft(2, '0')}-${dates[appointmentDateIndex].year}',
         });
       }
 
@@ -230,7 +230,7 @@ class _BodyState extends State<Body> {
       } else {
         jobHandymanAppliedIDs.add(applierID);
         final document =
-            await FirebaseFirestore.instance.collection('Job Application').add({
+        await FirebaseFirestore.instance.collection('Job Application').add({
           'Jobs Applied': {
             'Customer': [],
             'Handyman': jobHandymanAppliedIDs,
@@ -294,7 +294,7 @@ class _BodyState extends State<Body> {
         jobCustomerOffersIDs.add(applierID);
         print(jobCustomerOffersIDs);
         final document =
-            await FirebaseFirestore.instance.collection('Job Application').add({
+        await FirebaseFirestore.instance.collection('Job Application').add({
           'Jobs Applied': {
             'Customer': [],
             'Handyman': [],
@@ -332,7 +332,7 @@ class _BodyState extends State<Body> {
       if (jobUploadDoc.docs.isNotEmpty) {
         final docID = jobUploadDoc.docs.single.id;
         List applierIDs =
-            jobUploadDoc.docs.single.get('Job Details.Applier IDs');
+        jobUploadDoc.docs.single.get('Job Details.Applier IDs');
         var deadlineP = jobUploadDoc.docs.single.get('Job Details.Deadline');
         var jobStatus = jobUploadDoc.docs.single.get('Job Details.Job Status');
 
@@ -376,7 +376,7 @@ class _BodyState extends State<Body> {
             backgroundColor: Colors.black45,
             behavior: SnackBarBehavior.floating,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             content: Center(
               child: Text(
                 e.toString(),
@@ -415,11 +415,11 @@ class _BodyState extends State<Body> {
                 ),
                 child: allJobItemList[0].pic == ''
                     ? Center(
-                        child: Icon(
-                        Icons.person,
-                        color: white,
-                        size: 42,
-                      ))
+                    child: Icon(
+                      Icons.person,
+                      color: white,
+                      size: 42,
+                    ))
                     : SizedBox(),
               ),
               SizedBox(height: 10 * screenHeight),
@@ -512,7 +512,7 @@ class _BodyState extends State<Body> {
             ],
           ),
           SizedBox(height: 23 * screenHeight),
-          ApplicationChargeDetails(chargeController: chargeController),
+
           SizedBox(height: 10 * screenHeight),
           ScheduleDayTab(),
           SizedBox(height: 10 * screenHeight),
