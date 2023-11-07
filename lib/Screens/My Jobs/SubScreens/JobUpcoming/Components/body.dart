@@ -38,7 +38,7 @@ class _BodyState extends State<Body> {
     final jobsAppliedID = moreOffers[selectedJob].documentID;
     if (moreOffers[selectedJob].whoApplied == 'Customer') {
       await FirebaseFirestore.instance
-          .collection('Customer Jobs Applied')
+          .collection('Bookings')
           .doc(jobsAppliedID)
           .update(
         {
@@ -48,7 +48,7 @@ class _BodyState extends State<Body> {
       );
     } else {
       await FirebaseFirestore.instance
-          .collection('Handyman Jobs Applied')
+          .collection('Applications')
           .doc(jobsAppliedID)
           .update(
         {

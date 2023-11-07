@@ -27,8 +27,8 @@ class _PortfolioTabState extends State<PortfolioTab> {
               ? handymanDashboardID[handymanSelectedIndex]
               : jobDashboardID[jobSelectedIndex],
           typeClicked == 'Customer'
-              ? 'Handyman Job Upload'
-              : 'Customer Job Upload'),
+              ? 'Booking Profile'
+              : 'Jobs'),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return Column(

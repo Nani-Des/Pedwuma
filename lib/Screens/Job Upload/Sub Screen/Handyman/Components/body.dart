@@ -22,7 +22,7 @@ class _BodyState extends State<Body> {
     allHandymanJobsUpload.clear();
     try {
       final result = await FirebaseFirestore.instance
-          .collection('Handyman Job Upload')
+          .collection('Booking Profile')
           .where('Customer ID', isEqualTo: loggedInUserId)
           .get();
 

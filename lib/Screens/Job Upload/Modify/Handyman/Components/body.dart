@@ -67,7 +67,7 @@ class _BodyState extends State<Body> {
         deadline = '$deadlineDay-$deadlineMonth-$deadlineYear';
 
         await FirebaseFirestore.instance
-            .collection('Handyman Job Upload')
+            .collection('Booking Profile')
             .doc(allHandymanJobsUpload[selectedJobUploadIndex].jobUploadId)
             .update({
           'Deadline': deadline,
@@ -182,7 +182,7 @@ class _BodyState extends State<Body> {
         final fileNames = file!.name;
         final filePath = file!.path;
         await storage.jobUploadFiles(fileNames as String, 'Portfolio',
-            filePath as String, jobId, 'Handyman Job Upload');
+            filePath as String, jobId, 'Booking Profile');
         print(uploadPortfolioList);
       });
     } else {
@@ -196,7 +196,7 @@ class _BodyState extends State<Body> {
         final fileNames = file!.name;
         final filePath = file!.path;
         storage.jobUploadFiles(fileNames, 'Certification', filePath as String,
-            jobId, 'Handyman Job Upload');
+            jobId, 'Booking Profile');
       });
     } else {
       throw ('No file picked');
@@ -209,7 +209,7 @@ class _BodyState extends State<Body> {
         final fileNames = file!.name;
         final filePath = file!.path;
         storage.jobUploadFiles(fileNames, 'Experience', filePath as String,
-            jobId, 'Handyman Job Upload');
+            jobId, 'Booking Profile');
       });
     } else {
       throw ('No file picked');

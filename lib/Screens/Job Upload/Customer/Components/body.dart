@@ -38,7 +38,7 @@ class _BodyState extends State<Body> {
     if (FieldsCheck()) {
       try {
         final document = await FirebaseFirestore.instance
-            .collection('Customer Job Upload')
+            .collection('Jobs')
             .add({
           'Customer ID': loggedInUserId,
         });
@@ -155,7 +155,7 @@ class _BodyState extends State<Body> {
       ) async {
     DateTime dateTime = DateTime.now();
     await FirebaseFirestore.instance
-        .collection('Customer Job Upload')
+        .collection('Jobs')
         .doc(jobId)
         .update({
       'User Pic': pic,
@@ -236,7 +236,7 @@ class _BodyState extends State<Body> {
         final fileNames = file!.name;
         final filePath = file!.path;
         await storage.jobUploadFiles(fileNames, 'Portfolio', filePath as String,
-            jobId, 'Customer Job Upload');
+            jobId, 'Jobs');
       });
     } else {
       throw ('No file picked');

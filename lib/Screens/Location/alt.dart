@@ -53,7 +53,7 @@ class _LocationScreenaState extends State<LocationScreena>
 
   Future getLocationCoordinates() async {
     final document = await FirebaseFirestore.instance
-        .collection('Customer/Handyman Job Upload')
+        .collection('Customer/Booking Profile')
         .where('Customer ID',
             isEqualTo: 'user_id gotten from jobid job -> jobUpload ')
         .get();

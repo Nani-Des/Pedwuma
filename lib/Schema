@@ -7,7 +7,7 @@ provide all the database fields and categorize them under their collections and 
 1.**Collection: 'Handyman Job Upload'/ Booking Profile**
 
 - Document: Auto-generated document ID(Handyman Job Document)
-  - 'Customer ID/ Worker ID' (String)
+  - 'Customer ID/ User ID' (String)
   - 'Deadline' (String)
   - 'User Pic' (String)
   - 'Job ID/ Booking Profile ID' (String)
@@ -88,7 +88,7 @@ provide all the database fields and categorize them under their collections and 
 
 
 
-
+++++++++++++++
 5.Collection: Category
 
 Document: [Category Document]
@@ -133,7 +133,7 @@ Experience' (Data Type: List of Strings)
    - **Document**: [Job Document]
      - 'User Pic': String (Profile picture of the customer)
      - 'Job ID': String (Unique identifier for the job)
-     - 'Customer ID/ Client ID': String (ID of the customer submitting the job)
+     - 'Customer ID/ User ID': String (ID of the customer submitting the job)
      - 'Name': String (Name of the customer)
      - 'Seen By': String (Visibility settings for who can see the job upload)
      - 'Service Information':

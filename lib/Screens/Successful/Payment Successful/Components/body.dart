@@ -49,14 +49,14 @@ class _BodyState extends State<Body> {
 
       if (moreOffers[selectedJob].whoApplied == 'Customer') {
         await FirebaseFirestore.instance
-            .collection('Customer Jobs Applied')
+            .collection('Bookings')
             .doc(moreOffers[selectedJob].documentID)
             .update({
           'Job Status': 'Paid',
         });
       } else {
         await FirebaseFirestore.instance
-            .collection('Handyman Jobs Applied')
+            .collection('Applications')
             .doc(moreOffers[selectedJob].documentID)
             .update({
           'Job Status': 'Paid',

@@ -136,7 +136,7 @@ class _BodyState extends State<Body> {
         final uploadFileName = resultFile.name;
         final file = await FirebaseStorage.instance
             .ref(
-            'Job Application/${allJobItemList[0].jobID}/$loggedInUserId/Portfolio/')
+            'Services/${allJobItemList[0].jobID}/$loggedInUserId/Portfolio/')
             .child(uploadFileName)
             .putFile(uploadFile);
         final downloadURL = await file.ref.getDownloadURL();
@@ -158,9 +158,9 @@ class _BodyState extends State<Body> {
       ids.sort();
       final applierID = ids.join('_');
 
-      // create handyman jobs applied collection
+      // create Applications collection
       final querySnapshot = await FirebaseFirestore.instance
-          .collection('Handyman Jobs Applied')
+          .collection('Applications')
           .where('Applier ID', isEqualTo: loggedInUserId)
           .get();
 
@@ -170,7 +170,7 @@ class _BodyState extends State<Body> {
         await uploadPortfolio();
 
         await FirebaseFirestore.instance
-            .collection('Handyman Jobs Applied')
+            .collection('Applications')
             .doc(applierID)
             .set({
           'Accepted Date': null,
@@ -202,7 +202,7 @@ class _BodyState extends State<Body> {
       // add applier id to applied -> handyman
 
       final document = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: loggedInUserId)
           .get();
       if (document.docs.isNotEmpty) {
@@ -216,7 +216,7 @@ class _BodyState extends State<Body> {
 
         jobHandymanAppliedIDs.add(applierID);
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Jobs Applied': {
@@ -230,7 +230,7 @@ class _BodyState extends State<Body> {
       } else {
         jobHandymanAppliedIDs.add(applierID);
         final document =
-        await FirebaseFirestore.instance.collection('Job Application').add({
+        await FirebaseFirestore.instance.collection('Services').add({
           'Jobs Applied': {
             'Customer': [],
             'Handyman': jobHandymanAppliedIDs,
@@ -253,7 +253,7 @@ class _BodyState extends State<Body> {
         final docID = document.id;
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({'Job Application ID': docID});
       }
@@ -261,14 +261,14 @@ class _BodyState extends State<Body> {
       // add applier id to offers -> customer
 
       final customerQuerySnapshot = await FirebaseFirestore.instance
-          .collection('Customer Job Upload')
+          .collection('Jobs')
           .where('Job ID', isEqualTo: allJobItemList[0].jobID)
           .get();
 
       final customerID = customerQuerySnapshot.docs.single.get('Customer ID');
 
       final docOffers = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: customerID)
           .get();
 
@@ -280,7 +280,7 @@ class _BodyState extends State<Body> {
         jobCustomerOffersIDs.add(applierID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Job Offers': {
@@ -294,7 +294,7 @@ class _BodyState extends State<Body> {
         jobCustomerOffersIDs.add(applierID);
         print(jobCustomerOffersIDs);
         final document =
-        await FirebaseFirestore.instance.collection('Job Application').add({
+        await FirebaseFirestore.instance.collection('Services').add({
           'Jobs Applied': {
             'Customer': [],
             'Handyman': [],
@@ -317,7 +317,7 @@ class _BodyState extends State<Body> {
         final docID = document.id;
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({'Job Application ID': docID});
       }
@@ -325,7 +325,7 @@ class _BodyState extends State<Body> {
       // add applier id to job upload applier IDs section
 
       final jobUploadDoc = await FirebaseFirestore.instance
-          .collection('Customer Job Upload')
+          .collection('Jobs')
           .where('Job ID', isEqualTo: allJobItemList[0].jobID)
           .get();
 
@@ -341,7 +341,7 @@ class _BodyState extends State<Body> {
         applierIDs.add(applierID);
 
         await FirebaseFirestore.instance
-            .collection('Customer Job Upload')
+            .collection('Jobs')
             .doc(docID)
             .update({
           'Job Details': {
@@ -353,7 +353,7 @@ class _BodyState extends State<Body> {
         });
 
         await FirebaseFirestore.instance
-            .collection('Handyman Jobs Applied')
+            .collection('Applications')
             .doc(applierID)
             .update({'Receiver ID': receiverID});
       } else {

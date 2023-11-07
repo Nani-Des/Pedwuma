@@ -260,7 +260,7 @@ class _BodyState extends State<Body> {
                   ),
                   child: Center(
                     child: Text(
-                      'AppLocalizations.of(context)!.reg',
+                      AppLocalizations.of(context)!.reg,
                       style: TextStyle(
                         color: white,
                         fontSize: 18,

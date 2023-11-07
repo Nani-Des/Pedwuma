@@ -96,7 +96,7 @@ Future getCustomerCategoryData() async {
   handymanDashboardImage.clear();
 
   final documents = await FirebaseFirestore.instance
-      .collection('Handyman Job Upload')
+      .collection('Booking Profile')
       .where('Seen By', isEqualTo: 'All')
       .where('Customer ID', isNotEqualTo: loggedInUserId)
       .orderBy('Customer ID')
@@ -159,7 +159,7 @@ Future getHandymanCategoryData() async {
   jobDashboardImage.clear();
 
   final documents = await FirebaseFirestore.instance
-      .collection('Customer Job Upload')
+      .collection('Jobs')
       .where('Seen By', isEqualTo: 'All')
       .where('Customer ID', isNotEqualTo: loggedInUserId)
       .orderBy('Customer ID')

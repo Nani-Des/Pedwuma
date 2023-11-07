@@ -118,7 +118,7 @@ class ReadData {
     late final document;
     if (type == 'Customer') {
       document = await FirebaseFirestore.instance
-          .collection('Handyman Job Upload')
+          .collection('Booking Profile')
           .doc(handymanDashboardID[handymanSelectedIndex])
           .get()
           .timeout(
@@ -129,7 +129,7 @@ class ReadData {
       );
     } else {
       document = await FirebaseFirestore.instance
-          .collection('Customer Job Upload')
+          .collection('Jobs')
           .doc(jobDashboardID[jobSelectedIndex])
           .get()
           .timeout(
@@ -326,7 +326,7 @@ class ReadData {
 
     try {
       final document = await FirebaseFirestore.instance
-          .collection('Customer Job Upload')
+          .collection('Jobs')
           .where('Job ID', isEqualTo: jobId)
           .get()
           .timeout(
@@ -377,7 +377,7 @@ class ReadData {
 
     try {
       final document = await FirebaseFirestore.instance
-          .collection('Handyman Job Upload')
+          .collection('Booking Profile')
           .where('Job ID', isEqualTo: jobId)
           .get()
           .timeout(
@@ -435,7 +435,7 @@ class ReadData {
       String jobID, TextEditingController charge) async {
     try {
       final querySnapshot = await FirebaseFirestore.instance
-          .collection('Customer Job Upload')
+          .collection('Jobs')
           .doc(jobID)
           .get()
           .timeout(
@@ -507,7 +507,7 @@ class ReadData {
       String jobID, TextEditingController charge) async {
     try {
       final querySnapshot = await FirebaseFirestore.instance
-          .collection('Handyman Job Upload')
+          .collection('Booking Profile')
           .doc(jobID)
           .get()
           .timeout(
@@ -586,7 +586,7 @@ class ReadData {
   Future deleteJobUpload(BuildContext context) async {
     try {
       await FirebaseFirestore.instance
-          .collection('Customer Job Upload')
+          .collection('Jobs')
           .doc(allCustomerJobsUpload[selectedJobUploadIndex].jobUploadId)
           .delete()
           .catchError((err) {
@@ -595,7 +595,7 @@ class ReadData {
 
       //directory in firebase storage whose files and sub directories are to be deleted
       final directoryRef = FirebaseStorage.instance.ref().child(
-          '$loggedInUserId/Customer Job Upload/${allCustomerJobsUpload[selectedJobUploadIndex].jobUploadId}');
+          '$loggedInUserId/Jobs/${allCustomerJobsUpload[selectedJobUploadIndex].jobUploadId}');
 
       //deleting all files present in directoryReference specified
       try {
@@ -658,7 +658,7 @@ class ReadData {
   Future handymanDeleteJobUpload(BuildContext context) async {
     try {
       await FirebaseFirestore.instance
-          .collection('Handyman Job Upload')
+          .collection('Booking Profile')
           .doc(allHandymanJobsUpload[selectedJobUploadIndex].jobUploadId)
           .delete()
           .catchError((err) {
@@ -667,7 +667,7 @@ class ReadData {
 
       //directory in firebase storage whose files and sub directories are to be deleted
       final directoryReference = await FirebaseStorage.instance.ref(
-          '$loggedInUserId/Handyman Job Upload/${allHandymanJobsUpload[selectedJobUploadIndex].jobUploadId}');
+          '$loggedInUserId/Booking Profile/${allHandymanJobsUpload[selectedJobUploadIndex].jobUploadId}');
 
       //deleting all files present in directoryReference specified
       try {
@@ -780,7 +780,7 @@ class ReadData {
           print(document);
 
           final querySnapshot = await FirebaseFirestore.instance
-              .collection('Handyman Job Upload')
+              .collection('Booking Profile')
               .doc(document)
               .get()
               .timeout(
@@ -838,7 +838,7 @@ class ReadData {
         for (var document in customerJobsBookmarked) {
           print(document);
           final querySnapshot = await FirebaseFirestore.instance
-              .collection('Customer Job Upload')
+              .collection('Jobs')
               .doc(document)
               .get()
               .timeout(
@@ -902,7 +902,7 @@ class ReadData {
     }
 
     final querySnapshot = await FirebaseFirestore.instance
-        .collection('Job Application')
+        .collection('Services')
         .where('Customer ID', isEqualTo: loggedInUserId)
         .get()
         .timeout(
@@ -917,7 +917,7 @@ class ReadData {
         final docID = querySnapshot.docs.single.id;
 
         final document = await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .get();
         final docData = document.data()!;
@@ -926,11 +926,11 @@ class ReadData {
         if (documentIDs.isNotEmpty) {
           for (var id in documentIDs) {
             final jobDoc = await FirebaseFirestore.instance
-                .collection('Handyman Jobs Applied')
+                .collection('Applications')
                 .doc(id)
                 .get();
 
-            //to get more info about handyman jobs applied
+            //to get more info about Applications
             final docData = jobDoc.data()!;
             final offerData = CustomerAppliedData(
               note: docData['Note'],
@@ -961,7 +961,7 @@ class ReadData {
             final jobID = jobDoc.get('Job ID');
 
             final document = await FirebaseFirestore.instance
-                .collection('Customer Job Upload')
+                .collection('Jobs')
                 .doc(jobID)
                 .get();
 
@@ -1066,7 +1066,7 @@ class ReadData {
     }
 
     final querySnapshot = await FirebaseFirestore.instance
-        .collection('Job Application')
+        .collection('Services')
         .where('Customer ID', isEqualTo: loggedInUserId)
         .get()
         .timeout(
@@ -1081,7 +1081,7 @@ class ReadData {
         final docID = querySnapshot.docs.single.id;
 
         final document = await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .get();
         final docData = document.data()!;
@@ -1090,7 +1090,7 @@ class ReadData {
         if (documentIDs.isNotEmpty) {
           for (var id in documentIDs) {
             final jobDoc = await FirebaseFirestore.instance
-                .collection('Customer Jobs Applied')
+                .collection('Bookings')
                 .doc(id)
                 .get();
 
@@ -1124,7 +1124,7 @@ class ReadData {
             final jobID = jobDoc.get('Job ID');
 
             final document = await FirebaseFirestore.instance
-                .collection('Handyman Job Upload')
+                .collection('Booking Profile')
                 .doc(jobID)
                 .get();
 
@@ -1229,11 +1229,11 @@ class ReadData {
     final applierID = moreOffers[selectedJob].applierID;
     final receiverID = moreOffers[selectedJob].receiverID;
 
-    // change job status of Customer/Handyman Jobs Applied
+    // change job status of Customer/Applications
 
     if (moreOffers[selectedJob].whoApplied == 'Customer') {
       await FirebaseFirestore.instance
-          .collection('Customer Jobs Applied')
+          .collection('Bookings')
           .doc(jobsAppliedID)
           .update({
         'Job Status': 'Completed',
@@ -1241,7 +1241,7 @@ class ReadData {
       });
     } else {
       await FirebaseFirestore.instance
-          .collection('Handyman Jobs Applied')
+          .collection('Applications')
           .doc(jobsAppliedID)
           .update({
         'Job Status': 'Completed',
@@ -1254,7 +1254,7 @@ class ReadData {
 
     if (moreOffers[selectedJob].whoApplied == 'Customer') {
       final customerUpcomingDocs = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: applierID)
           .get();
       if (customerUpcomingDocs.docs.isNotEmpty) {
@@ -1272,7 +1272,7 @@ class ReadData {
         jobCustomerCompletedIDs.add(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Jobs Upcoming': {
@@ -1287,7 +1287,7 @@ class ReadData {
       }
     } else {
       final customerUpcomingDocs = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: applierID)
           .get();
       if (customerUpcomingDocs.docs.isNotEmpty) {
@@ -1305,7 +1305,7 @@ class ReadData {
         jobHandymanCompletedIDs.add(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Jobs Upcoming': {
@@ -1330,7 +1330,7 @@ class ReadData {
 
     if (moreOffers[selectedJob].whoApplied == 'Customer') {
       final handymanUpcomingDocs = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: receiverID)
           .get();
       if (handymanUpcomingDocs.docs.isNotEmpty) {
@@ -1348,7 +1348,7 @@ class ReadData {
         jobHandymanCompletedIDs.add(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Jobs Upcoming': {
@@ -1363,7 +1363,7 @@ class ReadData {
       }
     } else {
       final handymanUpcomingDocs = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: receiverID)
           .get();
       if (handymanUpcomingDocs.docs.isNotEmpty) {
@@ -1381,7 +1381,7 @@ class ReadData {
         jobCustomerCompletedIDs.add(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Jobs Upcoming': {
@@ -1448,7 +1448,7 @@ class ReadData {
     allHandymanAppliedIDs.clear();
 
     final querySnapshot = await FirebaseFirestore.instance
-        .collection('Job Application')
+        .collection('Services')
         .where('Customer ID', isEqualTo: loggedInUserId)
         .get()
         .timeout(
@@ -1463,7 +1463,7 @@ class ReadData {
         final docID = querySnapshot.docs.single.id;
 
         final document = await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .get();
         final docData = document.data()!;
@@ -1478,10 +1478,10 @@ class ReadData {
 
             // customer job applied contains id?
             final allCustomerAppliedDocs = await FirebaseFirestore.instance
-                .collection('Customer Jobs Applied')
+                .collection('Bookings')
                 .get();
             final allHandymanAppliedDocs = await FirebaseFirestore.instance
-                .collection('Handyman Jobs Applied')
+                .collection('Applications')
                 .get();
 
             for (var doc in allCustomerAppliedDocs.docs) {
@@ -1493,7 +1493,7 @@ class ReadData {
 
             if (allCustomerAppliedIDs.contains(id)) {
               final jobDoc = await FirebaseFirestore.instance
-                  .collection('Customer Jobs Applied')
+                  .collection('Bookings')
                   .doc(id)
                   .get();
 
@@ -1526,7 +1526,7 @@ class ReadData {
               final jobID = jobDoc.get('Job ID');
 
               final document = await FirebaseFirestore.instance
-                  .collection('Handyman Job Upload')
+                  .collection('Booking Profile')
                   .doc(jobID)
                   .get();
 
@@ -1575,11 +1575,11 @@ class ReadData {
               );
             } else {
               final jobDoc = await FirebaseFirestore.instance
-                  .collection('Handyman Jobs Applied')
+                  .collection('Applications')
                   .doc(id)
                   .get();
 
-              //to get more info about handyman jobs applied
+              //to get more info about Applications
               final docData = jobDoc.data()!;
               offerData = CustomerAppliedData(
                 acceptedDate: docData['Accepted Date'],
@@ -1607,7 +1607,7 @@ class ReadData {
               final jobID = jobDoc.get('Job ID');
 
               final document = await FirebaseFirestore.instance
-                  .collection('Customer Job Upload')
+                  .collection('Jobs')
                   .doc(jobID)
                   .get();
 
@@ -1680,14 +1680,14 @@ class ReadData {
     if (type == 'Handyman Uploaded') {
       // delete document at Customer Jobs Applied
       await FirebaseFirestore.instance
-          .collection('Customer Jobs Applied')
+          .collection('Bookings')
           .doc(jobsAppliedID)
           .delete();
 
       // delete applier id at Job application -> Jobs Applied -> Customer
 
       final querySnapshot = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: loggedInUserId)
           .get();
       if (querySnapshot.docs.isNotEmpty) {
@@ -1700,7 +1700,7 @@ class ReadData {
         jobCustomerAppliedIDs.remove(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Jobs Applied': {
@@ -1713,7 +1713,7 @@ class ReadData {
       // delete applier id at Job application -> Jobs Offers -> Handyman
 
       final offersDocs = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: receiverID)
           .get()
           .timeout(
@@ -1736,7 +1736,7 @@ class ReadData {
         print(jobHandymanOffersIDs);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Job Offers': {
@@ -1749,7 +1749,7 @@ class ReadData {
     // delete applier id at job upload -> Job Details -> applier ids
 
     final jobUploadDoc = await FirebaseFirestore.instance
-        .collection('Handyman Job Upload')
+        .collection('Booking Profile')
         .where('Job ID', isEqualTo: jobUploadID)
         .get();
     if (jobUploadDoc.docs.isNotEmpty) {
@@ -1760,7 +1760,7 @@ class ReadData {
       applierIDs.remove(jobsAppliedID);
 
       await FirebaseFirestore.instance
-          .collection('Handyman Job Upload')
+          .collection('Booking Profile')
           .doc(docID)
           .update({
         'Job Details': {
@@ -1773,14 +1773,14 @@ class ReadData {
     else {
       // delete document at Customer Jobs Applied
       await FirebaseFirestore.instance
-          .collection('Handyman Jobs Applied')
+          .collection('Applications')
           .doc(jobsAppliedID)
           .delete();
 
-      // delete applier id at Job application -> Jobs Applied -> Handyman
+      // delete applier id at Services -> Jobs Applied -> Handyman
 
       final querySnapshot = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: loggedInUserId)
           .get()
           .timeout(
@@ -1799,7 +1799,7 @@ class ReadData {
         jobHandymanAppliedIDs.remove(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Jobs Applied': {
@@ -1812,7 +1812,7 @@ class ReadData {
       // delete applier id at Job application -> Jobs Offers -> Customer
 
       final offersDocs = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: receiverID)
           .get();
       if (offersDocs.docs.isNotEmpty) {
@@ -1825,7 +1825,7 @@ class ReadData {
         jobCustomerOffersIDs.remove(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Job Offers': {
@@ -1838,7 +1838,7 @@ class ReadData {
       // delete applier id at job upload -> Job Details -> applier ids
 
       final jobUploadDoc = await FirebaseFirestore.instance
-          .collection('Customer Job Upload')
+          .collection('Jobs')
           .where('Job ID', isEqualTo: jobUploadID)
           .get();
       if (jobUploadDoc.docs.isNotEmpty) {
@@ -1853,7 +1853,7 @@ class ReadData {
         applierIDs.remove(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Customer Job Upload')
+            .collection('Jobs')
             .doc(docID)
             .update({
           'Job Details': {
@@ -1879,14 +1879,14 @@ class ReadData {
     if (type == 'Handyman Uploaded') {
       // delete document at Customer Jobs Applied
       await FirebaseFirestore.instance
-          .collection('Customer Jobs Applied')
+          .collection('Bookings')
           .doc(jobsAppliedID)
           .delete();
 
       // delete applier id at Job application -> Jobs Applied -> Customer
 
       final querySnapshot = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: applierID)
           .get();
       if (querySnapshot.docs.isNotEmpty) {
@@ -1899,7 +1899,7 @@ class ReadData {
         jobCustomerUpcomingIDs.remove(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Jobs Upcoming': {
@@ -1912,10 +1912,10 @@ class ReadData {
       jobCustomerUpcomingIDs.clear();
       jobHandymanUpcomingIDs.clear();
 
-      // delete applier id at Job application -> Jobs Offers -> Handyman
+      // delete applier id at Services -> Jobs Offers -> Handyman
 
       final offersDocs = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: receiverID)
           .get()
           .timeout(
@@ -1938,7 +1938,7 @@ class ReadData {
         print(jobHandymanOffersIDs);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Jobs Upcoming': {
@@ -1951,7 +1951,7 @@ class ReadData {
     // delete applier id at job upload -> Job Details -> applier ids
 
     final jobUploadDoc = await FirebaseFirestore.instance
-        .collection('Handyman Job Upload')
+        .collection('Booking Profile')
         .where('Job ID', isEqualTo: jobUploadID)
         .get();
     if (jobUploadDoc.docs.isNotEmpty) {
@@ -1962,7 +1962,7 @@ class ReadData {
       applierIDs.remove(jobsAppliedID);
 
       await FirebaseFirestore.instance
-          .collection('Handyman Job Upload')
+          .collection('Booking Profile')
           .doc(docID)
           .update({
         'Job Details': {
@@ -1975,14 +1975,14 @@ class ReadData {
     else {
       // delete document at Customer Jobs Applied
       await FirebaseFirestore.instance
-          .collection('Handyman Jobs Applied')
+          .collection('Applications')
           .doc(jobsAppliedID)
           .delete();
 
       // delete applier id at Job application -> Jobs Applied -> Handyman
 
       final querySnapshot = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: applierID)
           .get()
           .timeout(
@@ -2001,7 +2001,7 @@ class ReadData {
         jobHandymanUpcomingIDs.remove(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Jobs Upcoming': {
@@ -2017,7 +2017,7 @@ class ReadData {
       // delete applier id at Job application -> Jobs Offers -> Customer
 
       final offersDocs = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: receiverID)
           .get();
       if (offersDocs.docs.isNotEmpty) {
@@ -2030,7 +2030,7 @@ class ReadData {
         jobCustomerUpcomingIDs.remove(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Jobs Upcoming': {
@@ -2043,7 +2043,7 @@ class ReadData {
       // delete applier id at job upload -> Job Details -> applier ids
 
       final jobUploadDoc = await FirebaseFirestore.instance
-          .collection('Customer Job Upload')
+          .collection('Jobs')
           .where('Job ID', isEqualTo: jobUploadID)
           .get();
       if (jobUploadDoc.docs.isNotEmpty) {
@@ -2058,7 +2058,7 @@ class ReadData {
         applierIDs.remove(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Customer Job Upload')
+            .collection('Jobs')
             .doc(docID)
             .update({
           'Job Details': {
@@ -2084,15 +2084,15 @@ class ReadData {
     final receiverID = moreOffers[selectedJob].receiverID;
     final jobUploadID = moreOffers[selectedJob].jobID;
 
-    //delete Customer Jobs Applied with jobs applied ID
+    //delete Bookings with jobs applied ID
     if (type == 'Handyman Uploaded') {
       await FirebaseFirestore.instance
-          .collection('Customer Jobs Applied')
+          .collection('Bookings')
           .doc(jobsAppliedID)
           .delete();
       // delete jobsAppliedID from applierID's Job Application -> Jobs Applied -> customer
       final querySnapshot = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: applierID)
           .get()
           .timeout(
@@ -2111,7 +2111,7 @@ class ReadData {
         jobCustomerAppliedIDs.remove(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Jobs Applied': {
@@ -2122,7 +2122,7 @@ class ReadData {
       }
       // delete jobsAppliedID from receiverID's Job Application -> Job Offers -> Handyman
       final offersDocs = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: receiverID)
           .get();
       if (offersDocs.docs.isNotEmpty) {
@@ -2139,7 +2139,7 @@ class ReadData {
         print(jobHandymanOffersIDs);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Job Offers': {
@@ -2151,7 +2151,7 @@ class ReadData {
       // delete jobsApplied from jobUpload( jobID ) -> Applier IDs
 
       final jobUploadDoc = await FirebaseFirestore.instance
-          .collection('Handyman Job Upload')
+          .collection('Booking Profile')
           .where('Job ID', isEqualTo: jobUploadID)
           .get();
       if (jobUploadDoc.docs.isNotEmpty) {
@@ -2163,7 +2163,7 @@ class ReadData {
         applierIDs.remove(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Handyman Job Upload')
+            .collection('Booking Profile')
             .doc(docID)
             .update({
           'Job Details': {
@@ -2175,14 +2175,14 @@ class ReadData {
     } else {
       // delete document at Customer Jobs Applied
       await FirebaseFirestore.instance
-          .collection('Handyman Jobs Applied')
+          .collection('Applications')
           .doc(jobsAppliedID)
           .delete();
 
       // delete applier id at Job application -> Jobs Applied -> Handyman
 
       final querySnapshot = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: loggedInUserId)
           .get();
       if (querySnapshot.docs.isNotEmpty) {
@@ -2195,7 +2195,7 @@ class ReadData {
         jobHandymanAppliedIDs.remove(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Jobs Applied': {
@@ -2208,7 +2208,7 @@ class ReadData {
       // delete applier id at Job application -> Jobs Offers -> Customer
 
       final offersDocs = await FirebaseFirestore.instance
-          .collection('Job Application')
+          .collection('Services')
           .where('Customer ID', isEqualTo: receiverID)
           .get();
       if (offersDocs.docs.isNotEmpty) {
@@ -2221,7 +2221,7 @@ class ReadData {
         jobCustomerOffersIDs.remove(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .update({
           'Job Offers': {
@@ -2234,7 +2234,7 @@ class ReadData {
       // delete applier id at job upload -> Job Details -> applier ids
 
       final jobUploadDoc = await FirebaseFirestore.instance
-          .collection('Customer Job Upload')
+          .collection('Jobs')
           .where('Job ID', isEqualTo: jobUploadID)
           .get();
       if (jobUploadDoc.docs.isNotEmpty) {
@@ -2249,7 +2249,7 @@ class ReadData {
         applierIDs.remove(jobsAppliedID);
 
         await FirebaseFirestore.instance
-            .collection('Customer Job Upload')
+            .collection('Jobs')
             .doc(docID)
             .update({
           'Job Details': {
@@ -2281,7 +2281,7 @@ class ReadData {
         // change job status in Customer Jobs Applied to Accepted
 
         await FirebaseFirestore.instance
-            .collection('Customer Jobs Applied')
+            .collection('Bookings')
             .doc(jobsAppliedID)
             .update({
           'Job Status': 'Accepted',
@@ -2292,7 +2292,7 @@ class ReadData {
         // add jobsAppliedID from Jobs Application (applierID) -> Upcoming -> Customer
 
         final appliedDocs = await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .where('Customer ID', isEqualTo: applierID)
             .get()
             .timeout(
@@ -2316,7 +2316,7 @@ class ReadData {
           jobCustomerUpcomingIDs.add(jobsAppliedID);
 
           await FirebaseFirestore.instance
-              .collection('Job Application')
+              .collection('Services')
               .doc(docID)
               .update({
             'Jobs Applied': {
@@ -2340,7 +2340,7 @@ class ReadData {
         // add jobsAppliedID from Jobs Application (receiverID) -> Upcoming -> Handyman}
 
         final offerDocs = await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .where('Customer ID', isEqualTo: receiverID)
             .get();
         if (offerDocs.docs.isNotEmpty) {
@@ -2358,7 +2358,7 @@ class ReadData {
           jobHandymanUpcomingIDs.add(jobsAppliedID);
 
           await FirebaseFirestore.instance
-              .collection('Job Application')
+              .collection('Services')
               .doc(docID)
               .update({
             'Job Offers': {
@@ -2375,7 +2375,7 @@ class ReadData {
         // change job status in Customer Jobs Applied to Accepted
 
         await FirebaseFirestore.instance
-            .collection('Handyman Jobs Applied')
+            .collection('Applications')
             .doc(jobsAppliedID)
             .update({
           'Job Status': 'Accepted',
@@ -2386,7 +2386,7 @@ class ReadData {
         // add jobsAppliedID from Jobs Application (applierID) -> Upcoming -> Customer
 
         final appliedDocs = await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .where('Customer ID', isEqualTo: applierID)
             .get();
         if (appliedDocs.docs.isNotEmpty) {
@@ -2404,7 +2404,7 @@ class ReadData {
           jobHandymanUpcomingIDs.add(jobsAppliedID);
 
           await FirebaseFirestore.instance
-              .collection('Job Application')
+              .collection('Services')
               .doc(docID)
               .update({
             'Jobs Applied': {
@@ -2428,7 +2428,7 @@ class ReadData {
         // add jobsAppliedID from Jobs Application (receiverID) -> Upcoming -> Handyman}
 
         final offerDocs = await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .where('Customer ID', isEqualTo: receiverID)
             .get();
         if (offerDocs.docs.isNotEmpty) {
@@ -2446,7 +2446,7 @@ class ReadData {
           jobCustomerUpcomingIDs.add(jobsAppliedID);
 
           await FirebaseFirestore.instance
-              .collection('Job Application')
+              .collection('Services')
               .doc(docID)
               .update({
             'Job Offers': {
@@ -2478,7 +2478,7 @@ class ReadData {
     jobCustomerOffersIDs.clear();
 
     final querySnapshot = await FirebaseFirestore.instance
-        .collection('Job Application')
+        .collection('Services')
         .where('Customer ID', isEqualTo: loggedInUserId)
         .get()
         .timeout(
@@ -2493,7 +2493,7 @@ class ReadData {
         final docID = querySnapshot.docs.single.id;
 
         final document = await FirebaseFirestore.instance
-            .collection('Job Application')
+            .collection('Services')
             .doc(docID)
             .get();
 
@@ -2516,7 +2516,7 @@ class ReadData {
     try {
       if (type == 'Handyman Uploaded') {
         await FirebaseFirestore.instance
-            .collection('Customer Jobs Applied')
+            .collection('Bookings')
             .doc(moreOffers[selectedJob].documentID)
             .update({
           'Schedule Date': rescheduleDate,
@@ -2525,7 +2525,7 @@ class ReadData {
         });
       } else {
         await FirebaseFirestore.instance
-            .collection('Handyman Jobs Applied')
+            .collection('Applications')
             .doc(moreOffers[selectedJob].documentID)
             .update({
           'Schedule Date': rescheduleDate,

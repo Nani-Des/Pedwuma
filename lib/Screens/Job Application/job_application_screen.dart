@@ -42,7 +42,7 @@ class _JobApplicationScreenState extends State<JobApplicationScreen> {
         elevation: 0.0,
         backgroundColor: white,
         title: Text(
-          'Job Application',
+          'Services',
           style: TextStyle(
             color: black,
             fontSize: 18,

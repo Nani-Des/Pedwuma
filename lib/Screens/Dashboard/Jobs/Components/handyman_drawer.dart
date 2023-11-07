@@ -12,6 +12,7 @@ import '../../../Chat/Sub Screen/chat.dart';
 import '../../../Favourites/Handyman/handyman_favourites_screen.dart';
 import '../../../Home/home_screen.dart';
 import '../../../Job Upload/Handyman/handyman_job_upload_screen.dart';
+import '../../../Location/location_screen.dart';
 import '../../../Login/login_screen.dart';
 import '../../../Notifications/notification_screen.dart';
 
@@ -179,7 +180,7 @@ class HandymanDrawer extends StatelessWidget {
                   DrawerTile(
                     title: AppLocalizations.of(context)!.bs,
                     icon: Icons.help_rounded,
-                    screen: NotificationScreen(),
+                    screen: LocationScreen(role: 'Customer'),
                   ),
                   SizedBox(height: 27 * screenHeight),
                   Center(

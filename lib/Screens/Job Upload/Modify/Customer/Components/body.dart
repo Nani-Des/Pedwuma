@@ -44,7 +44,7 @@ class _BodyState extends State<Body> {
         DateTime dateTime = DateTime.now();
 
         await FirebaseFirestore.instance
-            .collection('Customer Job Upload')
+            .collection('Jobs')
             .doc(allCustomerJobsUpload[selectedJobUploadIndex].jobUploadId)
             .update({
           'User Pic': imageUrl,
@@ -164,7 +164,7 @@ class _BodyState extends State<Body> {
         final fileNames = file.name;
         final filePath = file.path;
         await storage.jobUploadFiles(fileNames, 'Portfolio', filePath as String,
-            jobId, 'Customer Job Upload');
+            jobId, 'Jobs');
       });
     } else {
       throw ('No file picked');
