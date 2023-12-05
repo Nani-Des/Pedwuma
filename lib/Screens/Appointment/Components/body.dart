@@ -150,7 +150,7 @@ class _BodyState extends State<Body> {
 
       final document = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: loggedInUserId)
+          .where('User ID', isEqualTo: loggedInUserId)
           .get();
       if (document.docs.isNotEmpty) {
         final docID = document.docs.single.id;
@@ -198,7 +198,7 @@ class _BodyState extends State<Body> {
             'Customer': [],
             'Handyman': [],
           },
-          'Customer ID': loggedInUserId,
+          'User ID': loggedInUserId,
         });
 
         final docID = document.id;
@@ -206,7 +206,7 @@ class _BodyState extends State<Body> {
         await FirebaseFirestore.instance
             .collection('Services')
             .doc(docID)
-            .update({'Job Application ID': docID});
+            .update({'Services ID': docID});
       }
 
       //add applier id to offers -> handyman
@@ -216,11 +216,11 @@ class _BodyState extends State<Body> {
           .where('Job ID', isEqualTo: allJobItemList[0].jobID)
           .get();
 
-      final customerID = handymanQuerySnapshot.docs.single.get('Customer ID');
+      final customerID = handymanQuerySnapshot.docs.single.get('User ID');
 
       final docOffers = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: customerID)
+          .where('User ID', isEqualTo: customerID)
           .get();
 
       if (docOffers.docs.isNotEmpty) {
@@ -257,7 +257,7 @@ class _BodyState extends State<Body> {
             'Customer': [],
             'Handyman': jobHandymanOffersIDs,
           },
-          'Customer ID': customerID,
+          'User ID': customerID,
         });
 
         final docID = document.id;
@@ -265,7 +265,7 @@ class _BodyState extends State<Body> {
         await FirebaseFirestore.instance
             .collection('Services')
             .doc(docID)
-            .update({'Job Application ID': docID});
+            .update({'Services ID': docID});
       }
 
       //add applier id to job upload applier IDs section
@@ -281,7 +281,7 @@ class _BodyState extends State<Body> {
         jobUploadDoc.docs.single.get('Job Details.Applier IDs');
 
         applierIDs.add(applierID);
-        final receiverID = jobUploadDoc.docs.single.get('Customer ID');
+        final receiverID = jobUploadDoc.docs.single.get('User ID');
 
         await FirebaseFirestore.instance
             .collection('Booking Profile')

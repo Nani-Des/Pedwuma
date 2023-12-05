@@ -98,8 +98,8 @@ Future getCustomerCategoryData() async {
   final documents = await FirebaseFirestore.instance
       .collection('Booking Profile')
       .where('Seen By', isEqualTo: 'All')
-      .where('Customer ID', isNotEqualTo: loggedInUserId)
-      .orderBy('Customer ID')
+      .where('User ID', isNotEqualTo: loggedInUserId)
+      .orderBy('User ID')
       .get()
       .timeout(
     Duration(seconds: 30), // Set your desired timeout duration
@@ -161,8 +161,8 @@ Future getHandymanCategoryData() async {
   final documents = await FirebaseFirestore.instance
       .collection('Jobs')
       .where('Seen By', isEqualTo: 'All')
-      .where('Customer ID', isNotEqualTo: loggedInUserId)
-      .orderBy('Customer ID')
+      .where('User ID', isNotEqualTo: loggedInUserId)
+      .orderBy('User ID')
       .get()
       .timeout(
     Duration(seconds: 30), // Set your desired timeout duration

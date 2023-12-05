@@ -23,7 +23,7 @@ class _BodyState extends State<Body> {
     try {
       final result = await FirebaseFirestore.instance
           .collection('Booking Profile')
-          .where('Customer ID', isEqualTo: loggedInUserId)
+          .where('User ID', isEqualTo: loggedInUserId)
           .get();
 
       if (result.docs.isNotEmpty) {

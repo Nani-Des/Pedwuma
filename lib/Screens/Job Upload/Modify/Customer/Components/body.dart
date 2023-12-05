@@ -130,10 +130,6 @@ class _BodyState extends State<Body> {
     if (chargeController.text.trim().isNotEmpty &&
         chargePHint != 'N/A' &&
         expertHint != 'N/A' &&
-        uploadRegion != '' &&
-        uploadTown != '' &&
-        uploadStreet != '' &&
-        uploadHouseNum != '' &&
         deadlineDay != 'Day') {
       return true;
     } else {

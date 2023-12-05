@@ -41,7 +41,7 @@ class _BodyState extends State<Body> {
         final document = await FirebaseFirestore.instance
             .collection('Booking Profile')
             .add({
-          'Customer ID': loggedInUserId,
+          'User ID': loggedInUserId,
         });
 
         final jobID = document.id;
@@ -183,7 +183,7 @@ class _BodyState extends State<Body> {
       'Deadline': deadline,
       'User Pic': pic,
       'Job ID': jobId,
-      'Customer ID': custId,
+      'User ID': custId,
       'Name': userName,
       'Seen By': seenBy,
       'Service Information': {
@@ -221,11 +221,7 @@ class _BodyState extends State<Body> {
   bool FieldsCheck() {
     if (chargeController.text.trim().isNotEmpty &&
         chargePHint != 'N/A' &&
-        expertHint != 'N/A' &&
-        uploadRegion != '' &&
-        uploadTown != '' &&
-        uploadStreet != '' &&
-        uploadHouseNum != '') {
+        expertHint != 'N/A' ) {
       return true;
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -382,10 +378,7 @@ class _BodyState extends State<Body> {
                     JobUploadWorkCertInfo(
                         isReadOnly: jobUploadReadOnly, isHandyManUpload: true),
                     SizedBox(height: 30 * screenHeight),
-                    JobUploadLocationInfo(
-                      isReadOnly: jobUploadReadOnly,
-                    ),
-                    SizedBox(height: 30 * screenHeight),
+
                   ],
                 ),
               );

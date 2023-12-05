@@ -31,7 +31,7 @@ Future selectedHandymanCategoryData(String categoryName) async {
   final documents = await FirebaseFirestore.instance
       .collection('Jobs')
       .where('Service Information.Service Category', isEqualTo: categoryName)
-      .where('Customer ID', isNotEqualTo: loggedInUserId)
+      .where('User ID', isNotEqualTo: loggedInUserId)
       .get();
 
   if (documents.docs.isNotEmpty) {

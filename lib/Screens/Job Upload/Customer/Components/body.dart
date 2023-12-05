@@ -40,7 +40,7 @@ class _BodyState extends State<Body> {
         final document = await FirebaseFirestore.instance
             .collection('Jobs')
             .add({
-          'Customer ID': loggedInUserId,
+          'User ID': loggedInUserId,
         });
         final jobID = document.id;
 
@@ -160,7 +160,7 @@ class _BodyState extends State<Body> {
         .update({
       'User Pic': pic,
       'Job ID': jobId,
-      'Customer ID': custId,
+      'User ID': custId,
       'Name': userName,
       'Seen By': seenBy,
       'Service Information': {
@@ -201,11 +201,7 @@ class _BodyState extends State<Body> {
   bool FieldsCheck() {
     if (chargeController.text.isNotEmpty &&
         chargePHint != 'N/A' &&
-        expertHint != 'N/A' &&
-        uploadRegion != '' &&
-        uploadTown != '' &&
-        uploadStreet != '' &&
-        uploadHouseNum != '' &&
+        expertHint != 'N/A'  &&
         deadlineDay != 'Day') {
       return true;
     } else {
@@ -408,9 +404,7 @@ class _BodyState extends State<Body> {
                       isReadOnly: jobUploadReadOnly,
                     ),
                     SizedBox(height: 30 * screenHeight),
-                    JobUploadLocationInfo(
-                      isReadOnly: jobUploadReadOnly,
-                    ),
+
                     SizedBox(height: 30 * screenHeight),
                     JobUploadOptionalsInfo(
                       isReadOnly: jobUploadReadOnly,

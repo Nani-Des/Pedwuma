@@ -140,7 +140,7 @@ class ReadData {
       );
     }
 
-    final userID = document.get('Customer ID');
+    final userID = document.get('User ID');
 
     final querySnapshot = await FirebaseFirestore.instance
         .collection('users')
@@ -337,12 +337,12 @@ class ReadData {
       );
 
       if (document.docs.isNotEmpty) {
-        currentJobClickedUserId = document.docs.single.get('Customer ID');
+        currentJobClickedUserId = document.docs.single.get('User ID');
 
         final documentData = document.docs.single.data();
 
         final jobItemData = JobItemData(
-          customerID: documentData['Customer ID'],
+          customerID: documentData['User ID'],
           pic: documentData['User Pic'] == '' ? '' : documentData['User Pic'],
           deadline: documentData['Job Details']['Deadline'],
           peopleApplied: documentData['Job Details']['People Applied'],
@@ -388,13 +388,13 @@ class ReadData {
       );
 
       if (document.docs.isNotEmpty) {
-        currentJobClickedUserId = document.docs.single.get('Customer ID');
+        currentJobClickedUserId = document.docs.single.get('User ID');
 
         final documentData = document.docs.single.data();
         appointmentChargeRate =
             documentData['Service Information']['Charge Rate'];
         final jobItemData = JobItemData(
-          customerID: documentData['Customer ID'],
+          customerID: documentData['User ID'],
           jobsDone: documentData['Work Experience & Certification']
               ["Job's Completed"],
           references: documentData['Work Experience & Certification']
@@ -903,7 +903,7 @@ class ReadData {
 
     final querySnapshot = await FirebaseFirestore.instance
         .collection('Services')
-        .where('Customer ID', isEqualTo: loggedInUserId)
+        .where('User ID', isEqualTo: loggedInUserId)
         .get()
         .timeout(
       Duration(seconds: 30), // Set your desired timeout duration
@@ -1067,7 +1067,7 @@ class ReadData {
 
     final querySnapshot = await FirebaseFirestore.instance
         .collection('Services')
-        .where('Customer ID', isEqualTo: loggedInUserId)
+        .where('User ID', isEqualTo: loggedInUserId)
         .get()
         .timeout(
       Duration(seconds: 30), // Set your desired timeout duration
@@ -1255,7 +1255,7 @@ class ReadData {
     if (moreOffers[selectedJob].whoApplied == 'Customer') {
       final customerUpcomingDocs = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: applierID)
+          .where('User ID', isEqualTo: applierID)
           .get();
       if (customerUpcomingDocs.docs.isNotEmpty) {
         final docID = customerUpcomingDocs.docs.single.id;
@@ -1288,7 +1288,7 @@ class ReadData {
     } else {
       final customerUpcomingDocs = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: applierID)
+          .where('User ID', isEqualTo: applierID)
           .get();
       if (customerUpcomingDocs.docs.isNotEmpty) {
         final docID = customerUpcomingDocs.docs.single.id;
@@ -1331,7 +1331,7 @@ class ReadData {
     if (moreOffers[selectedJob].whoApplied == 'Customer') {
       final handymanUpcomingDocs = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: receiverID)
+          .where('User ID', isEqualTo: receiverID)
           .get();
       if (handymanUpcomingDocs.docs.isNotEmpty) {
         final docID = handymanUpcomingDocs.docs.single.id;
@@ -1364,7 +1364,7 @@ class ReadData {
     } else {
       final handymanUpcomingDocs = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: receiverID)
+          .where('User ID', isEqualTo: receiverID)
           .get();
       if (handymanUpcomingDocs.docs.isNotEmpty) {
         final docID = handymanUpcomingDocs.docs.single.id;
@@ -1449,7 +1449,7 @@ class ReadData {
 
     final querySnapshot = await FirebaseFirestore.instance
         .collection('Services')
-        .where('Customer ID', isEqualTo: loggedInUserId)
+        .where('User ID', isEqualTo: loggedInUserId)
         .get()
         .timeout(
       Duration(seconds: 30), // Set your desired timeout duration
@@ -1688,7 +1688,7 @@ class ReadData {
 
       final querySnapshot = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: loggedInUserId)
+          .where('User ID', isEqualTo: loggedInUserId)
           .get();
       if (querySnapshot.docs.isNotEmpty) {
         final docID = querySnapshot.docs.single.id;
@@ -1714,7 +1714,7 @@ class ReadData {
 
       final offersDocs = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: receiverID)
+          .where('User ID', isEqualTo: receiverID)
           .get()
           .timeout(
         Duration(seconds: 30), // Set your desired timeout duration
@@ -1781,7 +1781,7 @@ class ReadData {
 
       final querySnapshot = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: loggedInUserId)
+          .where('User ID', isEqualTo: loggedInUserId)
           .get()
           .timeout(
         Duration(seconds: 30), // Set your desired timeout duration
@@ -1813,7 +1813,7 @@ class ReadData {
 
       final offersDocs = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: receiverID)
+          .where('User ID', isEqualTo: receiverID)
           .get();
       if (offersDocs.docs.isNotEmpty) {
         final docID = offersDocs.docs.single.id;
@@ -1887,7 +1887,7 @@ class ReadData {
 
       final querySnapshot = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: applierID)
+          .where('User ID', isEqualTo: applierID)
           .get();
       if (querySnapshot.docs.isNotEmpty) {
         final docID = querySnapshot.docs.single.id;
@@ -1916,7 +1916,7 @@ class ReadData {
 
       final offersDocs = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: receiverID)
+          .where('User ID', isEqualTo: receiverID)
           .get()
           .timeout(
         Duration(seconds: 30), // Set your desired timeout duration
@@ -1983,7 +1983,7 @@ class ReadData {
 
       final querySnapshot = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: applierID)
+          .where('User ID', isEqualTo: applierID)
           .get()
           .timeout(
         Duration(seconds: 30), // Set your desired timeout duration
@@ -2018,7 +2018,7 @@ class ReadData {
 
       final offersDocs = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: receiverID)
+          .where('User ID', isEqualTo: receiverID)
           .get();
       if (offersDocs.docs.isNotEmpty) {
         final docID = offersDocs.docs.single.id;
@@ -2093,7 +2093,7 @@ class ReadData {
       // delete jobsAppliedID from applierID's Job Application -> Jobs Applied -> customer
       final querySnapshot = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: applierID)
+          .where('User ID', isEqualTo: applierID)
           .get()
           .timeout(
         Duration(seconds: 30), // Set your desired timeout duration
@@ -2123,7 +2123,7 @@ class ReadData {
       // delete jobsAppliedID from receiverID's Job Application -> Job Offers -> Handyman
       final offersDocs = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: receiverID)
+          .where('User ID', isEqualTo: receiverID)
           .get();
       if (offersDocs.docs.isNotEmpty) {
         final docID = offersDocs.docs.single.id;
@@ -2183,7 +2183,7 @@ class ReadData {
 
       final querySnapshot = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: loggedInUserId)
+          .where('User ID', isEqualTo: loggedInUserId)
           .get();
       if (querySnapshot.docs.isNotEmpty) {
         final docID = querySnapshot.docs.single.id;
@@ -2209,7 +2209,7 @@ class ReadData {
 
       final offersDocs = await FirebaseFirestore.instance
           .collection('Services')
-          .where('Customer ID', isEqualTo: receiverID)
+          .where('User ID', isEqualTo: receiverID)
           .get();
       if (offersDocs.docs.isNotEmpty) {
         final docID = offersDocs.docs.single.id;
@@ -2293,7 +2293,7 @@ class ReadData {
 
         final appliedDocs = await FirebaseFirestore.instance
             .collection('Services')
-            .where('Customer ID', isEqualTo: applierID)
+            .where('User ID', isEqualTo: applierID)
             .get()
             .timeout(
           Duration(seconds: 30), // Set your desired timeout duration
@@ -2341,7 +2341,7 @@ class ReadData {
 
         final offerDocs = await FirebaseFirestore.instance
             .collection('Services')
-            .where('Customer ID', isEqualTo: receiverID)
+            .where('User ID', isEqualTo: receiverID)
             .get();
         if (offerDocs.docs.isNotEmpty) {
           final docID = offerDocs.docs.single.id;
@@ -2387,7 +2387,7 @@ class ReadData {
 
         final appliedDocs = await FirebaseFirestore.instance
             .collection('Services')
-            .where('Customer ID', isEqualTo: applierID)
+            .where('User ID', isEqualTo: applierID)
             .get();
         if (appliedDocs.docs.isNotEmpty) {
           final docID = appliedDocs.docs.single.id;
@@ -2429,7 +2429,7 @@ class ReadData {
 
         final offerDocs = await FirebaseFirestore.instance
             .collection('Services')
-            .where('Customer ID', isEqualTo: receiverID)
+            .where('User ID', isEqualTo: receiverID)
             .get();
         if (offerDocs.docs.isNotEmpty) {
           final docID = offerDocs.docs.single.id;
@@ -2479,7 +2479,7 @@ class ReadData {
 
     final querySnapshot = await FirebaseFirestore.instance
         .collection('Services')
-        .where('Customer ID', isEqualTo: loggedInUserId)
+        .where('User ID', isEqualTo: loggedInUserId)
         .get()
         .timeout(
       Duration(seconds: 30), // Set your desired timeout duration

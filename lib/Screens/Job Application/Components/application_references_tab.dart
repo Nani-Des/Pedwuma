@@ -208,7 +208,7 @@ class _ApplicationReferencesTabState extends State<ApplicationReferencesTab> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SizedBox(
-                                      width: 265 * screenWidth,
+                                      width: 260 * screenWidth,
                                       child: Text(
                                         jobApplicationLinks[index],
                                         style: TextStyle(
@@ -325,7 +325,7 @@ class _ApplicationReferencesTabState extends State<ApplicationReferencesTab> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(width: 42),
+                      SizedBox(width: 41),
                       Text(
                         'Add references here...',
                         style: TextStyle(

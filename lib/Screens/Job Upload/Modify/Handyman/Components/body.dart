@@ -148,11 +148,7 @@ class _BodyState extends State<Body> {
   bool FieldsCheck() {
     if (chargeController.text.trim().isNotEmpty &&
         chargePHint != 'N/A' &&
-        expertHint != 'N/A' &&
-        uploadRegion != '' &&
-        uploadTown != '' &&
-        uploadStreet != '' &&
-        uploadHouseNum != '') {
+        expertHint != 'N/A' ) {
       return true;
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
