@@ -14,6 +14,7 @@ import '../../../../Components/drawer_header.dart';
 import '../../../../Components/drawer_tile.dart';
 import '../../../../Services/read_data.dart';
 import '../../../../constants.dart';
+import '../../../../help.dart';
 import '../../../Home/home_screen.dart';
 import '../../../Notifications/notification_screen.dart';
 import '../../../Profile/Profile - Customer/profile_customer.dart';
@@ -180,7 +181,7 @@ class CustomerDrawer extends StatelessWidget {
                   DrawerTile(
                     title: AppLocalizations.of(context)!.bs,
                     icon: Icons.help_rounded,
-                    screen: LocationScreen(role: 'Customer'),
+                    screen: HelpSupportPage()
                   ),
                   SizedBox(height: 27 * screenHeight),
                   Center(

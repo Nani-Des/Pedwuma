@@ -8,6 +8,7 @@ import '../../../../Components/drawer_header.dart';
 import '../../../../Components/drawer_tile.dart';
 import '../../../../Services/read_data.dart';
 import '../../../../constants.dart';
+import '../../../../help.dart';
 import '../../../Chat/Sub Screen/chat.dart';
 import '../../../Favourites/Handyman/handyman_favourites_screen.dart';
 import '../../../Home/home_screen.dart';
@@ -180,7 +181,7 @@ class HandymanDrawer extends StatelessWidget {
                   DrawerTile(
                     title: AppLocalizations.of(context)!.bs,
                     icon: Icons.help_rounded,
-                    screen: LocationScreen(role: 'Customer'),
+                    screen: HelpSupportPage(),
                   ),
                   SizedBox(height: 27 * screenHeight),
                   Center(
@@ -190,9 +191,9 @@ class HandymanDrawer extends StatelessWidget {
                       color: grey,
                     ),
                   ),
-                  SizedBox(height: 20 * screenHeight),
+                  SizedBox(height: 5 * screenHeight),
                   DrawerTile(
-                    title: AppLocalizations.of(context)!.bs,
+                    title: AppLocalizations.of(context)!.settings,
                     icon: Icons.settings,
                     screen: SettingsScreen(),
                   ),
