@@ -218,11 +218,7 @@
     "fk" : "What should I register as?",
     "fl" : "Users can register as a worker (Service provider) or a regular customer (in need of a service worker)",
     "fm" : "How do I get notified if someone need my service?",
-    "fn" : "Pedwuma uses users’ telephone numbers and email on file to contact service providers and customers for business. Frequently check your phone and email for job notifications. Customers may reach you via email, phone or through a live chat.",
-      "terms": {
-        "title": "TERMS OF USE",
-        "content": "The following terms of use outline your obligations when using the Pedwuma websites, mobile applications, and services.\n\n1. ACCEPTANCE OF TERMS\nPedwuma website is available at www.pedwuma.com, all related sites and mobile applications, and the various content, features, and services offered on and in connection with these sites and applications are owned and operated by Pedwuma.\nPLEASE READ THESE TERMS OF USE CAREFULLY. BY ACCESSING, DOWNLOADING, OR USING ANY OF THE SITES AND SERVICES, YOU AGREE TO BECOME BOUND BY THESE TERMS AND CONDITIONS. IF YOU DO NOT AGREE TO ALL THE TERMS AND CONDITIONS, YOU MAY NOT ACCESS AND USE THE SITES AND SERVICES.\n\n2. USER CONDUCT\nYou agree not to use the sites and services for any purpose unlawful or prohibited by these terms of use or any other purpose not reasonably intended by Pedwuma. Users who commit the outlined violations may be subject to civil and/or financial penalties and loss of access to Pedwuma.com and its mobile apps.\n\nA. Use Pedwuma.com and its mobile apps in any manner that infringes, misappropriates, or violates any third party’s rights, including harassing, threatening, intimidating, impersonating, or attempting to impersonate any other person, falsifying your contact, act of deception, crime, intentional damage to property and money laundering.\n\n... (remaining content)"
-      }
+    "fn" : "Pedwuma uses users’ telephone numbers and email on file to contact service providers and customers for business. Frequently check your phone and email for job notifications. Customers may reach you via email, phone or through a live chat."
 
 
 }
