@@ -162,7 +162,7 @@ class CategoryItem extends StatelessWidget {
                           ),
                           Spacer(),
                           Text(
-                            '\$' + price + '/' + chargeRate,
+                            '\₵' + price + '/' + chargeRate,
                             style: TextStyle(
                                 fontSize: 19,
                                 color: green,

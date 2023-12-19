@@ -147,7 +147,7 @@ class _JobUploadServiceInfoState extends State<JobUploadServiceInfo> {
                       ),
                       child: Center(
                         child: Text(
-                          '\$',
+                          '\₵',
                           style: TextStyle(
                             color: primary,
                             fontSize: 18,

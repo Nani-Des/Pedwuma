@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "handyman_app" "\0"
+            VALUE "CompanyName", "com.extension" "\0"
+            VALUE "FileDescription", "pedwuma" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "handyman_app" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "handyman_app.exe" "\0"
-            VALUE "ProductName", "handyman_app" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.extension. All rights reserved." "\0"
+            VALUE "OriginalFilename", "pedwuma.exe" "\0"
+            VALUE "ProductName", "pedwuma" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

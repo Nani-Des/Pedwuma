@@ -106,7 +106,7 @@ class PersonnelDetailsTab extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                '\$${allJobItemList[0].charge}/' + allJobItemList[0].chargeRate,
+                '\₵${allJobItemList[0].charge}/' + allJobItemList[0].chargeRate,
                 style: TextStyle(
                   color: primary,
                   fontSize: 21.64,

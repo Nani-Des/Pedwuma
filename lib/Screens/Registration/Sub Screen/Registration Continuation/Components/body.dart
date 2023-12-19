@@ -91,7 +91,7 @@ class _BodyState extends State<Body> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Wrapper(),
+          builder: (context) => HomeScreen(),
         ),
       );
     });
@@ -215,7 +215,7 @@ class _BodyState extends State<Body> {
                               ),
                               child: Center(
                                 child: Text(
-                                  '\$',
+                                  '\₵',
                                   style: TextStyle(
                                     color: primary,
                                     fontSize: 18,

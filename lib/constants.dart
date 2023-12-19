@@ -100,10 +100,16 @@ List<String> dashBoardTabList = [
 ];
 
 final serviceCategoryList = [
-  'Plumbing',
-  'Painting',
-  'Electrical Repairs',
-  'Gardeners'
+  'Appliance Repairers',
+  'Electricians',
+  ' Plumbers',
+  'Painters',
+  'Gardening & Landscaping',
+  'Locksmiths',
+  'HVAC Technicians',
+  'Tilers',
+
+
 ];
 List selectedServiceProvList = [];
 List selectedCertList = [];
@@ -116,9 +122,32 @@ List uploadPortfolioList = [];
 
 //to be deleted
 final servicesProvidedList = [
+  'Rice cooker and Stove Repairs',
+  ' Refirigerator and Fan Repairs',
+  ' Laptop Repairs',
+  'Mobile Phone Repairs',
+  'Electrical Wiring and Rewiring',
+  'Meter Repairs and Maintenance',
+  'Electrical Panel Upgrades',
+  'Pipe Repair and Installation',
+  'Toilet and faucet Repair',
+  'Commercial Plumbing',
+  'House/Room Painting',
+  'Wallpaper Installation and removal',
   'Furniture Painting',
-  'Building Painting',
-  'Room Painting',
+  'Lawn mowing and Maintenance',
+  'Tree and shrub pruning',
+  'Planting and Gardening',
+  'Lock installation and repair',
+  'Key Cutting and Duplication',
+  'Master Key System Installation',
+  'Air Conditioning and Heating system Installation',
+  'HVAC Maintenance and Repairs',
+  'Duct Cleaning and Repairs',
+  'Floor/Wall Tiling',
+  'Shower/Bathtub Tiling',
+  'Tiling Repair and Replacement',
+
 ];
 
 final expertiseList = [

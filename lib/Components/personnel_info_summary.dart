@@ -49,7 +49,7 @@ class PersonnelInfoSummary extends StatelessWidget {
           ),
         ),
         Text(
-          '\$' + '${allJobItemList[0].charge}/${allJobItemList[0].chargeRate}',
+          '\₵' + '${allJobItemList[0].charge}/${allJobItemList[0].chargeRate}',
           style: TextStyle(
             color: black,
             fontWeight: FontWeight.w700,

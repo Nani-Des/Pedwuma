@@ -20,6 +20,28 @@ import '../../../../../constants.dart';
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
 
+  Future<void> showLocationPermissionMessage(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Location Access'),
+          content: SingleChildScrollView(
+            child: Text('Pedwuma collects location data to enable live location tracking to enable service workers navigation to job sites even when the app is closed or in use'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Proceed'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     late final DateTime accDate;
@@ -78,6 +100,8 @@ class Body extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+
+
         Expanded(
           child: ListView.builder(
             shrinkWrap: true,
@@ -90,6 +114,7 @@ class Body extends StatelessWidget {
               progDate = inProgressDate.toDate();
               return JobDetailsAndStatus(
                 function: () async {
+                  await showLocationPermissionMessage(context);
                   await getUserLocationAndUpload();
                   Navigator.push(
                     context,

@@ -125,7 +125,7 @@ class JobSummary extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    '\$' +
+                    '\₵' +
                         allJobItemList[0].charge.toString() +
                         '/' +
                         allJobItemList[0].chargeRate,

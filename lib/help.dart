@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HelpSupportPage extends StatelessWidget {
   @override
@@ -119,6 +120,23 @@ class HelpSupportPage extends StatelessWidget {
         ListTile(
           leading: Icon(Icons.email),
           title: Text('Email: info@Pedwuma.com'),
+        ),
+        SizedBox(height: 12),
+        GestureDetector(
+          onTap: () {
+            // Replace 'https://your-privacy-policy-link.com' with your actual privacy policy URL
+            launch('https://pedwuma.com/privacy/Policy.html');
+          },
+          child: ListTile(
+            title: Text(
+              'Privacy Policy',
+              style: TextStyle(color: Colors.blue),
+            ),
+            onTap: () {
+              // Add your URL launching logic here if needed
+              launch('https://pedwuma.com/privacy/Policy.html');
+            },
+          ),
         ),
       ],
     );

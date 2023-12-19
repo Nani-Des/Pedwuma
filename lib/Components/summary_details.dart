@@ -43,7 +43,7 @@ class SummaryDetails extends StatelessWidget {
               children: <Widget>[
                 SummaryElement(
                     title: 'Charge',
-                    subtitle: '\$ ${allJobItemList[0].charge}'),
+                    subtitle: '\₵ ${allJobItemList[0].charge}'),
                 SummaryElement(
                     title: 'Charge per', subtitle: appointmentChargeRate),
               ],

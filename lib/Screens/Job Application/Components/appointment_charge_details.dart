@@ -144,7 +144,7 @@ class _ApplicationChargeDetailsState extends State<ApplicationChargeDetails> {
                                 Border.all(color: appointmentTimeColor)),
                             alignment: Alignment.center,
                             child: Text(
-                              '\$',
+                              '\₵',
                               style: TextStyle(
                                   color: primary,
                                   fontSize: 16,

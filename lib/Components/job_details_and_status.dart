@@ -142,7 +142,7 @@ class JobDetailsAndStatus extends StatelessWidget {
                     ),
                     // SizedBox(height: 17 * screenHeight),
                     Text(
-                      '\$ $charge/$chargeRate',
+                      '\₵ $charge/$chargeRate',
                       style: TextStyle(
                         color: black,
                         fontSize: 27.64,

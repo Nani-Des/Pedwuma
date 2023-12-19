@@ -207,7 +207,7 @@ class _ProfileServiceInformationState extends State<ProfileServiceInformation> {
                       ),
                       child: Center(
                         child: Text(
-                          '\$',
+                          '\₵',
                           style: TextStyle(
                             color: primary,
                             fontSize: 18,
