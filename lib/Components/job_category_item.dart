@@ -51,7 +51,7 @@ class JobCategoryItem extends StatelessWidget {
           typeClicked = 'Handyman';
         },
         child: Container(
-          height: 123 * screenHeight,
+          height: 130 * screenHeight,
           width: 362 * screenWidth,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),

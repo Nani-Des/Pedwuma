@@ -131,7 +131,7 @@ class CustomerDrawer extends StatelessWidget {
                   ),
                   SizedBox(height: 15 * screenHeight),
                   DrawerTile(
-                    title: AppLocalizations.of(context)!.bookings,
+                    title: "Bookings",
                     icon: Icons.bookmark,
                     screen: CustomerBookingsScreen(),
                   ),
@@ -149,18 +149,8 @@ class CustomerDrawer extends StatelessWidget {
                     icon: Icons.cloud_upload,
                     screen: CustomerJobUploadScreen(),
                   ),
-                  SizedBox(height: 20 * screenHeight),
-                  DrawerTile(
-                    title: AppLocalizations.of(context)!.notification,
-                    icon: Icons.notifications,
-                    screen: NotificationScreen(),
-                  ),
-                  SizedBox(height: 20 * screenHeight),
-                  DrawerTile(
-                    title: AppLocalizations.of(context)!.fav,
-                    icon: Icons.favorite,
-                    screen: CustomerFavouritesScreen(),
-                  ),
+
+
                   SizedBox(height: 20 * screenHeight),
 
 
@@ -197,7 +187,8 @@ class CustomerDrawer extends StatelessWidget {
                     icon: Icons.settings,
                     screen: SettingsScreen(),
                   ),
-                  SizedBox(height: 20 * screenHeight),
+                  SizedBox(height: 30 * screenHeight),
+
                   GestureDetector(
                     onTap: signOut,
                     child: Row(

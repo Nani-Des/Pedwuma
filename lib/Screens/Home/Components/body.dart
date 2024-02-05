@@ -23,6 +23,7 @@ import 'package:handyman_app/constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../Components/home_buttons.dart';
 import '../../../Components/home_screen_tabs.dart';
+import '../../../Components/home_screen_tabs1.dart';
 import '../../../Components/horizontal_divider.dart';
 
 class Body extends StatefulWidget {
@@ -282,18 +283,7 @@ class _BodyState extends State<Body> {
                           fontSize: 30,
                           color: Colors.black),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: screenHeight * 26),
-                      child: Text(
-                        AppLocalizations.of(context)!.bn,
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
-                          color: primary,
-                        ),
-                      ),
-                    ),
+
                     Padding(
                       padding: EdgeInsets.only(top: screenHeight * 40.0),
                       child: Center(
@@ -312,14 +302,14 @@ class _BodyState extends State<Body> {
                       padding: EdgeInsets.only(bottom: screenHeight * 50.0),
                       child: allUsers[0].role == 'Regular Customer'
                           ? Center(
-                              child: HomeScreenTabs(
+                              child: HomeScreenTabs1(
                                 isButtonClickable: false,
                                 title: AppLocalizations.of(context)!.jobs,
                                 screen: JobsDashboardScreen(),
                               ),
                             )
                           : Center(
-                              child: HomeScreenTabs(
+                              child: HomeScreenTabs1(
                                 title: AppLocalizations.of(context)!.jobs,
                                 screen: JobsDashboardScreen(),
                               ),
@@ -438,7 +428,7 @@ class _BodyState extends State<Body> {
                     Padding(
                       padding: EdgeInsets.only(bottom: screenHeight * 50.0),
                       child: Center(
-                        child: HomeScreenTabs(
+                        child: HomeScreenTabs1(
                           title: AppLocalizations.of(context)!.jobs,
                           screen: JobsDashboardScreen(),
                         ),

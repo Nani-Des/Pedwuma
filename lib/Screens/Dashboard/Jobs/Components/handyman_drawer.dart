@@ -146,12 +146,6 @@ class HandymanDrawer extends StatelessWidget {
                   ),
                   SizedBox(height: 20 * screenHeight),
                   DrawerTile(
-                    title: AppLocalizations.of(context)!.notification,
-                    icon: Icons.notifications,
-                    screen: NotificationScreen(),
-                  ),
-                  SizedBox(height: 20 * screenHeight),
-                  DrawerTile(
                     title: AppLocalizations.of(context)!.fav,
                     icon: Icons.favorite,
                     screen: HandymanFavouritesScreen(),
@@ -197,7 +191,7 @@ class HandymanDrawer extends StatelessWidget {
                     icon: Icons.settings,
                     screen: SettingsScreen(),
                   ),
-                  SizedBox(height: 5 * screenHeight),
+                  SizedBox(height: 20 * screenHeight),
                   GestureDetector(
                     onTap: signOut,
                     child: Row(

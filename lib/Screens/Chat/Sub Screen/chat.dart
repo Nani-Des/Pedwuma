@@ -97,7 +97,7 @@ class _ChatMessagingState extends State<ChatMessaging> {
               children: <Widget>[
                 Container(
                   height: 55 * screenHeight,
-                  width: 55 * screenWidth,
+                  width: 50 * screenWidth,
                   decoration: BoxDecoration(
                     border: Border.all(color: sectionColor),
                     shape: BoxShape.circle,

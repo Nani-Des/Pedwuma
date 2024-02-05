@@ -104,7 +104,7 @@ final serviceCategoryList = [
   'Electricians',
   ' Plumbers',
   'Painters',
-  'Gardening & Landscaping',
+  'Gardeners & Landscapers',
   'Locksmiths',
   'HVAC Technicians',
   'Tilers',
@@ -129,13 +129,13 @@ final servicesProvidedList = [
   'Electrical Wiring and Rewiring',
   'Meter Repairs and Maintenance',
   'Electrical Panel Upgrades',
-  'Pipe Repair and Installation',
-  'Toilet and faucet Repair',
+  'Pipe Repairs and Installation',
+  'Toilet and faucet Repairs',
   'Commercial Plumbing',
   'House/Room Painting',
-  'Wallpaper Installation and removal',
+  'Wallpaper Installations and removal',
   'Furniture Painting',
-  'Lawn mowing and Maintenance',
+  'Lawn Mowing and Maintenance',
   'Tree and shrub pruning',
   'Planting and Gardening',
   'Lock installation and repair',
@@ -568,8 +568,8 @@ String serviceProvHintText = servicesProvided[0];
 String chargePHint = 'N/A';
 String expertHint = 'N/A';
 
-String handymanServiceCatHintText = 'Appliance Repair';
-String handymanServiceProvHintText = 'Refrigerator Repair';
+String handymanServiceCatHintText = 'Appliance Repairers';
+String handymanServiceProvHintText = 'Refirigirator and Fan Repairs';
 String handymanChargePHint = 'N/A';
 String handymanExpertHint = 'N/A';
 

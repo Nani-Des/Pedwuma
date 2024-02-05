@@ -99,29 +99,55 @@ class _BodyState extends State<Body> {
 
   Storage storage = Storage();
 
-  Future addCertification() async {
-    if (resultCertList != null) {
-      resultCertList?.files.forEach((file) async {
-        final fileNames = file.name;
-        final filePath = file.path;
-        await storage.profileMediaUpload(
-            'Certification', filePath as String, fileNames);
-      });
-    } else {
-      throw (AppLocalizations.of(context)!.as);
+  Future<void> addCertification() async {
+    try {
+      if (resultCertList != null) {
+        resultCertList?.files.forEach((file) async {
+          final fileNames = file.name;
+          final filePath = file.path;
+          await storage.profileMediaUpload(
+              'Certification',
+              filePath as String,
+              fileNames
+          );
+        });
+      } else {
+        throw Exception(AppLocalizations.of(context)!.as);
+      }
+    } catch (e) {
+      // Show a snackbar or dialog to inform the user about the missing information
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+          duration: Duration(seconds: 3),
+        ),
+      );
     }
   }
 
-  Future addExperience() async {
-    if (resultExperienceList != null) {
-      resultExperienceList?.files.forEach((file) async {
-        final fileNames = file.name;
-        final filePath = file.path;
-        await storage.profileMediaUpload(
-            'Experience', filePath as String, fileNames);
-      });
-    } else {
-      throw (AppLocalizations.of(context)!.as);
+  Future<void> addExperience() async {
+    try {
+      if (resultExperienceList != null) {
+        resultExperienceList?.files.forEach((file) async {
+          final fileNames = file.name;
+          final filePath = file.path;
+          await storage.profileMediaUpload(
+              'Experience',
+              filePath as String,
+              fileNames
+          );
+        });
+      } else {
+        throw Exception(AppLocalizations.of(context)!.as);
+      }
+    } catch (e) {
+      // Show a snackbar or dialog to inform the user about the missing information
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+          duration: Duration(seconds: 3),
+        ),
+      );
     }
   }
 

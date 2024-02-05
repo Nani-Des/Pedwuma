@@ -75,7 +75,7 @@ class AboutTab extends StatelessWidget {
                       top: 15 * screenHeight),
                   child: Text(
 
-                    '${AppLocalizations.of(context)!.bc}: ${allJobItemList[0].jobsDone}',
+                    '${AppLocalizations.of(context)!.ax}: ${allJobItemList[0].jobsDone}',
                     style: TextStyle(
                         color: black,
                         fontWeight: FontWeight.w600,

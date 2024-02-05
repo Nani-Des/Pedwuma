@@ -55,6 +55,7 @@ dependencies:
   firebase_database: ^10.2.4
   flutter_polyline_points: ^1.0.0
 
+
   meta: ^1.9.1
   http: ^0.13.5
   async: ^2.11.0
