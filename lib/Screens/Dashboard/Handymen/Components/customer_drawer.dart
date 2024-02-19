@@ -118,12 +118,7 @@ class CustomerDrawer extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 27 * screenHeight),
-                  DrawerTile(
-                    title: AppLocalizations.of(context)!.home,
-                    icon: Icons.home_rounded,
-                    screen: HomeScreen(),
-                  ),
-                  SizedBox(height: 15 * screenHeight),
+
                   DrawerTile(
                     title: AppLocalizations.of(context)!.profile,
                     icon: Icons.person,

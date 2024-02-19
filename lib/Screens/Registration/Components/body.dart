@@ -19,6 +19,8 @@ import '../../../Services/read_data.dart';
 import '../../../constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../Dashboard/Handymen/handymen_dashboard_screen.dart';
+
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
 
@@ -75,7 +77,6 @@ class _BodyState extends State<Body> {
 
       if (confirmPassword() &&
           firstName() &&
-          lastName() &&
           email() &&
           number()) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -142,9 +143,7 @@ class _BodyState extends State<Body> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => roleValue == 'Regular Customer'
-                  ? HomeScreen()
-                  : RegistrationContinuationScreen(),
+              builder: (context) => HandymanDashboardScreen(),
             ),
           );
         });
@@ -167,7 +166,7 @@ class _BodyState extends State<Body> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             content: Text(
-              '${e.message}\nTry again later.',
+              AppLocalizations.of(context)!.tm,
               style: TextStyle(
                 height: 1.4,
                 fontSize: 16,
@@ -192,7 +191,7 @@ class _BodyState extends State<Body> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             content: Text(
-              '${err.toString()} \nTry again later.',
+              AppLocalizations.of(context)!.tm,
               style: TextStyle(
                 height: 1.4,
                 fontSize: 16,
@@ -235,20 +234,7 @@ class _BodyState extends State<Body> {
     }
   }
 
-  bool lastName() {
-    if (_lastNameController.text.isNotEmpty) {
-      setState(() {
-        registerLastNameError = false;
-      });
-      return true;
-    } else {
-      print(AppLocalizations.of(context)!.tp);
-      setState(() {
-        registerLastNameError = true;
-      });
-      return false;
-    }
-  }
+
 
   bool email() {
     if (_emailController.text.isNotEmpty) {
@@ -360,15 +346,15 @@ class _BodyState extends State<Body> {
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: screenWidth * 19.5,
-            vertical: 35 * screenHeight,
+            vertical: 15 * screenHeight,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: 35 * screenHeight),
+
               Padding(
-                padding: EdgeInsets.only(left: 5.5 * screenWidth),
+                padding: EdgeInsets.only(left: 90 * screenWidth),
                 child: Text(
                   AppLocalizations.of(context)!.ti,
                   style: TextStyle(
@@ -378,73 +364,43 @@ class _BodyState extends State<Body> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: 6.5 * screenWidth,
-                    top: 15 * screenHeight,
-                    bottom: 54 * screenHeight),
-                child: Text(
-                  AppLocalizations.of(context)!.ts,
-                  style: TextStyle(
-                    color: semiGrey,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
+
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  CredentialsContainer(
+                    inputFormatter: [
+                      FilteringTextInputFormatter.allow(RegExp("[a-zA-Z\\s]")),
+                      LengthLimitingTextInputFormatter(15),
+                    ],
+                    errorTextField: registerFirstNameError,
+                    controller: _firstNameController,
+                    title: AppLocalizations.of(context)!.tt,
+                    hintText: AppLocalizations.of(context)!.tu,
+                    isPassword: false,
+                    iconText: 'N',
+
                   ),
-                ),
-              ),
-              CredentialsContainer(
-                inputFormatter: [
-                  FilteringTextInputFormatter.allow(
-                      RegExp("[a-zA-Z\\s]")), // Only allow letters and spaces
-                  LengthLimitingTextInputFormatter(25),
+                  registerFirstNameError
+                      ? SizedBox(width: 12 * screenWidth)
+                      : SizedBox(),
+                  registerFirstNameError
+                      ? Text(
+                    AppLocalizations.of(context)!.tv,
+                    style: TextStyle(
+                      color: complementaryRed,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                      : SizedBox(),
+                  SizedBox(width: 20 * screenHeight),
+
+                  // Add more CredentialsContainer widgets as needed
                 ],
-                errorTextField: registerFirstNameError,
-                controller: _firstNameController,
-                title: AppLocalizations.of(context)!.tt,
-                hintText: AppLocalizations.of(context)!.tu,
-                isPassword: false,
-                iconText: 'T',
               ),
-              registerFirstNameError
-                  ? SizedBox(height: 12 * screenHeight)
-                  : SizedBox(),
-              registerFirstNameError
-                  ? Text(
-                AppLocalizations.of(context)!.tv,
-                      style: TextStyle(
-                        color: complementaryRed,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    )
-                  : SizedBox(),
-              SizedBox(height: 20 * screenHeight),
-              CredentialsContainer(
-                inputFormatter: [
-                  FilteringTextInputFormatter.allow(
-                      RegExp("[a-zA-Z\\s]")), // Only allow letters and spaces
-                  LengthLimitingTextInputFormatter(25),
-                ],
-                errorTextField: registerLastNameError,
-                controller: _lastNameController,
-                title: AppLocalizations.of(context)!.tw,
-                hintText: AppLocalizations.of(context)!.tx,
-                isPassword: false,
-                iconText: 'T',
-              ),
-              registerLastNameError
-                  ? SizedBox(height: 12 * screenHeight)
-                  : SizedBox(),
-              registerLastNameError
-                  ? Text(
-                AppLocalizations.of(context)!.ty,
-                      style: TextStyle(
-                        color: complementaryRed,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    )
-                  : SizedBox(),
+            ),
               SizedBox(height: 20 * screenHeight),
               CredentialsContainer(
                 inputFormatter: [
@@ -580,8 +536,7 @@ class _BodyState extends State<Body> {
                         decoration: BoxDecoration(
                           color: white,
                           borderRadius: BorderRadius.circular(7),
-                          border:
-                              Border.all(color: appointmentTimeColor, width: 1),
+                          border: Border.all(color: appointmentTimeColor, width: 1),
                         ),
                         child: Center(
                           child: Image.asset(
@@ -593,57 +548,43 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                       SizedBox(width: 12 * screenWidth),
-                      DropdownButton2(
-                        buttonStyleData: ButtonStyleData(
-                          elevation: 0,
-                          height: 53 * screenHeight,
-                          width: 288 * screenWidth,
-                          decoration: BoxDecoration(
-                            color: white,
-                            borderRadius: BorderRadius.circular(7),
-                            border: Border.all(
-                                color: appointmentTimeColor, width: 1),
+                      Row(
+                        children: [
+                          Radio(
+                            value: 'Regular Customer',
+                            groupValue: roleValue,
+                            onChanged: (value) {
+                              setState(() {
+                                roleValue = value.toString();
+                              });
+                            },
                           ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 15 * screenWidth,
-                              vertical: 15 * screenHeight),
-                        ),
-                        underline: Text(''),
-                        dropdownStyleData: DropdownStyleData(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10 * screenWidth,
-                              vertical: 10 * screenHeight),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        iconStyleData: IconStyleData(
-                          icon: Image.asset('assets/icons/down_arrow.png',
-                              color: semiGrey),
-                          iconDisabledColor: black,
-                          iconEnabledColor: primary,
-                        ),
-                        isExpanded: true,
-                        hint: Text(
-                          AppLocalizations.of(context)!.am,
-                          style: TextStyle(
+                          Text(
+                            'Requester',
+                            style: TextStyle(
                               fontSize: 16,
                               color: black,
-                              fontWeight: FontWeight.w200),
-                        ),
-                        items: userRoleList.map((String serviceCategoryList) {
-                          return DropdownMenuItem(
-                            child: Text(serviceCategoryList),
-                            value: serviceCategoryList,
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            roleValue = newValue!;
-                            roleSelected = roleValue;
-                          });
-                        },
-                        value: roleValue,
+                              fontWeight: FontWeight.w200,
+                            ),
+                          ),
+                          Radio(
+                            value: 'Professional Handyman',
+                            groupValue: roleValue,
+                            onChanged: (value) {
+                              setState(() {
+                                roleValue = value.toString();
+                              });
+                            },
+                          ),
+                          Text(
+                            'Worker',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: black,
+                              fontWeight: FontWeight.w200,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   )
@@ -728,48 +669,7 @@ class _BodyState extends State<Body> {
                       ),
                     ),
               SizedBox(height: 30 * screenHeight),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    height: 1.5 * screenHeight,
-                    width: 70 * screenWidth,
-                    color: grey,
-                  ),
-                  SizedBox(width: 19.5 * screenWidth),
-                  Text(
-                    AppLocalizations.of(context)!.ap,
-                    style: TextStyle(
-                      color: black,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(width: 19.5 * screenWidth),
-                  Container(
-                    height: 1.5 * screenHeight,
-                    width: 70 * screenWidth,
-                    color: grey,
-                  ),
-                ],
-              ),
-              SizedBox(height: 30 * screenHeight),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SocialMediaContainer(
-                    text: 'Facebook',
-                    iconLocation: 'assets/icons/facebook.png',
-                  ),
-                  SizedBox(width: 10 * screenWidth),
-                  SocialMediaContainer(
-                    text: 'Google',
-                    iconLocation: 'assets/icons/google.png',
-                  ),
-                ],
-              ),
-              SizedBox(height: 89 * screenHeight),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

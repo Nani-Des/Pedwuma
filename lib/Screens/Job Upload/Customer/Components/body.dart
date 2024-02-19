@@ -11,7 +11,7 @@ import 'package:handyman_app/Components/upload_button.dart';
 import 'package:handyman_app/Screens/Dashboard/Handymen/handymen_dashboard_screen.dart';
 import 'package:handyman_app/Services/storage_service.dart';
 import 'package:handyman_app/constants.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../Components/deadline_item.dart';
 import '../../../../Components/job_upload_optionals_info.dart';
 import '../../../../Services/read_data.dart';
@@ -30,6 +30,7 @@ class _BodyState extends State<Body> {
   @override
   void dispose() {
     chargeController.dispose();
+    super.dispose();
   }
 
   late final String jobID;
@@ -101,7 +102,7 @@ class _BodyState extends State<Body> {
                   Image(image: AssetImage('assets/images/success.gif')),
                   SizedBox(height: 15 * screenHeight),
                   Text(
-                    'Job Uploaded Successfully!',
+                    AppLocalizations.of(context)!.cr,
                     style: TextStyle(
                       color: black,
                       fontSize: 18,
@@ -342,6 +343,7 @@ class _BodyState extends State<Body> {
                           ),
                           SizedBox(height: 13 * screenHeight),
                           Row(
+
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
@@ -351,26 +353,29 @@ class _BodyState extends State<Body> {
                                     context: context,
                                     initialDate: DateTime.now(),
                                     firstDate: DateTime.now(),
-                                    lastDate: DateTime(2024),
+                                    lastDate: DateTime(2024, 12, 31), // Set a future date
                                   ).then((date) {
+                                    if(mounted){
                                     setState(() {
-                                      if (date!.day > 9) {
-                                        deadlineDay = date.day.toString();
-                                      } else {
-                                        deadlineDay = '0${date.day}';
-                                      }
+                                      if (date != null) {
+                                        if (date.day > 9) {
+                                          deadlineDay = date.day.toString();
+                                        } else {
+                                          deadlineDay = '0${date.day}';
+                                        }
 
-                                      if (date.month == 10 ||
-                                          date.month == 11 ||
-                                          date.month == 12) {
-                                        deadlineMonth = date.month.toString();
-                                      } else {
-                                        deadlineMonth =
-                                        ('0' + date.month.toString());
+                                        if (date.month >= 10) {
+                                          deadlineMonth = date.month.toString();
+                                        } else {
+                                          deadlineMonth = ('0' + date.month.toString());
+                                        }
+
+                                        deadlineYear = date.year.toString();
                                       }
-                                      deadlineYear = date.year.toString();
                                     });
-                                  });
+                                  }else{ print("Not mounted");}
+                                  }
+                                  );
                                 },
                                 child: Container(
                                   height: 49 * screenHeight,
@@ -378,18 +383,18 @@ class _BodyState extends State<Body> {
                                   decoration: BoxDecoration(
                                     color: white,
                                     borderRadius: BorderRadius.circular(7),
-                                    border: Border.all(
-                                        color: appointmentTimeColor, width: 1),
+                                    border: Border.all(color: appointmentTimeColor, width: 1),
                                   ),
                                   child: Center(
-                                      child: Icon(Icons.edit_calendar_rounded,
-                                          color: primary)),
+                                    child: Icon(Icons.edit_calendar_rounded, color: primary),
+                                  ),
                                 ),
                               ),
                               DeadlineItem(text: deadlineDay),
                               DeadlineItem(text: deadlineMonth),
                               DeadlineItem(text: deadlineYear),
                             ],
+
                           ),
                         ],
                       ),

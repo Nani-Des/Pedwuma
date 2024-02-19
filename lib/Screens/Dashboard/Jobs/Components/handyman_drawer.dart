@@ -16,6 +16,7 @@ import '../../../Job Upload/Handyman/handyman_job_upload_screen.dart';
 import '../../../Location/location_screen.dart';
 import '../../../Login/login_screen.dart';
 import '../../../Notifications/notification_screen.dart';
+import '../../Handymen/handymen_dashboard_screen.dart';
 
 class HandymanDrawer extends StatelessWidget {
   const HandymanDrawer({
@@ -115,8 +116,8 @@ class HandymanDrawer extends StatelessWidget {
                   SizedBox(height: 27 * screenHeight),
                   DrawerTile(
                     title: AppLocalizations.of(context)!.home,
-                    icon: Icons.home_rounded,
-                    screen: HomeScreen(),
+                    icon: Icons.question_mark,
+                    screen: HandymanDashboardScreen(),
                   ),
                   SizedBox(height: 20 * screenHeight),
                   DrawerTile(

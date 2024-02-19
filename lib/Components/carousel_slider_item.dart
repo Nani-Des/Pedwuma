@@ -21,7 +21,7 @@ class _CarouselSliderItemState extends State<CarouselSliderItem> {
       },
       options: CarouselOptions(
         viewportFraction: 0.88,
-        height: 200 * screenHeight,
+        height: 180 * screenHeight,
         // viewportFraction: 1,
         enlargeCenterPage: true,
         enlargeStrategy: CenterPageEnlargeStrategy.height,

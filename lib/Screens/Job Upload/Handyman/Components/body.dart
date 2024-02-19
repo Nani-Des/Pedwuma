@@ -11,7 +11,7 @@ import 'package:handyman_app/Components/upload_button.dart';
 import 'package:handyman_app/Screens/Dashboard/Jobs/jobs_dashboard_screen.dart';
 import 'package:handyman_app/Screens/Home/Components/body.dart';
 import 'package:handyman_app/constants.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../Components/job_upload_location_info.dart';
 import '../../../../Components/job_upload_service_info.dart';
 import '../../../../Services/read_data.dart';
@@ -105,7 +105,7 @@ class _BodyState extends State<Body> {
                   Image(image: AssetImage('assets/images/success.gif')),
                   SizedBox(height: 15 * screenHeight),
                   Text(
-                    'Job Uploaded Successfully!',
+                    AppLocalizations.of(context)!.crr,
                     style: TextStyle(
                       color: black,
                       fontSize: 18,

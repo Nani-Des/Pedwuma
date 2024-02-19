@@ -149,7 +149,7 @@ class _BodyState extends State<Body> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             content: Text(
-              '${e.message}\n${AppLocalizations.of(context)!.tm}',
+              '${AppLocalizations.of(context)!.tm}',
               style: TextStyle(
                 height: 1.4,
                 fontSize: 16,
@@ -174,7 +174,7 @@ class _BodyState extends State<Body> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             content: Text(
-              '${err.toString()} \n${AppLocalizations.of(context)!.tm}',
+              '${AppLocalizations.of(context)!.tm}',
               style: TextStyle(
                 height: 1.4,
                 fontSize: 16,

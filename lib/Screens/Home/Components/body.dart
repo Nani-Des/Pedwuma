@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -268,239 +269,39 @@ class _BodyState extends State<Body> {
         future: allData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40.0, vertical: 15),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      '${AppLocalizations.of(context)!.bm} ${allUsers[0].firstName}',
-                      style: TextStyle(
-                          fontFamily: 'Habibi',
-                          fontSize: 30,
-                          color: Colors.black),
-                    ),
+            loggedInUserId = FirebaseAuth.instance.currentUser!.uid;
+            return FutureBuilder<QuerySnapshot>(
+              future: FirebaseFirestore.instance
+                  .collection('users')
+                  .where('User ID', isEqualTo: loggedInUserId)
+                  .get(),
+              builder: (context, userSnapshot) {
+                if (userSnapshot.connectionState == ConnectionState.waiting) {
+                  // Return a loading indicator if data is still loading
+                  return CircularProgressIndicator();
+                }
 
-                    Padding(
-                      padding: EdgeInsets.only(top: screenHeight * 40.0),
-                      child: Center(
-                        child: HomeScreenTabs(
-                          title: AppLocalizations.of(context)!.handyworker,
-                          screen: HandymanDashboardScreen(),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: screenHeight * 30.0),
-                      child: HorizontalDivider(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: screenHeight * 50.0),
-                      child: allUsers[0].role == 'Regular Customer'
-                          ? Center(
-                              child: HomeScreenTabs1(
-                                isButtonClickable: false,
-                                title: AppLocalizations.of(context)!.jobs,
-                                screen: JobsDashboardScreen(),
-                              ),
-                            )
-                          : Center(
-                              child: HomeScreenTabs1(
-                                title: AppLocalizations.of(context)!.jobs,
-                                screen: JobsDashboardScreen(),
-                              ),
-                            ),
-                    ),
-                    allUsers[0].role == 'Regular Customer'
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              HomeButtons(
-                                  press: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            CustomerBookingsScreen(),
-                                      ),
-                                    );
-                                  },
-                                  title: AppLocalizations.of(context)!.bookings),
-                              Container(
-                                height: size.height * 40 / 820.5714,
-                                width: size.width * 2 / 411.4285,
-                                color: grey,
-                              ),
-                              HomeButtons(
-                                  press: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ProfileCustomer(),
-                                      ),
-                                    );
-                                  },
-                                  title: 'Profile'),
-                            ],
-                          )
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              HomeButtons(
-                                  press: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => MyJobsScreen(),
-                                      ),
-                                    );
-                                  },
-                                  title: AppLocalizations.of(context)!.myjobs),
-                              Container(
-                                height: size.height * 40 / 820.5714,
-                                width: size.width * 2 / 411.4285,
-                                color: grey,
-                              ),
-                              HomeButtons(
-                                  press: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            HandymanProfileScreen(),
-                                      ),
-                                    );
-                                  },
-                                  title: AppLocalizations.of(context)!.profile),
-                            ],
-                          ),
-                  ],
-                ),
-              ),
+                if (userSnapshot.hasData) {
+                  // Check the role and return the appropriate dashboard
+                  String role = userSnapshot.data!.docs.first.get('Role');
+
+                  if (role == 'Regular Customer') {
+                    return HandymanDashboardScreen();
+                  } else if (role == 'Professional Handyman') {
+                    return JobsDashboardScreen();
+                  } else {
+                    // Handle other roles as needed
+                    return Container();
+                  }
+                } else {
+                  return Container();
+                }
+              },
             );
           }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Stack(children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40.0, vertical: 15),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      AppLocalizations.of(context)!.bm,
-                      style: TextStyle(
-                          fontFamily: 'Habibi',
-                          fontSize: 30,
-                          color: Colors.black),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: screenHeight * 26),
-                      child: Text(
-                        AppLocalizations.of(context)!.bn,
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
-                          color: primary,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: screenHeight * 40.0),
-                      child: Center(
-                        child: HomeScreenTabs(
-                          title: AppLocalizations.of(context)!.handymen,
-                          screen: HandymanDashboardScreen(),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: screenHeight * 30.0),
-                      child: HorizontalDivider(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: screenHeight * 50.0),
-                      child: Center(
-                        child: HomeScreenTabs1(
-                          title: AppLocalizations.of(context)!.jobs,
-                          screen: JobsDashboardScreen(),
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        HomeButtons(
-                            press: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      CustomerBookingsScreen(),
-                                ),
-                              );
-                            },
-                            title: 'N/A'),
-                        Container(
-                          height: size.height * 40 / 820.5714,
-                          width: size.width * 2 / 411.4285,
-                          color: grey,
-                        ),
-                        HomeButtons(
-                            press: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProfileCustomer(),
-                                ),
-                              );
-                            },
-                            title: AppLocalizations.of(context)!.profile),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Stack(
-                children: [
-                  ModalBarrier(
-                    color: black.withOpacity(0.3),
-                    dismissible: false,
-                  ),
-                  AlertDialog(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                    insetPadding:
-                        EdgeInsets.symmetric(horizontal: 150 * screenWidth),
-                    content: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        (Platform.isIOS)
-                            ? const CupertinoActivityIndicator(
-                                radius: 20,
-                                color: Color(0xff32B5BD),
-                              )
-                            : const CircularProgressIndicator(
-                                color: Color(0xff32B5BD),
-                              ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ]);
-          }
+          if (snapshot.connectionState == ConnectionState.waiting) {}
           if (snapshot.hasError) {
-            return Center(child: Text('${AppLocalizations.of(context)!.err}:${snapshot.error}'));
+            return Center(child: Text('${AppLocalizations.of(context)!.errr}'));
           }
           return Center(
             child: Platform.isIOS

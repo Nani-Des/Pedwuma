@@ -6,6 +6,7 @@ import 'package:handyman_app/Components/profile_item.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../Services/read_data.dart';
 import '../constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfilePersonalInformation extends StatefulWidget {
   const ProfilePersonalInformation({
@@ -132,7 +133,7 @@ class _ProfilePersonalInformationState
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Personal Information',
+                AppLocalizations.of(context)!.fx,
                 style: TextStyle(
                   color: black,
                   fontSize: 17,
@@ -188,25 +189,12 @@ class _ProfilePersonalInformationState
                 controller: _firstNameControlller,
                 isHintText: false,
                 isReadOnly: isPersonalInfoReadOnly,
-                title: 'First Name',
+                title: AppLocalizations.of(context)!.tt,
                 hintText: allUsers[0].firstName,
                 keyboardType: TextInputType.name,
               ),
               SizedBox(height: 20 * screenHeight),
-              ProfileItem(
-                inputFormatter: [
-                  FilteringTextInputFormatter.allow(
-                      RegExp("[a-zA-Z\\s]")), // Only allow letters and spaces
-                  LengthLimitingTextInputFormatter(25),
-                ],
-                controller: _lastNameControlller,
-                isHintText: false,
-                isReadOnly: isPersonalInfoReadOnly,
-                title: 'Last Name',
-                hintText: allUsers[0].lastName,
-                keyboardType: TextInputType.name,
-              ),
-              SizedBox(height: 20 * screenHeight),
+
               ProfileItem(
                 inputFormatter: [
                   FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9@.]')),
@@ -217,7 +205,7 @@ class _ProfilePersonalInformationState
                 controller: _emailControlller,
                 isHintText: false,
                 isReadOnly: isPersonalInfoReadOnly,
-                title: 'Email',
+                title: AppLocalizations.of(context)!.fu,
                 hintText: allUsers[0].email,
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -231,7 +219,7 @@ class _ProfilePersonalInformationState
                 controller: _numberControlller,
                 isHintText: false,
                 isReadOnly: isPersonalInfoReadOnly,
-                title: 'Mobile Number',
+                title: AppLocalizations.of(context)!.fv,
                 hintText: '+233 (0) ' + allUsers[0].number.toString(),
                 keyboardType: TextInputType.number,
               ),
@@ -252,7 +240,7 @@ class _ProfilePersonalInformationState
                             ),
                             child: Center(
                               child: Text(
-                                'Save',
+                                AppLocalizations.of(context)!.fw,
                                 style: TextStyle(
                                   color: white,
                                   fontSize: 16,

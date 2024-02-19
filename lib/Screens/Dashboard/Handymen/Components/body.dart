@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:handyman_app/Components/carousel_slider_item.dart';
@@ -23,6 +21,21 @@ class Body extends StatefulWidget {
 
 List<dynamic> selectedCategoryDataList = [];
 
+Future<String> getUserRole(String userId) async {
+  try {
+    var userQuery = await FirebaseFirestore.instance.collection('users').where('User ID', isEqualTo: userId).get();
+
+    if (userQuery.docs.isNotEmpty) {
+      return userQuery.docs.first['Role'];
+    } else {
+      return ''; // Default value if the document doesn't exist
+    }
+  } catch (e) {
+    print('Error fetching user role: $e');
+    return ''; // Default value in case of an error
+  }
+}
+
 Future selectedCategoryData(String categoryName) async {
   handymanDashboardJobType.clear();
   handymanDashboardName.clear();
@@ -38,7 +51,7 @@ Future selectedCategoryData(String categoryName) async {
         .where('Service Information.Service Category', isEqualTo: categoryName)
         .where('User ID', isNotEqualTo: loggedInUserId)
         .get();
-    
+
     if (documents.docs.isNotEmpty) {
       documents.docs.forEach((document) {
         final documentData = document.data();
@@ -53,7 +66,7 @@ Future selectedCategoryData(String categoryName) async {
           chargeRate: documentData['Service Information']['Charge Rate'],
           jobCategory: documentData['Service Information']['Service Category'],
         );
-    
+
         handymanDashboardImage.add(categoryData.pic);
         handymanDashboardID.add(categoryData.jobID);
         handymanDashboardJobType.add(categoryData.jobService);
@@ -81,6 +94,7 @@ Future selectedCategoryData(String categoryName) async {
 
 class _BodyState extends State<Body> {
   int selectedTabIndex = 0;
+  String userRole = ''; // Add a variable to store the user's role
 
   void onTabSelected(int index) {
     setState(() {
@@ -98,14 +112,36 @@ class _BodyState extends State<Body> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SearchBarItem(
-              hintText: AppLocalizations.of(context)!.bq,
-              onSearchTap: () {
-                showSearch(
-                  context: context,
-                  delegate: HandymanSearchDelegate(
-                      itemsToSearch: handymanDashboardJobType),
-                );
+            FutureBuilder<String>(
+              future: getUserRole(loggedInUserId),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  userRole = snapshot.data ?? '';
+                  return Row(
+                    children: [
+                      if (userRole == 'Professional Handyman') // Display the back icon conditionally
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.arrow_back),
+                        ),
+                      Expanded(
+                        child: SearchBarItem(
+                          hintText: AppLocalizations.of(context)!.bq,
+                          onSearchTap: () {
+                            showSearch(
+                              context: context,
+                              delegate: HandymanSearchDelegate(
+                                  itemsToSearch: handymanDashboardJobType),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                }
+                return SizedBox(); // Return empty container while fetching user role
               },
             ),
             SizedBox(height: screenHeight * 15),
@@ -160,37 +196,37 @@ class _BodyState extends State<Body> {
                     print('handymanDashboardPrice: $handymanDashboardPrice');
                     return handymanDashboardPrice.isEmpty
                         ? Padding(
-                            padding: EdgeInsets.only(top: screenHeight * 20.0),
-                            child: Center(
-                              child: Text(
-                                  AppLocalizations.of(context)!.br,
-                                  style: TextStyle(
-                                    color: green,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  )),
-                            ),
-                          )
+                      padding: EdgeInsets.only(top: screenHeight * 20.0),
+                      child: Center(
+                        child: Text(
+                            AppLocalizations.of(context)!.br,
+                            style: TextStyle(
+                              color: green,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            )),
+                      ),
+                    )
                         : ListView.separated(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount:
-                                handymanDashboardPrice.toSet().toList().length,
-                            itemBuilder: (context, index) {
-                              return CategoryItem(
-                                imageLocation: handymanDashboardImage[index],
-                                jobType: handymanDashboardJobType[index],
-                                name: handymanDashboardName[index],
-                                price: handymanDashboardPrice[index],
-                                rating: handymanDashboardRating[index],
-                                chargeRate: handymanDashboardChargeRate[index],
-                                index: index,
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return SizedBox(height: screenHeight * 20);
-                            },
-                          );
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount:
+                      handymanDashboardPrice.toSet().toList().length,
+                      itemBuilder: (context, index) {
+                        return CategoryItem(
+                          imageLocation: handymanDashboardImage[index],
+                          jobType: handymanDashboardJobType[index],
+                          name: handymanDashboardName[index],
+                          price: handymanDashboardPrice[index],
+                          rating: handymanDashboardRating[index],
+                          chargeRate: handymanDashboardChargeRate[index],
+                          index: index,
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return SizedBox(height: screenHeight * 20);
+                      },
+                    );
                   }
                   return SizedBox();
                 }),

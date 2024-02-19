@@ -1,9 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:handyman_app/constants.dart';
+import 'package:handyman_app/wrapper.dart';
+import '../../../constants.dart';
 import 'package:page_transition/page_transition.dart';
-
-import 'Sub Screens/splash_screen_cont.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -12,13 +11,16 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedSplashScreen(
-        splashIconSize: 700,
-        splash: Image.asset('assets/images/app_logo.png'),
-        nextScreen: SplashScreenCont(),
-        splashTransition: SplashTransition.scaleTransition,
+        splashIconSize: 1200,
+        splash: Image.asset(
+          'assets/images/app_logoa.png',
+
+        ),
+        nextScreen: Wrapper(),
+        splashTransition: SplashTransition.rotationTransition,
+        pageTransitionType: PageTransitionType.leftToRightWithFade,
+        duration: 3000,
         backgroundColor: white,
-        pageTransitionType: PageTransitionType.fade,
-        animationDuration: Duration(seconds: 2),
       ),
     );
   }

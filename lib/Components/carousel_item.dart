@@ -85,7 +85,7 @@ class CarouselItem extends StatelessWidget {
           ),
         if (index == 1)
           Container(
-            height: screenHeight * 170,
+            height: screenHeight * 140,
             width: screenWidth * 310,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -94,7 +94,7 @@ class CarouselItem extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(
                   left: screenWidth * 23.0,
-                  top: screenHeight * 20,
+                  top: screenHeight * 15,
                   right: 30 * screenWidth),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -118,7 +118,7 @@ class CarouselItem extends StatelessWidget {
                   ),
                   SizedBox(height: 6 * screenHeight),
                   SizedBox(
-                    width: 207 * screenWidth,
+                    width: 230 * screenWidth,
                     child: Text(
                       'We offer professional repairing service on-demand!',
                       style: TextStyle(
@@ -134,7 +134,7 @@ class CarouselItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        '\$' + '45' + '/hr',
+                        '\₵' + '45' + '/hr',
                         style: TextStyle(
                           color: Color(0xff0c46b6),
                           fontSize: 20,
@@ -158,7 +158,7 @@ class CarouselItem extends StatelessWidget {
           ),
         if (index == 2)
           Container(
-            height: screenHeight * 170,
+            height: screenHeight * 150,
             width: screenWidth * 270,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -189,9 +189,9 @@ class CarouselItem extends StatelessWidget {
                       Image.asset('assets/icons/5-Star.png'),
                     ],
                   ),
-                  SizedBox(height: 7 * screenHeight),
+
                   SizedBox(
-                    width: 207 * screenWidth,
+                    width: 237 * screenWidth,
                     child: Text(
                       'Put an end to all your plumberig Issues',
                       style: TextStyle(
@@ -207,7 +207,7 @@ class CarouselItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        '\$' + '45' + '/hr',
+                        '\₵' + '45' + '/hr',
                         style: TextStyle(
                           color: Color(0xff0c46b6),
                           fontSize: 20,

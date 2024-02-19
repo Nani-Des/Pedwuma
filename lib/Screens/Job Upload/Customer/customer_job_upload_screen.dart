@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:handyman_app/Screens/Job%20Upload/Customer/Components/body.dart';
 import 'package:handyman_app/Screens/Job%20Upload/Sub%20Screen/Customer/customer_job_upload_list.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../Components/default_back_button.dart';
 import '../../../constants.dart';
 
@@ -16,7 +16,7 @@ class CustomerJobUploadScreen extends StatelessWidget {
       appBar: AppBar(
         leading: DefaultBackButton(),
         title: Text(
-          'Job Upload',
+          AppLocalizations.of(context)!.jobupload,
           style: TextStyle(
             color: black,
             fontSize: 18,

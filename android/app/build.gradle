@@ -58,7 +58,7 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion 20
         targetSdkVersion flutter.targetSdkVersion
-        versionCode 4
+        versionCode 5
         versionName "1.0.1"
     }
 
@@ -71,6 +71,10 @@ android {
         }
     }
     buildTypes {
+        debug {
+            debuggable true
+            // Other debug configurations...
+        }
         release {
             signingConfig signingConfigs.release
         }

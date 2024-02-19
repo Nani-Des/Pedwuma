@@ -13,28 +13,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: white,
-        elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.exit_to_app,
-            color: primary,
-          ),
-          onPressed: () {
-            FirebaseAuth.instance.signOut();
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
-                ),
-                    (route) => false);
 
-            // Implement your exit/logout logic here
-          },
-        ),
-      ),
       body: Body(),
     );
   }

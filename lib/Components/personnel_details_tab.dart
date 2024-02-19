@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:handyman_app/Components/personnel_rating_summary.dart';
 import 'package:handyman_app/Screens/Appointment/appointment_screen.dart';
 import 'package:handyman_app/Services/read_data.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../constants.dart';
 
 class PersonnelDetailsTab extends StatelessWidget {
@@ -83,7 +83,7 @@ class PersonnelDetailsTab extends StatelessWidget {
                       color: black, fontSize: 15, fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  'away from you',
+                  AppLocalizations.of(context)!.ft,
                   style: TextStyle(
                       fontSize: 8, fontWeight: FontWeight.w300, color: black),
                 ),
@@ -109,7 +109,7 @@ class PersonnelDetailsTab extends StatelessWidget {
                 '\₵${allJobItemList[0].charge}/' + allJobItemList[0].chargeRate,
                 style: TextStyle(
                   color: primary,
-                  fontSize: 21.64,
+                  fontSize: 15,
                   fontWeight: FontWeight.w700,
                 ),
               ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:handyman_app/Components/job_category_item.dart';
 import 'package:handyman_app/Components/search_bar_item.dart';
 import 'package:handyman_app/Models/handyman_category_data.dart';
+import 'package:handyman_app/Screens/Dashboard/Handymen/handymen_dashboard_screen.dart';
 import 'package:handyman_app/Screens/Home/Components/body.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../Components/dashboard_tab.dart';
@@ -94,11 +95,44 @@ class _BodyState extends State<Body> {
                 showSearch(
                   context: context,
                   delegate:
-                      JobSearchDelegate(itemsToSearch: jobDashboardJobType),
+                  JobSearchDelegate(itemsToSearch: jobDashboardJobType),
                 );
               },
             ),
             SizedBox(height: screenHeight * 15),
+
+            GestureDetector(
+              onTap: () {
+                // Navigate to HandymanDashboard() page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HandymanDashboardScreen()),
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: primary,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Switch to Find Workers",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    SizedBox(width: 10),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                      size: 16,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,43 +177,43 @@ class _BodyState extends State<Body> {
                 future: dashBoardTabList[selectedTabIndex] == 'All'
                     ? getHandymanCategoryData()
                     : selectedHandymanCategoryData(
-                        dashBoardTabList[selectedTabIndex]),
+                    dashBoardTabList[selectedTabIndex]),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return jobDashboardPrice.isEmpty
                         ? Padding(
-                            padding: EdgeInsets.only(top: screenHeight * 20.0),
-                            child: Center(
-                              child: Text(
-                                  AppLocalizations.of(context)!.br,
-                                  style: TextStyle(
-                                    color: primary,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  )),
-                            ),
-                          )
+                      padding: EdgeInsets.only(top: screenHeight * 20.0),
+                      child: Center(
+                        child: Text(
+                            AppLocalizations.of(context)!.br,
+                            style: TextStyle(
+                              color: primary,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            )),
+                      ),
+                    )
                         : ListView.separated(
-                            physics: BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount:
-                                jobDashboardPrice.toSet().toList().length,
-                            itemBuilder: (context, index) {
-                              return JobCategoryItem(
-                                jobItemId: jobDashboardID[index],
-                                index: index,
-                                status: jobStatusOptions[index],
-                                name: jobDashboardName[index],
-                                imageLocation: jobDashboardImage[index],
-                                jobType: jobDashboardJobType[index],
-                                price: jobDashboardPrice[index],
-                                chargeRate: jobDashboardChargeRate[index],
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return SizedBox(height: screenHeight * 20);
-                            },
-                          );
+                      physics: BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount:
+                      jobDashboardPrice.toSet().toList().length,
+                      itemBuilder: (context, index) {
+                        return JobCategoryItem(
+                          jobItemId: jobDashboardID[index],
+                          index: index,
+                          status: jobStatusOptions[index],
+                          name: jobDashboardName[index],
+                          imageLocation: jobDashboardImage[index],
+                          jobType: jobDashboardJobType[index],
+                          price: jobDashboardPrice[index],
+                          chargeRate: jobDashboardChargeRate[index],
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return SizedBox(height: screenHeight * 20);
+                      },
+                    );
                   }
                   return SizedBox();
                   // return Center(child:CircularProgressIndicator(),);

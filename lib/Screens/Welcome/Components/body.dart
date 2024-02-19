@@ -13,6 +13,20 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return PageView(
+      children: [
+        FirstScreen(),
+        SecondScreen(),
+        ThirdScreen(),
+      ],
+    );
+  }
+}
+
+
+class FirstScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -56,27 +70,20 @@ class Body extends StatelessWidget {
                       left: screenWidth * 13.0,
                       top: 13 * screenHeight,
                     ),
-                    child: Text(
-                      AppLocalizations.of(context)!.ta,
-                      style: TextStyle(
-                        color: black,
-                        fontSize: 20,
-                        fontFamily: 'Junge',
-                      ),
-                    ),
+
                   ),
                 ],
               ),
             ),
             SizedBox(height: 50 * screenHeight),
             Container(
-              height: 243.41 * screenHeight,
+              height: 300 * screenHeight,
               width: 381 * screenWidth,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/welcome_pic.png'),
-              )),
+                    fit: BoxFit.cover,
+                    image: AssetImage('assets/images/welcome_pic.png'),
+                  )),
             ),
             SizedBox(height: 48 * screenHeight),
             Center(
@@ -98,44 +105,97 @@ class Body extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        Text(
-                          AppLocalizations.of(context)!.tc,
-                          style: TextStyle(
-                            color: black,
-                            fontSize: 17,
-                            fontFamily: 'Junge',
-                            height: 1.3,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.td,
-                          style: TextStyle(
-                            color: black,
-                            fontSize: 17,
-                            fontFamily: 'Junge',
-                            height: 1.3,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
+
+
                       ],
                     ),
                   ),
-                  SizedBox(height: 2 * screenHeight),
+                  SizedBox(height: 150 * screenHeight),
                   Text(
-                    AppLocalizations.of(context)!.te,
+                    'Pedwuma',
                     style: TextStyle(
                       color: primary,
                       fontSize: 17,
                     ),
                     textAlign: TextAlign.center,
                   ),
+
+                ],
+              ),
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+}
+class SecondScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(
+                left: screenWidth * 37.0,
+                right: 23 * screenWidth,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        AppLocalizations.of(context)!.fz,
+                        style: TextStyle(
+                          color: black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(width: 6 * screenWidth),
+
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: screenWidth * 13.0,
+                      top: 13 * screenHeight,
+                    ),
+
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 50 * screenHeight),
+            Container(
+              height: 300 * screenHeight,
+              width: 381 * screenWidth,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage('assets/images/welcome_pic1.png'),
+                  )),
+            ),
+            SizedBox(height: 48 * screenHeight),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
                   Container(
                     width: 324 * screenWidth,
                     child: Column(
                       children: <Widget>[
                         Text(
-                          AppLocalizations.of(context)!.tf,
+                          AppLocalizations.of(context)!.handyworker,
                           style: TextStyle(
                             color: black,
                             fontSize: 17,
@@ -144,33 +204,162 @@ class Body extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        Text(
-                          AppLocalizations.of(context)!.tg,
-                          style: TextStyle(
-                            color: black,
-                            fontSize: 17,
-                            fontFamily: 'Junge',
-                            height: 1.3,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.th,
-                          style: TextStyle(
-                            color: black,
-                            fontSize: 17,
-                            fontFamily: 'Junge',
-                            height: 1.3,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
+
+
                       ],
                     ),
+                  ),
+                  SizedBox(height: 150 * screenHeight),
+                  Text(
+                    'Pedwuma',
+                    style: TextStyle(
+                      color: primary,
+                      fontSize: 17,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+
+                ],
+              ),
+            ),
+            SizedBox(height: 110 * screenHeight),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     AppointmentButton(
+            //       isWelcomeScreen: true,
+            //       text: AppLocalizations.of(context)!.login,
+            //       containerColor: primary,
+            //       textColor: white,
+            //       press: () {
+            //         Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //             builder: (context) => LoginScreen(),
+            //           ),
+            //         );
+            //       },
+            //     ),
+            //     SizedBox(width: 3 * screenWidth),
+            //     AppointmentButton(
+            //       isWelcomeScreen: true,
+            //       text: AppLocalizations.of(context)!.reg,
+            //       containerColor: sectionColor,
+            //       textColor: textGreyColor,
+            //       press: () {
+            //         Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //             builder: (context) => RegistrationScreen(),
+            //           ),
+            //         );
+            //       },
+            //     ),
+            //   ],
+            // ),
+
+
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ThirdScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(
+                left: screenWidth * 37.0,
+                right: 23 * screenWidth,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        AppLocalizations.of(context)!.ga,
+                        style: TextStyle(
+                          color: black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(width: 6 * screenWidth),
+
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: screenWidth * 13.0,
+                      top: 13 * screenHeight,
+                    ),
+
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 85 * screenHeight),
+            SizedBox(height: 50 * screenHeight),
+            Container(
+              height: 300 * screenHeight,
+              width: 381 * screenWidth,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage('assets/images/welcome_pic2.png'),
+                  )),
+            ),
+            SizedBox(height: 48 * screenHeight),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    width: 324 * screenWidth,
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          AppLocalizations.of(context)!.gb,
+                          style: TextStyle(
+                            color: black,
+                            fontSize: 17,
+                            fontFamily: 'Junge',
+                            height: 1.3,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+
+
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 35 * screenHeight),
+                  Text(
+                    AppLocalizations.of(context)!.gc,
+                    style: TextStyle(
+                      color: primary,
+                      fontSize: 17,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+
+                ],
+              ),
+            ),
+            SizedBox(height: 80 * screenHeight),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -212,3 +401,5 @@ class Body extends StatelessWidget {
     );
   }
 }
+
+
