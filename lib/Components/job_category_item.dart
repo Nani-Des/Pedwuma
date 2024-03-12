@@ -125,7 +125,7 @@ class JobCategoryItem extends StatelessWidget {
                         child: Text(
                           jobType,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 15,
                             fontWeight: FontWeight.w600,
                             color: black,
                           ),
@@ -139,7 +139,7 @@ class JobCategoryItem extends StatelessWidget {
                       child: Text(
                         'By: ' + name,
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 10,
                           color: textGreyColor,
                         ),
                         overflow: TextOverflow.ellipsis,
@@ -169,7 +169,7 @@ class JobCategoryItem extends StatelessWidget {
                                     style: TextStyle(
                                         color: green,
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 16),
+                                        fontSize: 15),
                                   ),
                                 )
                               : Padding(
@@ -180,7 +180,7 @@ class JobCategoryItem extends StatelessWidget {
                                     style: TextStyle(
                                         color: red,
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 16),
+                                        fontSize: 15),
                                   ),
                                 ),
                           Spacer(),
@@ -189,7 +189,7 @@ class JobCategoryItem extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 19,
                                 color: primary,
-                                fontWeight: FontWeight.w800),
+                                fontWeight: FontWeight.w900),
                           )
                         ],
                       ),

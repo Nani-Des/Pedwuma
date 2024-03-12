@@ -2,11 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:handyman_app/Screens/Login/login_screen.dart';
+import 'package:handyman_app/Screens/Public/public_screen.dart';
 import 'package:handyman_app/Screens/Registration/registration_screen.dart';
 
 import '../../../Components/appointment_button.dart';
 import '../../../constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../Home/home_screen.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -364,37 +367,46 @@ class ThirdScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppointmentButton(
-                  isWelcomeScreen: true,
-                  text: AppLocalizations.of(context)!.login,
-                  containerColor: primary,
-                  textColor: white,
-                  press: () {
+                GestureDetector(
+                  onTap: () {
+                    // Handle the skip action
+                    // You can add navigation or any other action here
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
-                      ),
+                        context,
+                        MaterialPageRoute(builder: (context) => PublicScreen())
                     );
                   },
-                ),
-                SizedBox(width: 3 * screenWidth),
-                AppointmentButton(
-                  isWelcomeScreen: true,
-                  text: AppLocalizations.of(context)!.reg,
-                  containerColor: sectionColor,
-                  textColor: textGreyColor,
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RegistrationScreen(),
-                      ),
-                    );
-                  },
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 5),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.gl,
+                          style: TextStyle(
+                            color: Colors.black, // Set your desired color
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        // Animated skip icon (You can replace this with your desired skip icon)
+                        Icon(
+                          Icons.arrow_forward,
+                          color: Colors.black, // Set your desired color
+                          size: 24,
+
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
+
           ],
         ),
       ),

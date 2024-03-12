@@ -26,6 +26,7 @@ import '../../../Components/home_buttons.dart';
 import '../../../Components/home_screen_tabs.dart';
 import '../../../Components/home_screen_tabs1.dart';
 import '../../../Components/horizontal_divider.dart';
+import '../../Login/login_screen.dart';
 
 class Body extends StatefulWidget {
   const Body({
@@ -252,6 +253,16 @@ class _BodyState extends State<Body> {
   }
 
   Future allData() async {
+    if (FirebaseAuth.instance.currentUser == null) {
+      // If not logged in, navigate to the LoginScreen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+      return;
+    }
+
+
     readData.getFirstName();
     await getAllCategories();
     await getCategoryData(allCategoriesName[0]);

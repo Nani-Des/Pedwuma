@@ -19,6 +19,7 @@ import '../../../Services/read_data.dart';
 import '../../../constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../wrapper.dart';
 import '../../Dashboard/Handymen/handymen_dashboard_screen.dart';
 
 class Body extends StatefulWidget {
@@ -35,6 +36,7 @@ class _BodyState extends State<Body> {
   final _numberController = TextEditingController();
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
+
 
   @override
   void dispose() {
@@ -79,9 +81,11 @@ class _BodyState extends State<Body> {
           firstName() &&
           email() &&
           number()) {
+        print("Selected Role: $roleValue");
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
+
         );
 
         userId = FirebaseAuth.instance.currentUser!.uid;
@@ -94,7 +98,7 @@ class _BodyState extends State<Body> {
           _lastNameController.text.trim(),
           _emailController.text.trim(),
           0 + int.parse(_numberController.text),
-          roleSelected,
+          roleValue,
           userId,
           fcmToken,
         );
@@ -143,7 +147,7 @@ class _BodyState extends State<Body> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => HandymanDashboardScreen(),
+              builder: (context) => Wrapper(),
             ),
           );
         });
@@ -573,9 +577,11 @@ class _BodyState extends State<Body> {
                             onChanged: (value) {
                               setState(() {
                                 roleValue = value.toString();
+
                               });
                             },
                           ),
+
                           Text(
                             'Worker',
                             style: TextStyle(
@@ -590,6 +596,7 @@ class _BodyState extends State<Body> {
                   )
                 ],
               ),
+
               SizedBox(height: 20 * screenHeight),
               Padding(
                 padding: EdgeInsets.only(left: screenWidth * 6.0),

@@ -30,26 +30,10 @@ class TextfieldBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            SizedBox(width: 13 * screenWidth),
-            GestureDetector(
-              onTap: () {},
-              child: Icon(
-                Icons.emoji_emotions_rounded,
-                color: primary,
-              ),
-            ),
-            SizedBox(width: 7 * screenWidth),
-            GestureDetector(
-              onTap: () {},
-              child: Icon(
-                Icons.add,
-                color: primary,
-              ),
-            ),
-            SizedBox(width: 8 * screenWidth),
+            SizedBox(width: 40 * screenWidth),
             Container(
               height: screenHeight * 50.62,
-              width: 255 * screenWidth,
+              width: 280 * screenWidth,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: white,

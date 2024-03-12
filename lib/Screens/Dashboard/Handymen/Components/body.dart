@@ -10,6 +10,8 @@ import '../../../Custom Search Delegate/handyman_search_delegate.dart';
 import '../../../Home/Components/body.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../Jobs/jobs_dashboard_screen.dart';
+
 class Body extends StatefulWidget {
   const Body({
     Key? key,
@@ -122,7 +124,10 @@ class _BodyState extends State<Body> {
                       if (userRole == 'Professional Handyman') // Display the back icon conditionally
                         IconButton(
                           onPressed: () {
-                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute( builder: (context)=> JobsDashboardScreen())
+                            );
                           },
                           icon: Icon(Icons.arrow_back),
                         ),

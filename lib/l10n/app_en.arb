@@ -234,7 +234,20 @@
     "fz" : "Do you need some work done?",
     "ga" : "Can't seem to find a suitable\n worker?",
     "gb" : "Are you a requester and can't find a suitable worker for a job?",
-    "gc" : "Post a job on Pedwuma now! "
+    "gc" : "Post a job on Pedwuma now! ",
+    "gd" : "Create account to\n Book/Apply Now!",
+    "ge" : "SIGN IN",
+    "gf" : "SIGN UP",
+    "gg" : "Account Sign Up?",
+    "gh" : "Apply!",
+    "gi" : "Available Jobs on Pedwuma!",
+    "gj" : "SIGN UP/IN NOW!",
+    "gk" : "Wanted",
+    "gl" : "Next",
+    "gm" : "Access Account To\n Book Now! "
+
+
+
 
 
 

@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:handyman_app/Screens/Job%20Application/job_application_screen.dart';
-
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../Services/read_data.dart';
 import '../../../constants.dart';
+import '../../Login/login_screen.dart';
+import '../../Registration/registration_screen.dart';
 
 class JobSummary extends StatelessWidget {
   const JobSummary({
@@ -37,7 +41,7 @@ class JobSummary extends StatelessWidget {
             child: SizedBox(
               width: 350 * screenWidth,
               child: Text(
-                allJobItemList[0].jobService + ' Wanted',
+                allJobItemList[0].jobService+' ' + AppLocalizations.of(context)!.gk,
                 style: TextStyle(
                   color: black,
                   fontSize: 24,
@@ -137,13 +141,49 @@ class JobSummary extends StatelessWidget {
                   ),
                   SizedBox(height: 23 * screenHeight),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const JobApplicationScreen(),
-                        ),
-                      );
+                    onTap: () async {
+                      // Check if the user is logged in
+                      User? user = FirebaseAuth.instance.currentUser;
+
+                      if (user != null) {
+                        // User is logged in, navigate to the JobApplicationScreen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const JobApplicationScreen(),
+                          ),
+                        );
+                      } else {
+                        // User is not logged in, show a login prompt or navigate to the login screen.
+                        // For example, you can navigate to the login screen.
+                        Alert(
+                          context: context,
+                          type: AlertType.info,
+                          title: AppLocalizations.of(context)!.gd,
+                          style: AlertStyle(
+                              titleStyle: TextStyle(fontWeight: FontWeight.w800),
+                              descStyle:
+                              TextStyle(fontWeight: FontWeight.w400, fontSize: 18)),
+                          desc: AppLocalizations.of(context)!.gg,
+                          buttons: [
+
+                            DialogButton(
+                              onPressed: () => Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => LoginScreen())),
+                              color: Color(0xFF0D47A1),
+                              border: Border.all(color: Color(0xffe5f3ff)),
+                              child: Text(
+                                AppLocalizations.of(context)!.ge,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontFamily: 'DM-Sans',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            )
+                          ],
+                        ).show(); // Replace '/login' with your actual login route
+                      }
                     },
                     child: Container(
                       height: 47 * screenHeight,
@@ -162,11 +202,12 @@ class JobSummary extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          'Apply!',
+                          AppLocalizations.of(context)!.gh,
                           style: TextStyle(
-                              color: white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700),
+                            color: white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
                     ),

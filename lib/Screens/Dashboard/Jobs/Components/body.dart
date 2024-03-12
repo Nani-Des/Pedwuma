@@ -120,7 +120,7 @@ class _BodyState extends State<Body> {
                   children: [
                     Text(
                       "Switch to Find Workers",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(color: Colors.white, fontSize: 10),
                     ),
                     SizedBox(width: 10),
                     Icon(
@@ -144,7 +144,7 @@ class _BodyState extends State<Body> {
                     AppLocalizations.of(context)!.cat,
                     style: TextStyle(
                         color: black,
-                        fontSize: 18,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600,
                         fontFamily: 'Inter'),
                   ),

@@ -120,7 +120,7 @@ class CategoryItem extends StatelessWidget {
                         child: Text(
                           jobType,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 15,
                             fontWeight: FontWeight.w600,
                             color: black,
                           ),
@@ -134,7 +134,7 @@ class CategoryItem extends StatelessWidget {
                       child: Text(
                         'By: ' + name,
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 10,
                           color: textGreyColor,
                         ),
                         overflow: TextOverflow.ellipsis,
@@ -158,7 +158,7 @@ class CategoryItem extends StatelessWidget {
                             style: TextStyle(
                                 color: green,
                                 fontWeight: FontWeight.w500,
-                                fontSize: 16),
+                                fontSize: 15),
                           ),
                           Spacer(),
                           Text(
@@ -166,7 +166,7 @@ class CategoryItem extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 19,
                                 color: green,
-                                fontWeight: FontWeight.w800),
+                                fontWeight: FontWeight.w900),
                           )
                         ],
                       ),

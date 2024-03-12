@@ -239,7 +239,7 @@ bool isJobPortfolioClicked = false;
 
 String chargeRateSelected = 'N/A';
 String expertiseSelected = 'N/A';
-late String roleSelected = 'Regular Customer';
+late String roleSelected = '';
 
 bool isJobUpcomingClicked = true;
 bool isJobOffersClicked = false;

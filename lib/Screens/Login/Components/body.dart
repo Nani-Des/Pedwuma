@@ -399,14 +399,7 @@ class _BodyState extends State<Body> {
                     color: grey,
                   ),
                   SizedBox(width: 24 * screenWidth),
-                  Text(
-                    AppLocalizations.of(context)!.bh,
-                    style: TextStyle(
-                      color: black,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+
                   SizedBox(width: 24 * screenWidth),
                   Container(
                     height: 1.5 * screenHeight,
@@ -416,20 +409,7 @@ class _BodyState extends State<Body> {
                 ],
               ),
               SizedBox(height: 30 * screenHeight),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SocialMediaContainer(
-                    text: 'Facebook',
-                    iconLocation: 'assets/icons/facebook.png',
-                  ),
-                  SizedBox(width: 10 * screenWidth),
-                  SocialMediaContainer(
-                    text: 'Google',
-                    iconLocation: 'assets/icons/google.png',
-                  ),
-                ],
-              ),
+
               loginTextFieldError
                   ? SizedBox(height: 65 * screenHeight)
                   : SizedBox(height: 89 * screenHeight),

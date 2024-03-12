@@ -4,8 +4,10 @@ import 'package:handyman_app/Screens/My%20Jobs/my_jobs_screen.dart';
 import 'package:handyman_app/Screens/Profile/Profile%20-%20Handyman/profile_handyman.dart';
 import 'package:handyman_app/Screens/Settings/settings_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../../../Components/drawer_header.dart';
 import '../../../../Components/drawer_tile.dart';
+import '../../../../Services/account_deletion.dart';
 import '../../../../Services/read_data.dart';
 import '../../../../constants.dart';
 import '../../../../help.dart';
@@ -179,6 +181,7 @@ class HandymanDrawer extends StatelessWidget {
                     screen: HelpSupportPage(),
                   ),
                   SizedBox(height: 27 * screenHeight),
+
                   Center(
                     child: Container(
                       height: 1 * screenHeight,
@@ -186,13 +189,62 @@ class HandymanDrawer extends StatelessWidget {
                       color: grey,
                     ),
                   ),
-                  SizedBox(height: 5 * screenHeight),
-                  DrawerTile(
-                    title: AppLocalizations.of(context)!.settings,
-                    icon: Icons.settings,
-                    screen: SettingsScreen(),
+                  SizedBox(height: 20 * screenHeight),
+
+                  GestureDetector(
+                    onTap: (){
+
+                      Alert(
+                        context: context,
+                        type: AlertType.warning,
+                        title: "ACCOUNT DELETION",
+                        style: AlertStyle(
+                            titleStyle: TextStyle(fontWeight: FontWeight.w800),
+                            descStyle:
+                            TextStyle(fontWeight: FontWeight.w400, fontSize: 18)),
+                        desc: "Do you want to delete your account",
+                        buttons: [
+
+                          DialogButton(
+                            onPressed: () async {
+                              // Call the deleteAccount method here
+                              await AccountDeletionService().deleteAccount(context);
+
+                            },
+                            color: Color(0xFF0D47A1),
+                            border: Border.all(color: Color(0xffe5f3ff)),
+                            child: Text(
+                              "Yes",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontFamily: 'DM-Sans',
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          )
+                        ],
+                      ).show();
+
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.delete_forever, color: primary),
+                        SizedBox(width: 22 * screenWidth),
+                        Text(
+                          "Delete Account",
+                          style: TextStyle(
+                            color: black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   SizedBox(height: 20 * screenHeight),
+
                   GestureDetector(
                     onTap: signOut,
                     child: Row(

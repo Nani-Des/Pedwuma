@@ -54,6 +54,9 @@ dependencies:
   location: ^4.3.0
   firebase_database: ^10.2.4
   flutter_polyline_points: ^1.0.0
+  rflutter_alert: ^2.0.7
+  flutter_slidable: ^3.0.1
+
 
 
   meta: ^1.9.1
