@@ -16,16 +16,6 @@ class AccountDeletionService {
 
     if (user != null) {
       try {
-        // Show the progress indicator
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        );
 
         // Retrieve documents where User ID field matches the signed-in user's ID
         QuerySnapshot querySnapshot = await _firestore
@@ -65,9 +55,8 @@ class AccountDeletionService {
             }
           }
 
-          // Close the progress indicator
 
-          Navigator.pop(context);
+
 
           await FirebaseAuth.instance.signOut();
           allUsers.clear();

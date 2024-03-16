@@ -8,17 +8,12 @@ import 'package:handyman_app/Screens/Favourites/Customer/customer_favourite_scre
 import 'package:handyman_app/Screens/Job%20Upload/Customer/customer_job_upload_screen.dart';
 import 'package:handyman_app/Screens/Location/location_screen.dart';
 import 'package:handyman_app/Screens/Login/login_screen.dart';
-//import 'package:handyman_app/Screens/Payment/Payment%20And%20Cards/Sub%20Screens/P%20&%20C/payment_and_cards.dart';
-import 'package:handyman_app/Screens/Settings/settings_screen.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../../../Components/drawer_header.dart';
 import '../../../../Components/drawer_tile.dart';
 import '../../../../Services/account_deletion.dart';
 import '../../../../Services/read_data.dart';
 import '../../../../constants.dart';
 import '../../../../help.dart';
-import '../../../Home/home_screen.dart';
-import '../../../Notifications/notification_screen.dart';
 import '../../../Profile/Profile - Customer/profile_customer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -179,6 +174,7 @@ class CustomerDrawer extends StatelessWidget {
                   ),
                   SizedBox(height: 27 * screenHeight),
 
+
                   Center(
                     child: Container(
                       height: 1 * screenHeight,
@@ -190,37 +186,32 @@ class CustomerDrawer extends StatelessWidget {
 
                   GestureDetector(
                     onTap: (){
-
-                      Alert(
+                      showDialog(
                         context: context,
-                        type: AlertType.warning,
-                        title: "ACCOUNT DELETION",
-                        style: AlertStyle(
-                            titleStyle: TextStyle(fontWeight: FontWeight.w800),
-                            descStyle:
-                            TextStyle(fontWeight: FontWeight.w400, fontSize: 18)),
-                        desc: "Do you want to delete your account",
-                        buttons: [
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Confirm Deletion"),
+                            content: Text("Are you sure you want to delete your account? This action cannot be undone."),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.of(context).pop(); // Close the dialog
+                                },
+                              ),
+                              TextButton(
+                                child: Text("Delete"),
+                                onPressed: () {
+                                  // Call the account deletion service
+                                  AccountDeletionService().deleteAccount(context);
+                                  Navigator.of(context).pop(); // Close the dialog
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
 
-                          DialogButton(
-                            onPressed: () async {
-                              // Call the deleteAccount method here
-                              await AccountDeletionService().deleteAccount(context);
-
-                            },
-                            color: Color(0xFF0D47A1),
-                            border: Border.all(color: Color(0xffe5f3ff)),
-                            child: Text(
-                              "Yes",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontFamily: 'DM-Sans',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )
-                        ],
-                      ).show();
 
                     },
                     child: Row(

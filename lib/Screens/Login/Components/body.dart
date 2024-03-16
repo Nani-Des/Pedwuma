@@ -17,6 +17,7 @@ import '../../../Components/credentials_button.dart';
 import '../../../Components/credentials_container.dart';
 import '../../../Components/social_media_container.dart';
 import '../../../Models/users.dart';
+import '../../../Services/SignINServices/auth.dart';
 import '../../Home/Components/body.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -399,7 +400,14 @@ class _BodyState extends State<Body> {
                     color: grey,
                   ),
                   SizedBox(width: 24 * screenWidth),
-
+                  Text(
+                    AppLocalizations.of(context)!.bh,
+                    style: TextStyle(
+                      color: black,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   SizedBox(width: 24 * screenWidth),
                   Container(
                     height: 1.5 * screenHeight,
@@ -409,7 +417,32 @@ class _BodyState extends State<Body> {
                 ],
               ),
               SizedBox(height: 30 * screenHeight),
-
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      // Handle onTap for Apple
+                      AuthMethods().signInWithApple(context);
+                    },
+                    child: SocialMediaContainer(
+                      text: 'Apple',
+                      iconLocation: 'assets/icons/facebook.png',//ou have an Apple icon
+                    ),
+                  ),
+                  // SizedBox(width: 10 * screenWidth),
+                  // // GestureDetector(
+                  // //   onTap: () {
+                  // //     // Handle onTap for Google
+                  // //     AuthMethods().signInWithGoogle(context);
+                  // //   },
+                  // //   child: SocialMediaContainer(
+                  // //     text: 'Google',
+                  // //     iconLocation: 'assets/icons/google.png',
+                  // //   ),
+                  // // ),
+                ],
+              ),
               loginTextFieldError
                   ? SizedBox(height: 65 * screenHeight)
                   : SizedBox(height: 89 * screenHeight),
