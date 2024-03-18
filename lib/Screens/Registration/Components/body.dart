@@ -97,7 +97,8 @@ class _BodyState extends State<Body> {
           _firstNameController.text.trim(),
           _lastNameController.text.trim(),
           _emailController.text.trim(),
-          0 + int.parse(_numberController.text),
+          _numberController.text.isNotEmpty ? int.parse(_numberController.text) : 00
+          ,
           roleValue,
           userId,
           fcmToken,
@@ -277,7 +278,7 @@ class _BodyState extends State<Body> {
         'First Name': firstName,
         'Last Name': lastName,
         'Email Address': email,
-        'Mobile Number': number,
+        'Mobile Number': number ?? '0000000000',
         'Role': role,
         'User ID': id,
         'Pic': '',
