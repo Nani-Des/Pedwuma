@@ -5,7 +5,6 @@ import 'package:handyman_app/Components/drawer_header.dart';
 import 'package:handyman_app/Screens/Dashboard/Handymen/Components/body.dart';
 import 'package:handyman_app/Screens/Notifications/notification_screen.dart'; // Import the screen
 import 'package:handyman_app/constants.dart';
-
 import '../../Home/home_screen.dart';
 import '../../Job Upload/Customer/customer_job_upload_screen.dart';
 import 'Components/customer_drawer.dart';
@@ -62,18 +61,26 @@ class _HandymanDashboardScreenState extends State<HandymanDashboardScreen> {
                   MaterialPageRoute(builder: (context) => CustomerJobUploadScreen()),
                 );
               },
-              child: Container(
-                margin: EdgeInsets.only(left: screenWidth * 10, top: screenHeight * 20, bottom: screenHeight * 20), // Adjust the margin as needed
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.blue, // You can change the color
-                  borderRadius: BorderRadius.all(Radius.circular(18)),
-                ),
-                child: Text(
-                  'Post a Job',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 2),
+                  height: 10,
+                   decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                    ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Text(
+                        'Post a Job',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),

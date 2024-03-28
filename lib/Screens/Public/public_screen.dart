@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:handyman_app/Components/default_back_button.dart';
 import 'package:handyman_app/Components/drawer_header.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:handyman_app/Screens/Job%20Upload/Customer/customer_job_upload_screen.dart';
 import 'package:handyman_app/Screens/Login/login_screen.dart';
 import 'package:handyman_app/Screens/Notifications/notification_screen.dart'; // Import the screen
 import 'package:handyman_app/constants.dart';
@@ -29,6 +30,28 @@ class _PublicScreenState extends State<PublicScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // leading: Builder(
+        //   builder: (context) => InkWell(
+        //     onTap: () {
+        //       Scaffold.of(context).openDrawer();
+        //     },
+        //     borderRadius: BorderRadius.circular(4),
+        //     splashColor: sectionColor,
+        //     child: Stack(
+        //       alignment: Alignment.center,
+        //       children: [
+        //         // Image assets
+        //         Padding(
+        //           padding: EdgeInsets.only(left: screenWidth * 14.0),
+        //           child: Image.asset(
+        //             'assets/icons/menu.png',
+        //             color: primary,
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
         elevation: 0.0,
         backgroundColor: white,
         actions: [
@@ -79,18 +102,26 @@ class _PublicScreenState extends State<PublicScreen> {
                   ],
                 ).show();
               },
-              child: Container(
-                margin: EdgeInsets.only(left: screenWidth * 10, top: screenHeight * 20, bottom: screenHeight * 20), // Adjust the margin as needed
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.blue, // You can change the color
-                  borderRadius: BorderRadius.all(Radius.circular(18)),
-                ),
-                child: Text(
-                  AppLocalizations.of(context)!.gj,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 2),
+                  height: 10,
+                   decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                    ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Text(
+                        AppLocalizations.of(context)!.gj,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -113,7 +144,7 @@ class _PublicScreenState extends State<PublicScreen> {
           ),
         ],
       ),
-      backgroundColor: Colors.white,
+           backgroundColor: Colors.white,
       body: Body(),
     );
   }

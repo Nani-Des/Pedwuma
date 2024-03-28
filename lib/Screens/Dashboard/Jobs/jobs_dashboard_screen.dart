@@ -58,18 +58,26 @@ class _JobsDashboardScreenState extends State<JobsDashboardScreen> {
                   MaterialPageRoute(builder: (context) => HandymanJobUploadScreen()),
                 );
               },
-              child: Container(
-                margin: EdgeInsets.only(left: screenWidth * 10, top: screenHeight * 20, bottom: screenHeight * 20),
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.all(Radius.circular(18)),
-                ),
-                child: Text(
-                  'Upload Profile For Booking',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 2),
+                  height: 10,
+                   decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                    ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Text(
+                        'Upload Profile For Booking',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),

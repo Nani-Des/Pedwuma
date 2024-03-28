@@ -51,19 +51,16 @@ class AuthMethods {
   //   }
   // }
 
-  Future<User> signInWithApple(BuildContext context, {List<Scope> scopes = const []}) async {
+  Future<User> signInWithApple( BuildContext context,{List<Scope> scopes = const []}) async {
     final result = await TheAppleSignIn.performRequests(
-      [AppleIdRequest(requestedScopes: scopes)],
-    );
+        [AppleIdRequest(requestedScopes: scopes)]);
 
     switch (result.status) {
       case AuthorizationStatus.authorized:
         final AppleIdCredential = result.credential!;
         final oAuthProvider = OAuthProvider('apple.com');
         final credential = oAuthProvider.credential(
-          idToken: String.fromCharCodes(AppleIdCredential.identityToken!),
-          accessToken: String.fromCharCodes(AppleIdCredential.authorizationCode!),
-        );
+            idToken: String.fromCharCodes(AppleIdCredential.identityToken!));
         final UserCredential = await auth.signInWithCredential(credential);
         final firebaseUser = UserCredential.user!;
         if (scopes.contains(Scope.fullName)) {
@@ -71,10 +68,13 @@ class AuthMethods {
           if (fullName != null &&
               fullName.givenName != null &&
               fullName.familyName != null) {
-            Map<String, dynamic> userInfoMap = {
+            final displayName = '${fullName.givenName} ${fullName.familyName}';
+            await firebaseUser.updateDisplayName(displayName);
+          }
+          Map<String, dynamic> userInfoMap = {
               "Email Address": firebaseUser.email,
-              "First Name": fullName.givenName,
-              "Last Name": fullName.familyName,
+              "First Name": fullName?.givenName,
+              "Last Name": fullName?.familyName,
               "User ID": firebaseUser.uid,
             };
             DatabaseMethods().addUser(firebaseUser.uid, userInfoMap).then((value) {
@@ -83,24 +83,19 @@ class AuthMethods {
                 MaterialPageRoute(builder: (context) => Wrapper()),
               );
             });
-          }
         }
         return firebaseUser;
       case AuthorizationStatus.error:
         throw PlatformException(
-          code: 'ERROR_AUTHORIZATION_DENIED',
-          message: result.error.toString(),
-        );
+            code: 'ERROR_AUTHORIZATION_DENIED',
+            message: result.error.toString());
 
       case AuthorizationStatus.cancelled:
         throw PlatformException(
-          code: 'ERROR_ABORTED_BY_USER',
-          message: 'Sign in aborted by user',
-        );
+            code: 'ERROR_ABORTED_BY_USER', message: 'Sign in aborted by user');
 
       default:
         throw UnimplementedError();
     }
   }
-
 }
