@@ -1,8 +1,10 @@
 // ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,8 @@ import 'package:handyman_app/Screens/Registration/registration_screen.dart';
 import 'package:handyman_app/Services/read_data.dart';
 import 'package:handyman_app/constants.dart';
 import 'package:handyman_app/wrapper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../../Components/credentials_button.dart';
 import '../../../Components/credentials_container.dart';
 import '../../../Components/social_media_container.dart';
@@ -34,11 +38,176 @@ class _BodyState extends State<Body> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  String? _authCred, _password, _authusername;
+
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> saveToSharedPreferences(String value, String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, value);
+  }
+
+  Future _appleSignIn() async {
+    try {
+      //display alert dialog box with loading indicator
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            insetPadding: EdgeInsets.symmetric(horizontal: 150 * screenWidth),
+            content: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                (Platform.isIOS)
+                    ? const CupertinoActivityIndicator(
+                        radius: 20,
+                        color: Color(0xff32B5BD),
+                      )
+                    : const CircularProgressIndicator(
+                        color: Color(0xff32B5BD),
+                      ),
+              ],
+            ),
+          );
+        },
+      );
+      //user sign in with credentials
+     
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _authCred!,
+          password: DateTime.now().millisecondsSinceEpoch.toString(),
+        );
+     
+
+      //obtaining current user's UID from firebase
+      userId = FirebaseAuth.instance.currentUser!.uid;
+      loggedInUserId = userId;
+      //getting current user's data into in-app variable for easy access
+      getUserData();
+      await readData.getUserJobApplicationIDS();
+      await ReadData().getFCMToken(true);
+
+      final userData = await getUserData();
+
+      // If user data is not found, show an error message
+      if (userData == 'User Not Found.') {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(AppLocalizations.of(context)!.tj),
+              content: Text(AppLocalizations.of(context)!.bg),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(AppLocalizations.of(context)!.tl),
+                ),
+              ],
+            );
+          },
+        );
+        return;
+      }
+
+      //Delaying opening next route(screen) in order to load data needed on next screen
+      await Future.delayed(Duration(seconds: 1), () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Wrapper(),
+          ),
+        );
+      });
+
+      setState(() {
+        loginTextFieldError = false;
+      });
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      if (e.code == 'wrong-password') {
+        setState(() {
+          loginTextFieldError = true;
+        });
+      }
+
+      print(e.code.toString());
+
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Center(
+              child: Text(
+                e.code.toString().toUpperCase(),
+                style: TextStyle(color: primary, fontSize: 17),
+              ),
+            ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            content: Text(
+              '${AppLocalizations.of(context)!.tm}',
+              style: TextStyle(
+                height: 1.4,
+                fontSize: 16,
+                color: black,
+              ),
+            ),
+          );
+        },
+      );
+    } catch (err) {
+      Navigator.pop(context);
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Center(
+              child: Text(
+                AppLocalizations.of(context)!.err.toUpperCase(),
+                style: TextStyle(color: primary, fontSize: 17),
+              ),
+            ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            content: Text(
+              '${AppLocalizations.of(context)!.tm}',
+              style: TextStyle(
+                height: 1.4,
+                fontSize: 16,
+                color: black,
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  Future addDetails(String firstName, String lastName, String email, int number,
+      String role, String id, String token) async {
+    FirebaseFirestore.instance.collection('users').add(
+      {
+        'First Name': _authusername,
+        'Last Name': lastName ?? '',
+        'Email Address': _authCred!,
+        'Mobile Number': number ?? '0000000000',
+        'Role': 'Professional Handyman',
+        'User ID': id,
+        'Pic': '',
+        'FCM Token': token,
+      },
+    );
   }
 
   Future signIn() async {
@@ -417,31 +586,12 @@ class _BodyState extends State<Body> {
                 ],
               ),
               SizedBox(height: 30 * screenHeight),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      // Handle onTap for Apple
-                      AuthMethods().signInWithApple(context);
-                    },
-                    child: SocialMediaContainer(
-                      text: 'Apple',
-                      iconLocation: 'assets/icons/facebook.png',//ou have an Apple icon
-                    ),
-                  ),
-                  // SizedBox(width: 10 * screenWidth),
-                  // // GestureDetector(
-                  // //   onTap: () {
-                  // //     // Handle onTap for Google
-                  // //     AuthMethods().signInWithGoogle(context);
-                  // //   },
-                  // //   child: SocialMediaContainer(
-                  // //     text: 'Google',
-                  // //     iconLocation: 'assets/icons/google.png',
-                  // //   ),
-                  // // ),
-                ],
+              SizedBox(
+                height: 55,
+                child: SignInWithAppleButton(
+                  height: 40,
+                  onPressed: _handleAppleSignIn,
+                ),
               ),
               loginTextFieldError
                   ? SizedBox(height: 65 * screenHeight)
@@ -484,5 +634,219 @@ class _BodyState extends State<Body> {
         ),
       ),
     );
+  }
+
+   Future<void> _handleAppleRegister() async {
+    try {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            insetPadding: EdgeInsets.symmetric(horizontal: 150 * screenWidth),
+            content: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                (Platform.isIOS)
+                    ? const CupertinoActivityIndicator(
+                        radius: 20,
+                        color: Color(0xff32B5BD),
+                      )
+                    : const CircularProgressIndicator(
+                        color: Color(0xff32B5BD),
+                      ),
+              ],
+            ),
+          );
+        },
+      );
+
+   
+        print("Selected Role: $roleValue");
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _authCred!,
+          password: DateTime.now().millisecondsSinceEpoch.toString(),
+
+        );
+
+        userId = FirebaseAuth.instance.currentUser!.uid;
+        loggedInUserId = userId;
+
+        await ReadData().getFCMToken(false);
+
+        addDetails(
+         _authusername!,
+         '',
+          _authCred!,
+           00
+          ,
+          'Professional Handyman',
+          userId,
+          fcmToken,
+        );
+
+        // addProfileDetails(
+        //   userId, //userId
+        //   '', //momoType
+        //   null, //card number
+        //   null, //expiry date
+        //   null, //cvv
+        //   null, //paypal
+        //   '', //street name
+        //   '', //town
+        //   '', //region
+        //   '', //house number
+        // );
+
+        allUsers.clear();
+        getUserData();
+
+        final userData = await getUserData();
+
+        // If user data is not found, show an error message
+        if (userData == 'User Not Found.') {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text(AppLocalizations.of(context)!.tj),
+                content: Text(AppLocalizations.of(context)!.tk),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(AppLocalizations.of(context)!.tl),
+                  ),
+                ],
+              );
+            },
+          );
+          return;
+        }
+
+        await Future.delayed(Duration(seconds: 1), () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Wrapper(),
+            ),
+          );
+        });
+      
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+
+      print(e.code.toString());
+
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Center(
+              child: Text(
+                e.code.toString().toUpperCase(),
+                style: TextStyle(color: primary, fontSize: 17),
+              ),
+            ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            content: Text(
+              AppLocalizations.of(context)!.tm,
+              style: TextStyle(
+                height: 1.4,
+                fontSize: 16,
+                color: black,
+              ),
+            ),
+          );
+        },
+      );
+    } catch (err) {
+      Navigator.pop(context);
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Center(
+              child: Text(
+                'Error'.toUpperCase(),
+                style: TextStyle(color: primary, fontSize: 17),
+              ),
+            ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            content: Text(
+              AppLocalizations.of(context)!.tm,
+              style: TextStyle(
+                height: 1.4,
+                fontSize: 16,
+                color: black,
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  void _handleAppleSignIn() async {
+    // setState(() {
+    //   _isProcessing = true;
+    // });
+    final String rawNonce = generateNonce();
+    final String nonce = sha256ofString(rawNonce);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    try {
+      final AuthorizationCredentialAppleID appleCredential =
+          await SignInWithApple.getAppleIDCredential(
+        scopes: <AppleIDAuthorizationScopes>[
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        nonce: nonce,
+      );
+
+      _authCred = appleCredential.email;
+      _authusername =
+          '${appleCredential.givenName} ${appleCredential.familyName}';
+      if (_authCred == null) {
+        _authCred = prefs.getString('_authCred');
+        _authusername = prefs.getString('_authusername');
+        _handleAppleSignIn();
+        
+        // if (user['success'] == false) {
+        //   // Get.snackbar('Error', user['error']);
+        // } else {}
+      } else {
+        saveToSharedPreferences(_authCred!, '_authCred');
+        saveToSharedPreferences(_authusername!, '_authusername');
+        _handleAppleRegister();
+        // Get.snackbar('Success', 'Authentication completed');
+        // await logEvents('signup', 'email');
+        
+      }
+
+      print(_authCred! + ' ' + _authusername!);
+    } catch (error) {
+      // Error occurred during sign in
+      // log('Here ->>>>>> $error');
+
+      // showSnackBar(context, message: 'Opps!! Something went wrong. Try again');
+    }
+    // setState(() {
+    //   _isProcessing = false;
+    // });
+  }
+
+  /// Returns the sha256 hash of [input] in hex notation.
+  String sha256ofString(String input) {
+    final List<int> bytes = utf8.encode(input);
+    final Digest digest = sha256.convert(bytes);
+    return digest.toString();
   }
 }
