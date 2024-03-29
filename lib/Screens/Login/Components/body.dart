@@ -84,7 +84,7 @@ class _BodyState extends State<Body> {
      
         await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _authCred!,
-          password: DateTime.now().millisecondsSinceEpoch.toString(),
+          password: _authCred!,
         );
      
 
@@ -668,7 +668,7 @@ class _BodyState extends State<Body> {
         print("Selected Role: $roleValue");
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _authCred!,
-          password: DateTime.now().millisecondsSinceEpoch.toString(),
+          password: '12345678',
 
         );
 
@@ -817,7 +817,10 @@ class _BodyState extends State<Body> {
       if (_authCred == null) {
         _authCred = prefs.getString('_authCred');
         _authusername = prefs.getString('_authusername');
-        _handleAppleSignIn();
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _authCred!,
+          password: '12345678',
+        );
         
         // if (user['success'] == false) {
         //   // Get.snackbar('Error', user['error']);
