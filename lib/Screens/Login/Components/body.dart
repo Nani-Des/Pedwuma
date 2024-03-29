@@ -817,10 +817,7 @@ class _BodyState extends State<Body> {
       if (_authCred == null) {
         _authCred = prefs.getString('_authCred');
         _authusername = prefs.getString('_authusername');
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _authCred!,
-          password: '12345678',
-        );
+        _appleSignIn();
         
         // if (user['success'] == false) {
         //   // Get.snackbar('Error', user['error']);
