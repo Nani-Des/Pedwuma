@@ -84,7 +84,7 @@ class _BodyState extends State<Body> {
      
         await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _authCred!,
-          password: _authCred!,
+          password: '12345678',
         );
      
 
@@ -811,9 +811,9 @@ class _BodyState extends State<Body> {
         nonce: nonce,
       );
 
-      _authCred = appleCredential.email;
+      _authCred = appleCredential.email ?? prefs.getString('_authCred');
       _authusername =
-          '${appleCredential.givenName} ${appleCredential.familyName}';
+          '${appleCredential.givenName ?? ''} ${appleCredential.familyName ?? ''}';
       if (_authCred == null) {
         _authCred = prefs.getString('_authCred');
         _authusername = prefs.getString('_authusername');
