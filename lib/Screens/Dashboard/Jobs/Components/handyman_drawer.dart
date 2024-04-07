@@ -18,6 +18,7 @@ import '../../../Job Upload/Handyman/handyman_job_upload_screen.dart';
 import '../../../Location/location_screen.dart';
 import '../../../Login/login_screen.dart';
 import '../../../Notifications/notification_screen.dart';
+import '../../../Public/public_screen.dart';
 import '../../Handymen/handymen_dashboard_screen.dart';
 
 class HandymanDrawer extends StatelessWidget {
@@ -197,7 +198,7 @@ class HandymanDrawer extends StatelessWidget {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text("Confirm Deletion"),
-                            content: Text("Are you sure you want to delete your account?  This action cannot be undone."),
+                            content: Text("Are you sure you want to delete your account? This action cannot be undone."),
                             actions: <Widget>[
                               TextButton(
                                 child: Text("Cancel"),
@@ -211,6 +212,8 @@ class HandymanDrawer extends StatelessWidget {
                                   // Call the account deletion service
                                   AccountDeletionService().deleteAccount(context);
                                   Navigator.of(context).pop(); // Close the dialog
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => PublicScreen(),)) ;
                                 },
                               ),
                             ],

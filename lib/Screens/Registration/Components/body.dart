@@ -257,7 +257,7 @@ class _BodyState extends State<Body> {
   }
 
   bool number() {
-    if (_numberController.text.isNotEmpty) {
+    if (_numberController.text.isEmpty || _numberController.text.length >= 10) {
       setState(() {
         registerNumberError = false;
       });

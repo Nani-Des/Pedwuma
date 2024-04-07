@@ -41,7 +41,7 @@
     "ag" : "Enter password",
     "ah" : "Passwords do not match",
     "ai" : "Mobile Number",
-    "aj" : "Enter mobile number",
+    "aj" : "Enter mobile number (Optional)",
     "ak" : "Mobile Number field cannot be empty",
     "al" : "Role",
     "am" : "Specify role in app",

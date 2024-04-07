@@ -8,6 +8,7 @@ import 'package:handyman_app/Screens/Favourites/Customer/customer_favourite_scre
 import 'package:handyman_app/Screens/Job%20Upload/Customer/customer_job_upload_screen.dart';
 import 'package:handyman_app/Screens/Location/location_screen.dart';
 import 'package:handyman_app/Screens/Login/login_screen.dart';
+import 'package:handyman_app/Screens/Public/public_screen.dart';
 import '../../../../Components/drawer_header.dart';
 import '../../../../Components/drawer_tile.dart';
 import '../../../../Services/account_deletion.dart';
@@ -186,6 +187,7 @@ class CustomerDrawer extends StatelessWidget {
 
                   GestureDetector(
                     onTap: (){
+
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -205,6 +207,8 @@ class CustomerDrawer extends StatelessWidget {
                                   // Call the account deletion service
                                   AccountDeletionService().deleteAccount(context);
                                   Navigator.of(context).pop(); // Close the dialog
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => PublicScreen(),)) ;
                                 },
                               ),
                             ],

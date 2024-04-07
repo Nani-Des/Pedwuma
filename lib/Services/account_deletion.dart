@@ -62,12 +62,6 @@ class AccountDeletionService {
           allUsers.clear();
           imageUrl = '';
 
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginScreen(),
-            ),
-          );
 
           print('Account deleted successfully.');
         } else {
