@@ -73,13 +73,14 @@ class _BodyState extends State<Body> {
           charge: profileData['Service Information']['Charge'],
           chargeRate: profileData['Service Information']['Charge Rate'],
           expertise: profileData['Service Information']['Level of Expertise'],
-          certification:
-              profileData['Work Experience & Certification']['Certification'] != ''
-                  ? List<String>.from(profileData['Work Experience & Certification']['Certification'])
-                  : [],
-          experience: profileData['Work Experience & Certification']['Experience'] != '' ? List<String>.from(profileData['Work Experience & Certification']['Experience']) : [],
-          rating: profileData['Work Experience & Certification']['Rating'] == 0 ? 0.0 : profileData['Work Experience & Certification']['Rating'],
-          jobTotal: profileData['Work Experience & Certification']['Number of Jobs']);
+          // certification:
+          //     profileData['Work Experience & Certification']['Certification'] != ''
+          //         ? List<String>.from(profileData['Work Experience & Certification']['Certification'])
+          //         : [],
+          // experience: profileData['Work Experience & Certification']['Experience'] != '' ? List<String>.from(profileData['Work Experience & Certification']['Experience']) : [],
+          // rating: profileData['Work Experience & Certification']['Rating'] == 0 ? 0.0 : profileData['Work Experience & Certification']['Rating'],
+          // jobTotal: profileData['Work Experience & Certification']['Number of Jobs']
+      );
 
       setState(() {
         allProfile.clear();
@@ -102,11 +103,11 @@ class _BodyState extends State<Body> {
         addressTownName = allProfile[0].town as List;
         selectedServiceCatList = allProfile[0].serviceCategory as List;
         selectedServiceProvList = allProfile[0].catergoryServices as List;
-        selectedCertList = allProfile[0].certification as List;
-        selectedExperienceList = allProfile[0].experience as List;
-
-        storage.listAllFiles('Certification', selectedCertList);
-        storage.listAllFiles('Experience', selectedExperienceList);
+        // selectedCertList = allProfile[0].certification as List;
+        // selectedExperienceList = allProfile[0].experience as List;
+        //
+        // storage.listAllFiles('Certification', selectedCertList);
+        // storage.listAllFiles('Experience', selectedExperienceList);
       });
     } else {
       setState(() {
