@@ -7,6 +7,7 @@ import 'package:handyman_app/Screens/Notifications/notification_screen.dart'; //
 import 'package:handyman_app/constants.dart';
 import '../../Home/home_screen.dart';
 import '../../Job Upload/Customer/customer_job_upload_screen.dart';
+import '../../Profile/Profile - Customer/profile_customer.dart';
 import 'Components/customer_drawer.dart';
 
 
@@ -85,21 +86,30 @@ class _HandymanDashboardScreenState extends State<HandymanDashboardScreen> {
                 ),
               ),
             ),
-          Container(
-            margin: EdgeInsets.only(right: screenWidth * 20),
-            height: screenHeight * 40,
-            width: screenWidth * 40,
-            decoration: BoxDecoration(
-              border: Border.all(color: sectionColor, width: 1),
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(imageUrl),
+          GestureDetector(
+            onTap: () {
+              // Navigate to the profile screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileCustomer()),
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.only(right: screenWidth * 20),
+              height: screenHeight * 40,
+              width: screenWidth * 40,
+              decoration: BoxDecoration(
+                border: Border.all(color: sectionColor, width: 1),
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(imageUrl),
+                ),
               ),
+              child: imageUrl == ''
+                  ? Center(child: Icon(Icons.person, color: grey))
+                  : null,
             ),
-            child: imageUrl == ''
-                ? Center(child: Icon(Icons.person, color: grey))
-                : null,
           ),
         ],
       ),

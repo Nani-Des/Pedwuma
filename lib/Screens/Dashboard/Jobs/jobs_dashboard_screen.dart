@@ -8,6 +8,7 @@ import 'package:handyman_app/Screens/Dashboard/Jobs/Components/body.dart';
 import 'package:handyman_app/Screens/Dashboard/Jobs/Components/handyman_drawer.dart';
 
 import '../../Job Upload/Handyman/handyman_job_upload_screen.dart';
+import '../../Profile/Profile - Handyman/profile_handyman.dart';
 
 class JobsDashboardScreen extends StatefulWidget {
   const JobsDashboardScreen({Key? key}) : super(key: key);
@@ -82,20 +83,27 @@ class _JobsDashboardScreenState extends State<JobsDashboardScreen> {
                 ),
               ),
             ),
-          Container(
-            margin: EdgeInsets.only(right: screenWidth * 20),
-            height: screenHeight * 40,
-            width: screenWidth * 40,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(imageUrl),
+          GestureDetector(
+            onTap: () {
+              // Navigate to the profile screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HandymanProfileScreen()),
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.only(right: screenWidth * 20),
+              height: screenHeight * 40,
+              width: screenWidth * 40,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(imageUrl),
+                ),
               ),
+              child: imageUrl == '' ? Center(child: Icon(Icons.person, color: grey)) : null,
             ),
-            child: imageUrl == ''
-                ? Center(child: Icon(Icons.person, color: grey))
-                : null,
           ),
         ],
       ),
