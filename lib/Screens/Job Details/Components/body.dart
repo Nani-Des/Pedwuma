@@ -8,6 +8,7 @@ import 'package:handyman_app/Components/about_tab.dart';
 import 'package:handyman_app/Services/read_data.dart';
 import 'package:handyman_app/constants.dart';
 
+import '../../../Components/contact_personnel_button.dart';
 import '../../../Components/job_details_essentials_container.dart';
 import '../../../Components/portfolio_tab.dart';
 import '../../Appointment/appointment_screen.dart';
@@ -50,7 +51,32 @@ class _BodyState extends State<Body> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           JobSummary(),
-          SizedBox(height: 22),
+          SizedBox(height: 20 * screenHeight),
+          Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Flexible(
+                  child: ContactPersonnelButton(
+                    call: true,
+                    press: () {
+                      readData.getPhoneNumber('', context, true);
+                    },
+                  ),
+                ),
+                SizedBox(width: 4), // Add some spacing between the buttons
+                Flexible(
+                  child: ContactPersonnelButton(
+                    call: false,
+                    press: () {
+                      readData.getPhoneNumber('', context, false);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 20 * screenHeight),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
