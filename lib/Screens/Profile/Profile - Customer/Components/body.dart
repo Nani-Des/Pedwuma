@@ -38,44 +38,14 @@ class _BodyState extends State<Body> {
     if (querySnapshot.docs.isNotEmpty) {
       final profileData = querySnapshot.docs.first.data();
       final user = ProfileData(
-        cardNumber: profileData['Credit Card Information']['Card Number'],
-        expiryDate: profileData['Credit Card Information']['Expiry Date'],
-        cvv: profileData['Credit Card Information']['CVV'],
-        momoType:
-            (profileData['Mobile Money Type'] as List<dynamic>).cast<String>(),
-        payPalAddress: profileData['PayPal'],
-        houseNumber: profileData['Address Information']['House Number'] != ''
-            ? List<String>.from(
-                profileData['Address Information']['House Number'])
-            : [],
-        streetName: profileData['Address Information']['Street Name'] != ''
-            ? List<String>.from(
-                profileData['Address Information']['Street Name'])
-            : [],
-        town: profileData['Address Information']['Town'] != ''
-            ? List<String>.from(profileData['Address Information']['Town'])
-            : [],
-        region: profileData['Address Information']['Region'] != ''
-            ? List<String>.from(profileData['Address Information']['Region'])
-            : [],
+
       );
 
       setState(() {
         allProfile.clear();
         allProfile.add(user);
 
-        selectedMomoOptions = allProfile[0].momoType;
-        print(selectedMomoOptions.length);
-        print(selectedMomoOptions);
-        cardNumberHintText = allProfile[0].cardNumber.toString();
-        expiryDateHintText = allProfile[0].expiryDate;
-        cvvHintText = allProfile[0].cvv.toString();
-        payPalHintText = allProfile[0].payPalAddress;
 
-        addressStreetName = allProfile[0].streetName as List<dynamic>;
-        addressHouseNum = allProfile[0].houseNumber as List;
-        addressRegionName = allProfile[0].region as List;
-        addressTownName = allProfile[0].town as List;
       });
     } else {
       setState(() {
