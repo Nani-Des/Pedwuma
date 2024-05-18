@@ -59,11 +59,11 @@ class Body extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CreateNewPasswordScreen(),
+                    builder: (context) => LoginScreen(),
                   ),
                 );
               },
-              buttonText: 'Open Email App',
+              buttonText: 'Skip',
             ),
           ),
           SizedBox(height: 22 * screenHeight),
@@ -77,7 +77,7 @@ class Body extends StatelessWidget {
                   ),
                 );
               },
-              buttonText: "Skip, I'll confirm later",
+              buttonText: "Skip, I'm done Confirming",
               isConfirmLater: true,
             ),
           ),

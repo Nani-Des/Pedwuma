@@ -34,7 +34,7 @@ class JobDetailsEssentialsContainer extends StatelessWidget {
             title,
             style: TextStyle(
               color: black,
-              fontSize: 16,
+              fontSize: 12,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -43,7 +43,7 @@ class JobDetailsEssentialsContainer extends StatelessWidget {
             subtitle,
             style: TextStyle(
               color: primary,
-              fontSize: 15,
+              fontSize: 12,
               fontWeight: FontWeight.w700,
             ),
           ),

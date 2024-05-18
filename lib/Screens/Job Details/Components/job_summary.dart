@@ -87,7 +87,7 @@ class JobSummary extends StatelessWidget {
                   Icon(Icons.verified_rounded, color: green),
                 ],
               ),
-              SizedBox(width: 10.35 * screenWidth),
+              SizedBox(width: 5.35 * screenWidth),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
