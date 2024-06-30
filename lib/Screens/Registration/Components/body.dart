@@ -282,6 +282,7 @@ class _BodyState extends State<Body> {
         'Role': role,
         'User ID': id,
         'Pic': '',
+        'status' : true,
         'FCM Token': token,
       },
     );

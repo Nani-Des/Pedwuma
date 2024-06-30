@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:handyman_app/Services/read_data.dart';
-
-import '../Screens/Login/login_screen.dart';
 import '../constants.dart';
 
 class AccountDeletionService {

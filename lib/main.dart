@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
           elevation: 0.0,
         ),
         fontFamily: 'Inter',
-        backgroundColor: white,
+
       ),
       routes: {
         '/login': (context) => const LoginScreen(),

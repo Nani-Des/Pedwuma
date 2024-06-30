@@ -205,20 +205,20 @@ class _BodyState extends State<Body> {
         'Role': 'Professional Handyman',
         'User ID': id,
         'Pic': '',
+        'status' : true,
         'FCM Token': token,
       },
     );
   }
 
-  Future signIn() async {
+  Future<void> signIn() async {
     try {
-      //display alert dialog box with loading indicator
+      // Display alert dialog box with loading indicator
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             insetPadding: EdgeInsets.symmetric(horizontal: 150 * screenWidth),
             content: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -227,63 +227,108 @@ class _BodyState extends State<Body> {
               children: <Widget>[
                 (Platform.isIOS)
                     ? const CupertinoActivityIndicator(
-                        radius: 20,
-                        color: Color(0xff32B5BD),
-                      )
+                  radius: 20,
+                  color: Color(0xff32B5BD),
+                )
                     : const CircularProgressIndicator(
-                        color: Color(0xff32B5BD),
-                      ),
+                  color: Color(0xff32B5BD),
+                ),
               ],
             ),
           );
         },
       );
-      //user sign in with credentials
-      if (_emailController.text.trim() != 'admin@admin.com') {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-        );
+
+      // User sign in with credentials
+      final email = _emailController.text.trim();
+      final password = _passwordController.text.trim();
+
+      // Retrieve user document from Firestore
+      final userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('Email Address', isEqualTo: email)
+          .get();
+
+      if (userSnapshot.docs.isNotEmpty) {
+        // Check if the user is disabled
+        final userData = userSnapshot.docs.first.data();
+        if (userData['status'] != true) {
+          // User is disabled, show error message
+          Navigator.pop(context);
+          setState(() {
+            loginTextFieldError = true;
+          });
+
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text(
+                  'Account Disabled',
+                  style: TextStyle(color: primary, fontSize: 17),
+                ),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                content: Text(
+                  'Your account has been disabled. Please contact support.',
+                  style: TextStyle(
+                    height: 1.4,
+                    fontSize: 16,
+                    color: black,
+                  ),
+                ),
+              );
+            },
+          );
+          return;
+        }
       } else {
+        // No user found
+        Navigator.pop(context);
         setState(() {
           loginTextFieldError = true;
         });
-        throw Exception();
-      }
 
-      //obtaining current user's UID from firebase
-      userId = FirebaseAuth.instance.currentUser!.uid;
-      loggedInUserId = userId;
-      //getting current user's data into in-app variable for easy access
-      getUserData();
-      await readData.getUserJobApplicationIDS();
-      await ReadData().getFCMToken(true);
-
-      final userData = await getUserData();
-
-      // If user data is not found, show an error message
-      if (userData == 'User Not Found.') {
         showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text(AppLocalizations.of(context)!.tj),
-              content: Text(AppLocalizations.of(context)!.bg),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(AppLocalizations.of(context)!.tl),
+              title: Text(
+                'User Not Found',
+                style: TextStyle(color: primary, fontSize: 17),
+              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              content: Text(
+                'No user found with the provided credentials.',
+                style: TextStyle(
+                  height: 1.4,
+                  fontSize: 16,
+                  color: black,
                 ),
-              ],
+              ),
             );
           },
         );
         return;
       }
 
-      //Delaying opening next route(screen) in order to load data needed on next screen
+      // Proceed with Firebase Authentication
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Obtain current user's UID from Firebase
+      userId = FirebaseAuth.instance.currentUser!.uid;
+      loggedInUserId = userId;
+
+      // Get current user's data into in-app variable for easy access
+      getUserData();
+      await readData.getUserJobApplicationIDS();
+      await ReadData().getFCMToken(true);
+
+      final userData = await getUserData();
+
+      // Delay opening next route (screen) to load data needed on next screen
       await Future.delayed(Duration(seconds: 1), () {
         Navigator.pushReplacement(
           context,
@@ -316,8 +361,7 @@ class _BodyState extends State<Body> {
                 style: TextStyle(color: primary, fontSize: 17),
               ),
             ),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             content: Text(
               '${AppLocalizations.of(context)!.tm}',
               style: TextStyle(
@@ -341,8 +385,7 @@ class _BodyState extends State<Body> {
                 style: TextStyle(color: primary, fontSize: 17),
               ),
             ),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             content: Text(
               '${AppLocalizations.of(context)!.tm}',
               style: TextStyle(
@@ -356,6 +399,7 @@ class _BodyState extends State<Body> {
       );
     }
   }
+
 
   late final String userId;
 
@@ -686,6 +730,7 @@ class _BodyState extends State<Body> {
           'Professional Handyman',
           userId,
           fcmToken,
+
         );
 
         // addProfileDetails(
