@@ -374,7 +374,7 @@ class ThirdScreen extends StatelessWidget {
                     // You can add navigation or any other action here
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AdminPanel())
+                        MaterialPageRoute(builder: (context) => PublicScreen())
                     );
                   },
                   child: Container(

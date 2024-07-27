@@ -630,13 +630,7 @@ class _BodyState extends State<Body> {
                 ],
               ),
               SizedBox(height: 30 * screenHeight),
-              SizedBox(
-                height: 55,
-                child: SignInWithAppleButton(
-                  height: 40,
-                  onPressed: _handleAppleSignIn,
-                ),
-              ),
+
               loginTextFieldError
                   ? SizedBox(height: 65 * screenHeight)
                   : SizedBox(height: 89 * screenHeight),

@@ -34,7 +34,7 @@ class CarouselItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      SizedBox(height: screenHeight * 15),
+                      SizedBox(height: screenHeight * 5),
                       Text(
                         '25% OFF',
                         style: TextStyle(
@@ -75,8 +75,8 @@ class CarouselItem extends StatelessWidget {
                   ),
                   SvgPicture.asset(
                     'assets/icons/repair_illustration.svg',
-                    height: 90 * screenHeight,
-                    width: 94 * screenWidth,
+                    height: 50 * screenHeight,
+                    width: 54 * screenWidth,
                     // fit: BoxFit.fill,
                   ),
                 ],
@@ -128,7 +128,7 @@ class CarouselItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 6 * screenHeight),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -137,7 +137,7 @@ class CarouselItem extends StatelessWidget {
                         '\₵' + '45' + '/hr',
                         style: TextStyle(
                           color: Color(0xff0c46b6),
-                          fontSize: 20,
+                          fontSize: 10,
                           fontWeight: FontWeight.w800,
                         ),
                       ),

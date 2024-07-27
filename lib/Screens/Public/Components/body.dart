@@ -229,6 +229,7 @@ class _BodyState extends State<Body> {
           // Place other components below the ListView.builder here
         ],
       ),
+      backgroundColor: white,
     );
   }
 }

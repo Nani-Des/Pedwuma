@@ -123,39 +123,39 @@ class _AdminPanelState extends State<AdminPanel> {
   }
 }
 
-class GridItem extends StatelessWidget {
-  final String title;
-  final int count;
-  final VoidCallback onPressed;
-
-  GridItem({required this.title, required this.count, required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Card(
-        elevation: 5,
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                title,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 8),
-              Text(
-                '$count',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+// class GridItem extends StatelessWidget {
+//   final String title;
+//   final int count;
+//   final VoidCallback onPressed;
+//
+//   GridItem({required this.title, required this.count, required this.onPressed});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: onPressed,
+//       child: Card(
+//         elevation: 5,
+//         child: Padding(
+//           padding: const EdgeInsets.all(12.0),
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: <Widget>[
+//               Text(
+//                 title,
+//                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+//               ),
+//               SizedBox(height: 8),
+//               Text(
+//                 '$count',
+//                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 

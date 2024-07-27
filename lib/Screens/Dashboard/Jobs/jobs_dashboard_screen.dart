@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:handyman_app/Components/drawer_header.dart';
 import 'package:handyman_app/constants.dart';
@@ -7,6 +8,7 @@ import 'package:handyman_app/Screens/Dashboard/Handymen/handymen_dashboard_scree
 import 'package:handyman_app/Screens/Dashboard/Jobs/Components/body.dart';
 import 'package:handyman_app/Screens/Dashboard/Jobs/Components/handyman_drawer.dart';
 
+import '../../../Admin/admin_panel.dart';
 import '../../Job Upload/Handyman/handyman_job_upload_screen.dart';
 import '../../Profile/Profile - Handyman/profile_handyman.dart';
 
@@ -19,6 +21,75 @@ class JobsDashboardScreen extends StatefulWidget {
 
 class _JobsDashboardScreenState extends State<JobsDashboardScreen> {
   bool showSpeechBubble = true; // Set to false to hide the speech bubble
+
+  Future<void> _showPinDialog(BuildContext context) async {
+    final TextEditingController pinController = TextEditingController();
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Enter PIN'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                TextField(
+                  controller: pinController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: 'Enter 4-digit PIN',
+                  ),
+                  maxLength: 4,
+                  obscureText: true,
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Verify'),
+              onPressed: () async {
+                String enteredPin = pinController.text;
+                if (await _verifyPin(enteredPin)) {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AdminPanel()),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Invalid PIN')),
+                  );
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<bool> _verifyPin(String enteredPin) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+      await FirebaseFirestore.instance
+          .collection('Admin')
+          .doc('Pass')
+          .get();
+      String storedPin = documentSnapshot.data()?['Pass'] ?? '';
+      return enteredPin == storedPin;
+    } catch (e) {
+      print('Error verifying PIN: $e');
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +134,7 @@ class _JobsDashboardScreenState extends State<JobsDashboardScreen> {
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 2),
-                  height: 10,
+                  height: 15,
                    decoration: BoxDecoration(
                       color: Colors.blue,
                       borderRadius: BorderRadius.all(Radius.circular(50)),
@@ -93,16 +164,33 @@ class _JobsDashboardScreenState extends State<JobsDashboardScreen> {
             },
             child: Container(
               margin: EdgeInsets.only(right: screenWidth * 20),
-              height: screenHeight * 40,
-              width: screenWidth * 40,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(imageUrl),
+              child: PopupMenuButton<int>(
+                icon: CircleAvatar(
+                  radius: screenWidth * 20,
+                  backgroundImage: NetworkImage(imageUrl),
+                  backgroundColor: sectionColor,
+                  child: imageUrl == ''
+                      ? Center(child: Icon(Icons.person, color: grey))
+                      : null,
                 ),
+                onSelected: (value) {
+                  if (value == 1) {
+                    _showPinDialog(context);
+                  }
+                },
+                itemBuilder: (context) => [
+                  PopupMenuItem<int>(
+                    value: 1,
+                    child: Row(
+                      children: [
+                        Icon(Icons.admin_panel_settings, color: primary),
+                        SizedBox(width: 8),
+                        Text("Admin"),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              child: imageUrl == '' ? Center(child: Icon(Icons.person, color: grey)) : null,
             ),
           ),
         ],

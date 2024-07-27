@@ -5,57 +5,101 @@ import 'package:handyman_app/Components/drawer_header.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:handyman_app/Screens/Job%20Upload/Customer/customer_job_upload_screen.dart';
 import 'package:handyman_app/Screens/Login/login_screen.dart';
-import 'package:handyman_app/Screens/Notifications/notification_screen.dart'; // Import the screen
+import 'package:handyman_app/Screens/Notifications/notification_screen.dart';
 import 'package:handyman_app/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../Admin/admin_panel.dart';
 import '../Public/Components/body.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../Registration/registration_screen.dart';
-
-
-
 
 class PublicScreen extends StatefulWidget {
   const PublicScreen({Key? key}) : super(key: key);
 
   @override
-  State<PublicScreen> createState() =>
-      _PublicScreenState();
+  State<PublicScreen> createState() => _PublicScreenState();
 }
 
 class _PublicScreenState extends State<PublicScreen> {
   bool isDrawerClicked = false;
-  bool showSpeechBubble = true; // Set to false to hide the speech bubble
+  bool showSpeechBubble = true;
+
+  Future<void> _showPinDialog(BuildContext context) async {
+    final TextEditingController pinController = TextEditingController();
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Enter PIN'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                TextField(
+                  controller: pinController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: 'Enter 4-digit PIN',
+                  ),
+                  maxLength: 4,
+                  obscureText: true,
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Verify'),
+              onPressed: () async {
+                String enteredPin = pinController.text;
+                if (await _verifyPin(enteredPin)) {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AdminPanel()),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Invalid PIN')),
+                  );
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<bool> _verifyPin(String enteredPin) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+      await FirebaseFirestore.instance
+          .collection('Admin')
+          .doc('Pass')
+          .get();
+      String storedPin = documentSnapshot.data()?['Pass'] ?? '';
+      return enteredPin == storedPin;
+    } catch (e) {
+      print('Error verifying PIN: $e');
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: Builder(
-        //   builder: (context) => InkWell(
-        //     onTap: () {
-        //       Scaffold.of(context).openDrawer();
-        //     },
-        //     borderRadius: BorderRadius.circular(4),
-        //     splashColor: sectionColor,
-        //     child: Stack(
-        //       alignment: Alignment.center,
-        //       children: [
-        //         // Image assets
-        //         Padding(
-        //           padding: EdgeInsets.only(left: screenWidth * 14.0),
-        //           child: Image.asset(
-        //             'assets/icons/menu.png',
-        //             color: primary,
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
         elevation: 0.0,
         backgroundColor: white,
         actions: [
-          // Speech bubble external to the container holding Image.asset
           if (showSpeechBubble)
             GestureDetector(
               onTap: () {
@@ -65,14 +109,15 @@ class _PublicScreenState extends State<PublicScreen> {
                   title: AppLocalizations.of(context)!.gd,
                   style: AlertStyle(
                       titleStyle: TextStyle(fontWeight: FontWeight.w800),
-                      descStyle:
-                      TextStyle(fontWeight: FontWeight.w400, fontSize: 18)),
+                      descStyle: TextStyle(
+                          fontWeight: FontWeight.w400, fontSize: 18)),
                   desc: AppLocalizations.of(context)!.gg,
                   buttons: [
-
                     DialogButton(
-                      onPressed: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginScreen())),
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen())),
                       color: Color(0xFF0D47A1),
                       border: Border.all(color: Color(0xffe5f3ff)),
                       child: Text(
@@ -84,10 +129,11 @@ class _PublicScreenState extends State<PublicScreen> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-
                     DialogButton(
-                      onPressed: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => RegistrationScreen())),
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegistrationScreen())),
                       color: Color(0xFF0D47A1),
                       border: Border.all(color: Color(0xffe5f3ff)),
                       child: Text(
@@ -106,11 +152,11 @@ class _PublicScreenState extends State<PublicScreen> {
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 2),
-                  height: 10,
-                   decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                    ),
+                  height: 15,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -128,23 +174,37 @@ class _PublicScreenState extends State<PublicScreen> {
             ),
           Container(
             margin: EdgeInsets.only(right: screenWidth * 20),
-            height: screenHeight * 40,
-            width: screenWidth * 40,
-            decoration: BoxDecoration(
-              border: Border.all(color: sectionColor, width: 1),
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(imageUrl),
+            child: PopupMenuButton<int>(
+              icon: CircleAvatar(
+                radius: screenWidth * 20,
+                backgroundImage: NetworkImage(imageUrl),
+                backgroundColor: sectionColor,
+                child: imageUrl == ''
+                    ? Center(child: Icon(Icons.person, color: grey))
+                    : null,
               ),
+              onSelected: (value) {
+                if (value == 1) {
+                  _showPinDialog(context);
+                }
+              },
+              itemBuilder: (context) => [
+                PopupMenuItem<int>(
+                  value: 1,
+                  child: Row(
+                    children: [
+                      Icon(Icons.admin_panel_settings, color: primary),
+                      SizedBox(width: 8),
+                      Text("Admin"),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            child: imageUrl == ''
-                ? Center(child: Icon(Icons.person, color: grey))
-                : null,
           ),
         ],
       ),
-           backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       body: Body(),
     );
   }
