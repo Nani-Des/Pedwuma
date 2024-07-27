@@ -53,6 +53,7 @@ class WelcomeScreen extends StatelessWidget {
         backgroundColor: white,
         elevation: 0.0,
         actions: <Widget>[
+
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(

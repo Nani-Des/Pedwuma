@@ -6,6 +6,8 @@ import 'package:handyman_app/Screens/Splash/splash_screen.dart';
 import 'package:handyman_app/constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'Screens/Login/login_screen.dart';
+
 //var publicKey = 'pk_test_caf898bc3a14e3b6c7bd997dd1828c8469726c63';
 //final plugin = PaystackPlugin();
 
@@ -71,8 +73,12 @@ class _MyAppState extends State<MyApp> {
           elevation: 0.0,
         ),
         fontFamily: 'Inter',
-        backgroundColor: white,
+
       ),
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        // Add other routes as needed
+      },
     );
 
     // return FutureBuilder(

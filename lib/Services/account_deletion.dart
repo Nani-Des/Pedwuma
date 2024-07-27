@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:handyman_app/Services/read_data.dart';
-
-import '../Screens/Login/login_screen.dart';
 import '../constants.dart';
 
 class AccountDeletionService {
@@ -16,16 +14,6 @@ class AccountDeletionService {
 
     if (user != null) {
       try {
-        // Show the progress indicator
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        );
 
         // Retrieve documents where User ID field matches the signed-in user's ID
         QuerySnapshot querySnapshot = await _firestore
@@ -65,20 +53,13 @@ class AccountDeletionService {
             }
           }
 
-          // Close the progress indicator
 
-          Navigator.pop(context);
+
 
           await FirebaseAuth.instance.signOut();
           allUsers.clear();
           imageUrl = '';
 
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginScreen(),
-            ),
-          );
 
           print('Account deleted successfully.');
         } else {

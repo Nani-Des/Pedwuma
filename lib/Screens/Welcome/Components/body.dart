@@ -5,6 +5,7 @@ import 'package:handyman_app/Screens/Login/login_screen.dart';
 import 'package:handyman_app/Screens/Public/public_screen.dart';
 import 'package:handyman_app/Screens/Registration/registration_screen.dart';
 
+import '../../../Admin/admin_panel.dart';
 import '../../../Components/appointment_button.dart';
 import '../../../constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

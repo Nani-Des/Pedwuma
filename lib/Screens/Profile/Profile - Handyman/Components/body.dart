@@ -41,26 +41,7 @@ class _BodyState extends State<Body> {
     if (querySnapshot.docs.isNotEmpty) {
       final profileData = querySnapshot.docs.first.data();
       final user = ProfileData(
-          cardNumber: profileData['Credit Card Information']['Card Number'],
-          expiryDate: profileData['Credit Card Information']['Expiry Date'],
-          cvv: profileData['Credit Card Information']['CVV'],
-          momoType: (profileData['Mobile Money Type'] as List<dynamic>)
-              .cast<String>(),
-          payPalAddress: profileData['PayPal'],
-          houseNumber: profileData['Address Information']['House Number'] != ''
-              ? List<String>.from(
-                  profileData['Address Information']['House Number'])
-              : [],
-          streetName: profileData['Address Information']['Street Name'] != ''
-              ? List<String>.from(
-                  profileData['Address Information']['Street Name'])
-              : [],
-          town: profileData['Address Information']['Town'] != ''
-              ? List<String>.from(profileData['Address Information']['Town'])
-              : [],
-          region: profileData['Address Information']['Region'] != ''
-              ? List<String>.from(profileData['Address Information']['Region'])
-              : [],
+
           serviceCategory: profileData['Service Information']['Service Category'] != ''
               ? List<String>.from(
                   profileData['Service Information']['Service Category'])
@@ -73,40 +54,34 @@ class _BodyState extends State<Body> {
           charge: profileData['Service Information']['Charge'],
           chargeRate: profileData['Service Information']['Charge Rate'],
           expertise: profileData['Service Information']['Level of Expertise'],
-          certification:
-              profileData['Work Experience & Certification']['Certification'] != ''
-                  ? List<String>.from(profileData['Work Experience & Certification']['Certification'])
-                  : [],
-          experience: profileData['Work Experience & Certification']['Experience'] != '' ? List<String>.from(profileData['Work Experience & Certification']['Experience']) : [],
-          rating: profileData['Work Experience & Certification']['Rating'] == 0 ? 0.0 : profileData['Work Experience & Certification']['Rating'],
-          jobTotal: profileData['Work Experience & Certification']['Number of Jobs']);
+          // certification:
+          //     profileData['Work Experience & Certification']['Certification'] != ''
+          //         ? List<String>.from(profileData['Work Experience & Certification']['Certification'])
+          //         : [],
+          // experience: profileData['Work Experience & Certification']['Experience'] != '' ? List<String>.from(profileData['Work Experience & Certification']['Experience']) : [],
+          // rating: profileData['Work Experience & Certification']['Rating'] == 0 ? 0.0 : profileData['Work Experience & Certification']['Rating'],
+          // jobTotal: profileData['Work Experience & Certification']['Number of Jobs']
+      );
 
       setState(() {
         allProfile.clear();
         allProfile.add(user);
 
-        selectedMomoOptions = allProfile[0].momoType;
-        cardNumberHintText = allProfile[0].cardNumber.toString();
-        expiryDateHintText = allProfile[0].expiryDate;
-        cvvHintText = allProfile[0].cvv.toString();
-        payPalHintText = allProfile[0].payPalAddress;
+
         chargeHintText = allProfile[0].charge.toString();
         chargeRateHintText = allProfile[0].chargeRate.toString();
         expertiseHintText = allProfile[0].expertise.toString();
         ratingHintText = allProfile[0].rating.toString();
         jobTotalHintText = allProfile[0].jobTotal.toString();
 
-        addressStreetName = allProfile[0].streetName as List<dynamic>;
-        addressHouseNum = allProfile[0].houseNumber as List;
-        addressRegionName = allProfile[0].region as List;
-        addressTownName = allProfile[0].town as List;
+        
         selectedServiceCatList = allProfile[0].serviceCategory as List;
         selectedServiceProvList = allProfile[0].catergoryServices as List;
-        selectedCertList = allProfile[0].certification as List;
-        selectedExperienceList = allProfile[0].experience as List;
-
-        storage.listAllFiles('Certification', selectedCertList);
-        storage.listAllFiles('Experience', selectedExperienceList);
+        // selectedCertList = allProfile[0].certification as List;
+        // selectedExperienceList = allProfile[0].experience as List;
+        //
+        // storage.listAllFiles('Certification', selectedCertList);
+        // storage.listAllFiles('Experience', selectedExperienceList);
       });
     } else {
       setState(() {
@@ -408,10 +383,7 @@ class _BodyState extends State<Body> {
             SizedBox(height: 25 * screenHeight),
             ProfileWorkExpInformation(),
             SizedBox(height: 25 * screenHeight),
-            ProfilePaymentInformation(),
-            SizedBox(height: 25 * screenHeight),
-            ProfileLocationInformation(),
-            SizedBox(height: 15 * screenHeight),
+
           ],
         ),
       ),

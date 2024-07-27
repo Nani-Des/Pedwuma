@@ -18,6 +18,7 @@ import '../../../Job Upload/Handyman/handyman_job_upload_screen.dart';
 import '../../../Location/location_screen.dart';
 import '../../../Login/login_screen.dart';
 import '../../../Notifications/notification_screen.dart';
+import '../../../Public/public_screen.dart';
 import '../../Handymen/handymen_dashboard_screen.dart';
 
 class HandymanDrawer extends StatelessWidget {
@@ -190,40 +191,36 @@ class HandymanDrawer extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20 * screenHeight),
-
                   GestureDetector(
                     onTap: (){
-
-                      Alert(
+                      showDialog(
                         context: context,
-                        type: AlertType.warning,
-                        title: "ACCOUNT DELETION",
-                        style: AlertStyle(
-                            titleStyle: TextStyle(fontWeight: FontWeight.w800),
-                            descStyle:
-                            TextStyle(fontWeight: FontWeight.w400, fontSize: 18)),
-                        desc: "Do you want to delete your account",
-                        buttons: [
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Confirm Deletion"),
+                            content: Text("Are you sure you want to delete your account? This action cannot be undone."),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.of(context).pop(); // Close the dialog
+                                },
+                              ),
+                              TextButton(
+                                child: Text("Delete"),
+                                onPressed: () {
+                                  // Call the account deletion service
+                                  AccountDeletionService().deleteAccount(context);
+                                  Navigator.of(context).pop(); // Close the dialog
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) => PublicScreen(),)) ;
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
 
-                          DialogButton(
-                            onPressed: () async {
-                              // Call the deleteAccount method here
-                              await AccountDeletionService().deleteAccount(context);
-
-                            },
-                            color: Color(0xFF0D47A1),
-                            border: Border.all(color: Color(0xffe5f3ff)),
-                            child: Text(
-                              "Yes",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontFamily: 'DM-Sans',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )
-                        ],
-                      ).show();
 
                     },
                     child: Row(
@@ -243,7 +240,9 @@ class HandymanDrawer extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20 * screenHeight),
+                  SizedBox(height: 27 * screenHeight),
+
+
 
                   GestureDetector(
                     onTap: signOut,

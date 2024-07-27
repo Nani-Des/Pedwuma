@@ -56,6 +56,11 @@ dependencies:
   flutter_polyline_points: ^1.0.0
   rflutter_alert: ^2.0.7
   flutter_slidable: ^3.0.1
+  the_apple_sign_in: ^1.1.1
+  google_sign_in:  ^6.1.4
+  sign_in_with_apple: ^5.0.0
+  shared_preferences: ^2.2.2
+  crypto: ^3.0.3
 
 
 

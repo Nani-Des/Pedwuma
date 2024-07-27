@@ -6,13 +6,10 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:handyman_app/Components/pinned_button.dart';
 import 'package:handyman_app/Screens/Bookings/customer_bookings_screen.dart';
-import 'package:handyman_app/Screens/Location/location_screen.dart';
 import 'package:handyman_app/Screens/My%20Jobs/SubScreens/JobCompleted/job_completed_screen.dart';
 import 'package:handyman_app/Services/read_data.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../../Components/job_details_and_status.dart';
 import '../../../../../constants.dart';
@@ -20,88 +17,15 @@ import '../../../../../constants.dart';
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
 
-  Future<void> showLocationPermissionMessage(BuildContext context) async {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Location Access'),
-          content: SingleChildScrollView(
-            child: Text('Pedwuma collects location data to enable live location tracking to enable service workers navigation to job sites even when the app is closed or in use'),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Proceed'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     late final DateTime accDate;
     late final DateTime progDate;
 
-    Future<void> getUserLocationAndUpload() async {
-      final permissionStatus = await Permission.location.request();
-      if (permissionStatus.isGranted) {
-        try {
-          final Position position = await Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.high,
-          );
-
-          final document = await FirebaseFirestore.instance
-              .collection('Location')
-              .where('User ID', isEqualTo: loggedInUserId)
-              .get()
-              .timeout(Duration(seconds: 30), onTimeout: () {
-            throw TimeoutException('Unable to communicate with server');
-          });
-          if (document.docs.isNotEmpty) {
-            final docID = document.docs.single.id;
-            await FirebaseFirestore.instance
-                .collection('Location')
-                .doc(docID)
-                .update({
-              'Latitude': position.latitude,
-              'Longitude': position.longitude,
-            });
-          } else {
-            final locationDoc =
-                await FirebaseFirestore.instance.collection('Location').add({
-              'Latitude': position.latitude,
-              'Longitude': position.longitude,
-              'User ID': loggedInUserId,
-            });
-
-            final docID = locationDoc.id;
-            await FirebaseFirestore.instance
-                .collection('Location')
-                .doc(docID)
-                .update({'Location ID': docID});
-          }
-
-          // Display success message or perform any other actions
-          print('Location uploaded successfully');
-        } catch (e) {
-          print('Error getting or uploading location: $e');
-        }
-      } else {
-        print('Location permission not granted');
-      }
-    }
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-
-
         Expanded(
           child: ListView.builder(
             shrinkWrap: true,
@@ -113,22 +37,13 @@ class Body extends StatelessWidget {
               Timestamp inProgressDate = moreOffers[selectedJob].inProgressDate;
               progDate = inProgressDate.toDate();
               return JobDetailsAndStatus(
-                function: () async {
-                  await showLocationPermissionMessage(context);
-                  await getUserLocationAndUpload();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LocationScreen(role: 'Customer'),
-                    ),
-                  );
-                },
+                function: () {},
                 statusText: 'Job Accepted',
                 note: moreOffers[selectedJob].note == ''
                     ? 'N/A'
                     : moreOffers[selectedJob].note,
                 isNoteShowing: true,
-                buttonText: 'See Location',
+                buttonText: '',
                 isJobInProgessScreen: true,
                 screen: JobCompletedScreen(),
                 isJobInProgressActive: true,
@@ -143,9 +58,9 @@ class Body extends StatelessWidget {
                 jobType: allJobUpcoming[selectedJob].serviceProvided,
                 date: moreOffers[selectedJob].date,
                 acceptedDate:
-                    '${accDate.day.toString().padLeft(2, '0')}-${accDate.month.toString().padLeft(2, '0')}-${accDate.year}',
+                '${accDate.day.toString().padLeft(2, '0')}-${accDate.month.toString().padLeft(2, '0')}-${accDate.year}',
                 inProgressDate:
-                    '${progDate.day.toString().padLeft(2, '0')}-${progDate.month.toString().padLeft(2, '0')}-${progDate.year}',
+                '${progDate.day.toString().padLeft(2, '0')}-${progDate.month.toString().padLeft(2, '0')}-${progDate.year}',
                 completedDate: 'N/A',
               );
             },
@@ -160,7 +75,7 @@ class Body extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12)),
                   insetPadding:
-                      EdgeInsets.symmetric(horizontal: 150 * screenWidth),
+                  EdgeInsets.symmetric(horizontal: 150 * screenWidth),
                   content: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -168,12 +83,12 @@ class Body extends StatelessWidget {
                     children: <Widget>[
                       (Platform.isIOS)
                           ? const CupertinoActivityIndicator(
-                              radius: 20,
-                              color: Color(0xff32B5BD),
-                            )
+                        radius: 20,
+                        color: Color(0xff32B5BD),
+                      )
                           : const CircularProgressIndicator(
-                              color: Color(0xff32B5BD),
-                            ),
+                        color: Color(0xff32B5BD),
+                      ),
                     ],
                   ),
                 );

@@ -41,7 +41,7 @@
   "ag" : "Entrer le mot de passe",
   "ah" : "Les mots de passe ne correspondent pas",
   "ai" : "Numéro de portable",
-  "aj" : "Entrez le numéro de portable",
+  "aj" : "Entrez le numéro de portable(facultative)",
   "ak" : "Le champ Numéro de mobile ne peut pas être vide",
   "al" : "Rôle",
   "am" : "Spécifier le rôle dans l'application",
